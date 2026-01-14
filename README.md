@@ -11,9 +11,12 @@ A hands-on course for learning Data Structures and Algorithms from the ground up
 
 ## 📚 Course Structure
 
-| Phase                               | Focus                                                                        |
-| ----------------------------------- | ---------------------------------------------------------------------------- |
-| [Phase 0](./phase-0/what-is-dsa.md) | Absolute Foundations — What is DSA, Big-O intuition, arrays, basic searching |
+### Phase 0: Absolute Foundations
+
+| Lesson | Topic |
+|--------|-------|
+| [Lesson 1](./phase-0/what-is-dsa.md) | What is DSA, Really? |
+| [Lesson 2](./phase-0/lesson-two/README.md) | Time Complexity (Big-O) — Zero-Math Version |
 
 ## 💡 Philosophy
 
