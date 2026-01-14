@@ -13,7 +13,7 @@ A hands-on course for learning Data Structures and Algorithms from the ground up
 
 | Phase | Focus |
 |-------|-------|
-| [Phase 0](./phase-0/) | Absolute Foundations — What is DSA, Big-O intuition, arrays, basic searching |
+| [Phase 0](./phase-0/what-is-dsa.md) | Absolute Foundations — What is DSA, Big-O intuition, arrays, basic searching |
 
 ## 💡 Philosophy
 
@@ -25,4 +25,4 @@ This course emphasizes:
 
 ## 🚀 Getting Started
 
-Start with [Phase 0](./phase-0/) to build the mental models you'll need for everything else.
+Start with [Phase 0](./phase-0/what-is-dsa.md) to build the mental models you'll need for everything else.
