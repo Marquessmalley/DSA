@@ -150,20 +150,20 @@ This is:
 - n + n = 2n
 - Still **O(n)**
 
-| Pattern | Result |
-|---------|--------|
-| Nested loops | Multiply |
-| Separate loops | Add |
+| Pattern        | Result   |
+| -------------- | -------- |
+| Nested loops   | Multiply |
+| Separate loops | Add      |
 
 ---
 
 ## 8. The Three Most Important Big-O Types (For Now)
 
-| Big-O | Meaning | Example |
-|-------|---------|---------|
-| O(1) | Constant | Access by index |
-| O(n) | Linear | Single loop |
-| O(n²) | Quadratic | Nested loops |
+| Big-O | Meaning   | Example         |
+| ----- | --------- | --------------- |
+| O(1)  | Constant  | Access by index |
+| O(n)  | Linear    | Single loop     |
+| O(n²) | Quadratic | Nested loops    |
 
 You'll see these everywhere.
 
