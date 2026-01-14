@@ -3,7 +3,7 @@
 // Using anime.js
 // ===================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Initialize all animations
   initHeroAnimations();
   initScrollAnimations();
@@ -20,48 +20,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initHeroAnimations() {
   const timeline = anime.timeline({
-    easing: 'easeOutExpo',
+    easing: "easeOutExpo",
   });
 
   // Animate hero elements in sequence
   timeline
     .add({
-      targets: '.hero-tag',
+      targets: ".hero-tag",
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 800,
     })
-    .add({
-      targets: '.title-line',
-      opacity: [0, 1],
-      translateY: [40, 0],
-      duration: 1000,
-      delay: anime.stagger(150),
-    }, '-=400')
-    .add({
-      targets: '.hero-subtitle',
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 800,
-    }, '-=600')
-    .add({
-      targets: '.phase-card',
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 600,
-      delay: anime.stagger(100),
-    }, '-=400')
-    .add({
-      targets: '.cta-button',
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 600,
-    }, '-=300')
-    .add({
-      targets: '.scroll-indicator',
-      opacity: [0, 0.7],
-      duration: 1000,
-    }, '-=200');
+    .add(
+      {
+        targets: ".title-line",
+        opacity: [0, 1],
+        translateY: [40, 0],
+        duration: 1000,
+        delay: anime.stagger(150),
+      },
+      "-=400"
+    )
+    .add(
+      {
+        targets: ".hero-subtitle",
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800,
+      },
+      "-=600"
+    )
+    .add(
+      {
+        targets: ".phase-card",
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 600,
+        delay: anime.stagger(100),
+      },
+      "-=400"
+    )
+    .add(
+      {
+        targets: ".cta-button",
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 600,
+      },
+      "-=300"
+    )
+    .add(
+      {
+        targets: ".scroll-indicator",
+        opacity: [0, 0.7],
+        duration: 1000,
+      },
+      "-=200"
+    );
 }
 
 // ===================================
@@ -70,7 +85,7 @@ function initHeroAnimations() {
 
 function initFloatingShapes() {
   // Animate each shape with random floating motion
-  document.querySelectorAll('.shape').forEach((shape, index) => {
+  document.querySelectorAll(".shape").forEach((shape, index) => {
     const randomDuration = 15000 + Math.random() * 10000;
     const randomDelay = index * 500;
 
@@ -88,7 +103,7 @@ function initFloatingShapes() {
         { value: 1, duration: randomDuration / 2 },
         { value: 1.1, duration: randomDuration / 2 },
       ],
-      easing: 'easeInOutQuad',
+      easing: "easeInOutQuad",
       loop: true,
       delay: randomDelay,
     });
@@ -100,84 +115,95 @@ function initFloatingShapes() {
 // ===================================
 
 function initScrollAnimations() {
-  const fadeElements = document.querySelectorAll('.fade-in');
+  const fadeElements = document.querySelectorAll(".fade-in");
 
   // Create intersection observer for fade-in animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Animate the element
-        anime({
-          targets: entry.target,
-          opacity: [0, 1],
-          translateY: [30, 0],
-          duration: 800,
-          easing: 'easeOutCubic',
-        });
-
-        // Add visible class
-        entry.target.classList.add('visible');
-
-        // Animate child elements with stagger
-        const children = entry.target.querySelectorAll('.def-card, .step, .topic-item');
-        if (children.length > 0) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Animate the element
           anime({
-            targets: children,
+            targets: entry.target,
             opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 600,
-            delay: anime.stagger(100, { start: 200 }),
-            easing: 'easeOutCubic',
+            translateY: [30, 0],
+            duration: 800,
+            easing: "easeOutCubic",
           });
-        }
 
-        // Stop observing once animated
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-  });
+          // Add visible class
+          entry.target.classList.add("visible");
+
+          // Animate child elements with stagger
+          const children = entry.target.querySelectorAll(
+            ".def-card, .step, .topic-item"
+          );
+          if (children.length > 0) {
+            anime({
+              targets: children,
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+              delay: anime.stagger(100, { start: 200 }),
+              easing: "easeOutCubic",
+            });
+          }
+
+          // Stop observing once animated
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    }
+  );
 
   // Observe all fade-in elements
   fadeElements.forEach((el) => observer.observe(el));
 
   // Animate lesson numbers on scroll
-  const lessonNumbers = document.querySelectorAll('.lesson-number');
-  const numberObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        anime({
-          targets: entry.target,
-          opacity: [0, 0.3],
-          scale: [0.8, 1],
-          duration: 1000,
-          easing: 'easeOutExpo',
-        });
-        numberObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
+  const lessonNumbers = document.querySelectorAll(".lesson-number");
+  const numberObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: entry.target,
+            opacity: [0, 0.3],
+            scale: [0.8, 1],
+            duration: 1000,
+            easing: "easeOutExpo",
+          });
+          numberObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
   lessonNumbers.forEach((el) => numberObserver.observe(el));
 
   // Animate Big-O reveals on scroll
-  const bigOReveals = document.querySelectorAll('.big-o-reveal');
-  const bigOObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        anime({
-          targets: entry.target.querySelector('.big-o'),
-          scale: [0, 1],
-          opacity: [0, 1],
-          duration: 800,
-          easing: 'easeOutElastic(1, 0.5)',
-        });
-        bigOObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
+  const bigOReveals = document.querySelectorAll(".big-o-reveal");
+  const bigOObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: entry.target.querySelector(".big-o"),
+            scale: [0, 1],
+            opacity: [0, 1],
+            duration: 800,
+            easing: "easeOutElastic(1, 0.5)",
+          });
+          bigOObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
   bigOReveals.forEach((el) => bigOObserver.observe(el));
 }
@@ -187,42 +213,45 @@ function initScrollAnimations() {
 // ===================================
 
 function initBookDemo() {
-  const demoSections = document.querySelectorAll('.comparison-demo');
+  const demoSections = document.querySelectorAll(".comparison-demo");
 
   demoSections.forEach((demo) => {
-    const slowBooks = demo.querySelectorAll('.slow .book');
-    const fastBooks = demo.querySelectorAll('.fast .book');
+    const slowBooks = demo.querySelectorAll(".slow .book");
+    const fastBooks = demo.querySelectorAll(".fast .book");
 
     // Create observer for demo section
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Animate slow/random pile
-          anime({
-            targets: slowBooks,
-            rotate: () => anime.random(-45, 45),
-            translateX: () => anime.random(-10, 10),
-            translateY: () => anime.random(-5, 5),
-            duration: 600,
-            delay: anime.stagger(50),
-            easing: 'easeOutElastic(1, 0.5)',
-          });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Animate slow/random pile
+            anime({
+              targets: slowBooks,
+              rotate: () => anime.random(-45, 45),
+              translateX: () => anime.random(-10, 10),
+              translateY: () => anime.random(-5, 5),
+              duration: 600,
+              delay: anime.stagger(50),
+              easing: "easeOutElastic(1, 0.5)",
+            });
 
-          // Animate fast/sorted pile
-          anime({
-            targets: fastBooks,
-            rotate: 0,
-            translateX: 0,
-            translateY: 0,
-            duration: 800,
-            delay: anime.stagger(50, { start: 300 }),
-            easing: 'easeOutExpo',
-          });
+            // Animate fast/sorted pile
+            anime({
+              targets: fastBooks,
+              rotate: 0,
+              translateX: 0,
+              translateY: 0,
+              duration: 800,
+              delay: anime.stagger(50, { start: 300 }),
+              easing: "easeOutExpo",
+            });
 
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
     observer.observe(demo);
   });
@@ -233,56 +262,59 @@ function initBookDemo() {
 // ===================================
 
 function initBigOCards() {
-  const cards = document.querySelectorAll('.big-o-card');
+  const cards = document.querySelectorAll(".big-o-card");
 
   cards.forEach((card) => {
-    const bar = card.querySelector('.bar');
+    const bar = card.querySelector(".bar");
 
-    card.addEventListener('mouseenter', () => {
+    card.addEventListener("mouseenter", () => {
       // Animate bar on hover
       anime({
         targets: bar,
-        width: '100%',
+        width: "100%",
         duration: 400,
-        easing: 'easeOutQuad',
+        easing: "easeOutQuad",
       });
     });
 
-    card.addEventListener('mouseleave', () => {
+    card.addEventListener("mouseleave", () => {
       // Reset bar width
       const complexity = card.dataset.complexity;
-      let targetWidth = '20%';
-      if (complexity === 'on') targetWidth = '50%';
-      if (complexity === 'on2') targetWidth = '100%';
+      let targetWidth = "20%";
+      if (complexity === "on") targetWidth = "50%";
+      if (complexity === "on2") targetWidth = "100%";
 
       anime({
         targets: bar,
         width: targetWidth,
         duration: 400,
-        easing: 'easeOutQuad',
+        easing: "easeOutQuad",
       });
     });
   });
 
   // Animate cards on scroll
-  const cardsContainer = document.querySelector('.big-o-cards');
+  const cardsContainer = document.querySelector(".big-o-cards");
   if (cardsContainer) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          anime({
-            targets: cards,
-            opacity: [0, 1],
-            translateY: [30, 0],
-            scale: [0.9, 1],
-            duration: 600,
-            delay: anime.stagger(150),
-            easing: 'easeOutCubic',
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            anime({
+              targets: cards,
+              opacity: [0, 1],
+              translateY: [30, 0],
+              scale: [0.9, 1],
+              duration: 600,
+              delay: anime.stagger(150),
+              easing: "easeOutCubic",
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
     observer.observe(cardsContainer);
   }
@@ -293,9 +325,9 @@ function initBigOCards() {
 // ===================================
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener('click', function (e) {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(this.getAttribute("href"));
 
     if (target) {
       const offsetTop = target.offsetTop - 80; // Account for navbar
@@ -304,7 +336,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         targets: { scrollTop: window.pageYOffset },
         scrollTop: offsetTop,
         duration: 1000,
-        easing: 'easeInOutQuad',
+        easing: "easeInOutQuad",
         update: function (anim) {
           window.scrollTo(0, anim.animations[0].currentValue);
         },
@@ -318,15 +350,15 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 // ===================================
 
 let lastScroll = 0;
-const navbar = document.querySelector('.navbar');
+const navbar = document.querySelector(".navbar");
 
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   const currentScroll = window.pageYOffset;
 
   if (currentScroll > 100) {
-    navbar.style.background = 'rgba(10, 14, 23, 0.95)';
+    navbar.style.background = "rgba(10, 14, 23, 0.95)";
   } else {
-    navbar.style.background = 'rgba(10, 14, 23, 0.8)';
+    navbar.style.background = "rgba(10, 14, 23, 0.8)";
   }
 
   lastScroll = currentScroll;
@@ -337,27 +369,30 @@ window.addEventListener('scroll', () => {
 // ===================================
 
 function initCodeTyping() {
-  const codeBlocks = document.querySelectorAll('.code-block code');
+  const codeBlocks = document.querySelectorAll(".code-block code");
 
   codeBlocks.forEach((block) => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const text = block.innerHTML;
-          block.innerHTML = '';
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const text = block.innerHTML;
+            block.innerHTML = "";
 
-          anime({
-            targets: block,
-            innerHTML: text,
-            duration: text.length * 20,
-            easing: 'linear',
-            round: 1,
-          });
+            anime({
+              targets: block,
+              innerHTML: text,
+              duration: text.length * 20,
+              easing: "linear",
+              round: 1,
+            });
 
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
     observer.observe(block);
   });
@@ -369,104 +404,133 @@ function initCodeTyping() {
 
 function initPhaseAnimations() {
   // Animate phase header elements
-  const phaseHeader = document.querySelector('.phase-header');
+  const phaseHeader = document.querySelector(".phase-header");
   if (phaseHeader) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          anime.timeline({ easing: 'easeOutExpo' })
-            .add({
-              targets: '.phase-badge',
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 600,
-            })
-            .add({
-              targets: '.phase-title',
-              opacity: [0, 1],
-              translateY: [30, 0],
-              duration: 800,
-            }, '-=400')
-            .add({
-              targets: '.phase-description',
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 600,
-            }, '-=500')
-            .add({
-              targets: '.topic-tag',
-              opacity: [0, 1],
-              scale: [0.8, 1],
-              duration: 400,
-              delay: anime.stagger(50),
-            }, '-=300');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            anime
+              .timeline({ easing: "easeOutExpo" })
+              .add({
+                targets: ".phase-badge",
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 600,
+              })
+              .add(
+                {
+                  targets: ".phase-title",
+                  opacity: [0, 1],
+                  translateY: [30, 0],
+                  duration: 800,
+                },
+                "-=400"
+              )
+              .add(
+                {
+                  targets: ".phase-description",
+                  opacity: [0, 1],
+                  translateY: [20, 0],
+                  duration: 600,
+                },
+                "-=500"
+              )
+              .add(
+                {
+                  targets: ".topic-tag",
+                  opacity: [0, 1],
+                  scale: [0.8, 1],
+                  duration: 400,
+                  delay: anime.stagger(50),
+                },
+                "-=300"
+              );
 
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
     observer.observe(phaseHeader);
   }
 
   // Animate lessons navigation
-  const lessonsNav = document.querySelector('.lessons-nav');
+  const lessonsNav = document.querySelector(".lessons-nav");
   if (lessonsNav) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          anime({
-            targets: '.lesson-nav-item',
-            opacity: [0, 1],
-            translateX: [-30, 0],
-            duration: 600,
-            delay: anime.stagger(100),
-            easing: 'easeOutCubic',
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            anime({
+              targets: ".lesson-nav-item",
+              opacity: [0, 1],
+              translateX: [-30, 0],
+              duration: 600,
+              delay: anime.stagger(100),
+              easing: "easeOutCubic",
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
     observer.observe(lessonsNav);
   }
 
   // Animate phase complete section
-  const phaseComplete = document.querySelector('.phase-complete');
+  const phaseComplete = document.querySelector(".phase-complete");
   if (phaseComplete) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          anime.timeline({ easing: 'easeOutExpo' })
-            .add({
-              targets: '.complete-icon',
-              scale: [0, 1],
-              rotate: [180, 0],
-              duration: 800,
-            })
-            .add({
-              targets: '.phase-complete h3',
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 600,
-            }, '-=400')
-            .add({
-              targets: '.phase-complete p',
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 600,
-            }, '-=400')
-            .add({
-              targets: '.next-phase',
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 600,
-            }, '-=300');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            anime
+              .timeline({ easing: "easeOutExpo" })
+              .add({
+                targets: ".complete-icon",
+                scale: [0, 1],
+                rotate: [180, 0],
+                duration: 800,
+              })
+              .add(
+                {
+                  targets: ".phase-complete h3",
+                  opacity: [0, 1],
+                  translateY: [20, 0],
+                  duration: 600,
+                },
+                "-=400"
+              )
+              .add(
+                {
+                  targets: ".phase-complete p",
+                  opacity: [0, 1],
+                  translateY: [20, 0],
+                  duration: 600,
+                },
+                "-=400"
+              )
+              .add(
+                {
+                  targets: ".next-phase",
+                  opacity: [0, 1],
+                  translateY: [20, 0],
+                  duration: 600,
+                },
+                "-=300"
+              );
 
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
     observer.observe(phaseComplete);
   }
@@ -477,24 +541,27 @@ function initPhaseAnimations() {
 // ===================================
 
 function initRoadmapAnimations() {
-  const roadmap = document.querySelector('.roadmap');
+  const roadmap = document.querySelector(".roadmap");
   if (!roadmap) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        anime({
-          targets: '.roadmap-item',
-          opacity: [0, 1],
-          translateX: [-50, 0],
-          duration: 600,
-          delay: anime.stagger(100),
-          easing: 'easeOutCubic',
-        });
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: ".roadmap-item",
+            opacity: [0, 1],
+            translateX: [-50, 0],
+            duration: 600,
+            delay: anime.stagger(100),
+            easing: "easeOutCubic",
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
   observer.observe(roadmap);
 }
@@ -503,10 +570,10 @@ function initRoadmapAnimations() {
 // Parallax Effect for Hero
 // ===================================
 
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
-  const heroContent = document.querySelector('.hero-content');
-  const shapes = document.querySelectorAll('.shape');
+  const heroContent = document.querySelector(".hero-content");
+  const shapes = document.querySelectorAll(".shape");
 
   if (heroContent && scrolled < window.innerHeight) {
     heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
@@ -514,7 +581,7 @@ window.addEventListener('scroll', () => {
   }
 
   shapes.forEach((shape, index) => {
-    const speed = 0.1 + (index * 0.05);
+    const speed = 0.1 + index * 0.05;
     shape.style.transform = `translateY(${scrolled * speed}px)`;
   });
 });
