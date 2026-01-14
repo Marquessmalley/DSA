@@ -15,7 +15,7 @@ A hands-on course for learning Data Structures and Algorithms from the ground up
 
 | Lesson | Topic |
 |--------|-------|
-| [Lesson 1](./phase-0/what-is-dsa.md) | What is DSA, Really? |
+| [Lesson 1](./phase-0/lesson-one/what-is-dsa.md) | What is DSA, Really? |
 | [Lesson 2](./phase-0/lesson-two/README.md) | Time Complexity (Big-O) — Zero-Math Version |
 
 ## 💡 Philosophy
@@ -28,4 +28,4 @@ This course emphasizes:
 
 ## 🚀 Getting Started
 
-Start with [Phase 0](./phase-0/what-is-dsa.md) to build the mental models you'll need for everything else.
+Start with [Lesson 1](./phase-0/lesson-one/what-is-dsa.md) to build the mental models you'll need for everything else.
