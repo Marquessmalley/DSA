@@ -11,15 +11,15 @@ A hands-on course for learning Data Structures and Algorithms from the ground up
 
 ## 📚 Course Structure
 
-| Phase | Focus |
-|-------|-------|
+| Phase                               | Focus                                                                        |
+| ----------------------------------- | ---------------------------------------------------------------------------- |
 | [Phase 0](./phase-0/what-is-dsa.md) | Absolute Foundations — What is DSA, Big-O intuition, arrays, basic searching |
 
 ## 💡 Philosophy
 
 This course emphasizes:
 
-1. **Understanding over memorization** — Know *why* something works, not just *how*
+1. **Understanding over memorization** — Know _why_ something works, not just _how_
 2. **Trade-off thinking** — There's rarely a "perfect" solution, only trade-offs
 3. **Incremental complexity** — Build intuition before formalism
 
