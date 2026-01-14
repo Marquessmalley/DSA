@@ -13,10 +13,11 @@ A hands-on course for learning Data Structures and Algorithms from the ground up
 
 ### Phase 0: Absolute Foundations
 
-| Lesson | Topic |
-|--------|-------|
-| [Lesson 1](./phase-0/lesson-one/what-is-dsa.md) | What is DSA, Really? |
-| [Lesson 2](./phase-0/lesson-two/time-complexity.md) | Time Complexity (Big-O) — Zero-Math Version |
+| Lesson                                              | Topic                                             |
+| --------------------------------------------------- | ------------------------------------------------- |
+| [Lesson 1](./phase-0/lesson-one/what-is-dsa.md)     | What is DSA, Really?                              |
+| [Lesson 2](./phase-0/lesson-two/time-complexity.md) | Time Complexity (Big-O) — Zero-Math Version       |
+| [Lesson 3](./phase-0/lesson-three/README.md)        | Arrays (Python Lists) — Your First Data Structure |
 
 ## 💡 Philosophy
 
