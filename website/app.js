@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingShapes();
   initBookDemo();
   initBigOCards();
+  initPhaseAnimations();
+  initRoadmapAnimations();
 });
 
 // ===================================
@@ -43,7 +45,7 @@ function initHeroAnimations() {
       duration: 800,
     }, '-=600')
     .add({
-      targets: '.topic-item',
+      targets: '.phase-card',
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 600,
@@ -359,6 +361,142 @@ function initCodeTyping() {
 
     observer.observe(block);
   });
+}
+
+// ===================================
+// Phase Section Animations
+// ===================================
+
+function initPhaseAnimations() {
+  // Animate phase header elements
+  const phaseHeader = document.querySelector('.phase-header');
+  if (phaseHeader) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          anime.timeline({ easing: 'easeOutExpo' })
+            .add({
+              targets: '.phase-badge',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+            })
+            .add({
+              targets: '.phase-title',
+              opacity: [0, 1],
+              translateY: [30, 0],
+              duration: 800,
+            }, '-=400')
+            .add({
+              targets: '.phase-description',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+            }, '-=500')
+            .add({
+              targets: '.topic-tag',
+              opacity: [0, 1],
+              scale: [0.8, 1],
+              duration: 400,
+              delay: anime.stagger(50),
+            }, '-=300');
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(phaseHeader);
+  }
+
+  // Animate lessons navigation
+  const lessonsNav = document.querySelector('.lessons-nav');
+  if (lessonsNav) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: '.lesson-nav-item',
+            opacity: [0, 1],
+            translateX: [-30, 0],
+            duration: 600,
+            delay: anime.stagger(100),
+            easing: 'easeOutCubic',
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(lessonsNav);
+  }
+
+  // Animate phase complete section
+  const phaseComplete = document.querySelector('.phase-complete');
+  if (phaseComplete) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          anime.timeline({ easing: 'easeOutExpo' })
+            .add({
+              targets: '.complete-icon',
+              scale: [0, 1],
+              rotate: [180, 0],
+              duration: 800,
+            })
+            .add({
+              targets: '.phase-complete h3',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+            }, '-=400')
+            .add({
+              targets: '.phase-complete p',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+            }, '-=400')
+            .add({
+              targets: '.next-phase',
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+            }, '-=300');
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(phaseComplete);
+  }
+}
+
+// ===================================
+// Roadmap Animations
+// ===================================
+
+function initRoadmapAnimations() {
+  const roadmap = document.querySelector('.roadmap');
+  if (!roadmap) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        anime({
+          targets: '.roadmap-item',
+          opacity: [0, 1],
+          translateX: [-50, 0],
+          duration: 600,
+          delay: anime.stagger(100),
+          easing: 'easeOutCubic',
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(roadmap);
 }
 
 // ===================================
