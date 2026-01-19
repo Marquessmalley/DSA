@@ -2450,11 +2450,11 @@ li {
 /* Desktop */
 @media (min-width: 1024px) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   :root {
-    --content-max: 1000px;
+    --content-max: 960px;
   }
 
   .navbar {
@@ -2942,11 +2942,11 @@ li {
 /* Large Desktop */
 @media (min-width: 1440px) {
   html {
-    font-size: 21px;
+    font-size: 19px;
   }
 
   :root {
-    --content-max: 1100px;
+    --content-max: 1000px;
   }
 
   .navbar {
@@ -3246,11 +3246,11 @@ li {
 /* Extra Large Desktop */
 @media (min-width: 1920px) {
   html {
-    font-size: 23px;
+    font-size: 20px;
   }
 
   :root {
-    --content-max: 1300px;
+    --content-max: 1100px;
   }
 
   .navbar {
