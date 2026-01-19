@@ -8,28 +8,32 @@
   --bg-secondary: #111827;
   --bg-tertiary: #1a2234;
   --bg-card: #1e293b;
-  
+
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  
-  --accent-primary: #06b6d4;    /* Cyan */
-  --accent-secondary: #8b5cf6;  /* Purple */
-  --accent-tertiary: #f59e0b;   /* Amber */
-  --accent-success: #10b981;    /* Emerald */
-  --accent-danger: #ef4444;     /* Red */
-  
-  --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+
+  --accent-primary: #06b6d4; /* Cyan */
+  --accent-secondary: #8b5cf6; /* Purple */
+  --accent-tertiary: #f59e0b; /* Amber */
+  --accent-success: #10b981; /* Emerald */
+  --accent-danger: #ef4444; /* Red */
+
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
   --gradient-bg: radial-gradient(ellipse at top, #1a2234 0%, #0a0e17 100%);
-  
+
   /* Typography */
-  --font-display: 'Outfit', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
   /* Spacing */
   --section-padding: 6rem 2rem;
   --content-max: 900px;
-  
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-medium: 0.4s ease;
@@ -40,7 +44,9 @@
    Reset & Base
    =================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -90,11 +96,11 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .shape {
     display: none;
   }
-  
+
   html {
     scroll-behavior: auto;
   }
@@ -225,7 +231,7 @@ button:focus-visible,
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -317,11 +323,11 @@ button:focus-visible,
   position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 6rem 2rem;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
   overflow: hidden;
+  padding-top: 80px;
 }
 
 .hero-bg {
@@ -333,7 +339,7 @@ button:focus-visible,
 .grid-overlay {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
@@ -399,6 +405,9 @@ button:focus-visible,
   z-index: 1;
   text-align: center;
   max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
 }
 
 .hero-tag {
@@ -416,32 +425,47 @@ button:focus-visible,
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 1.5rem;
-}
-
-.title-line {
-  display: block;
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.title-line.accent {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, var(--text-primary), #a5b4fc);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
+  opacity: 1; /* Changed from 0 to 1 to ensure visibility */
+  transform: translateY(0); /* Reset transform to ensure visibility */
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 1rem;
+}
+
+/* Add animation class that will be added by JavaScript */
+.hero-title.animate {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto 2.5rem;
   opacity: 0;
   transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.3s;
+  padding: 0 1rem;
+  line-height: 1.6;
 }
 
 /* ===================================
@@ -472,7 +496,11 @@ button:focus-visible,
 
 .phase-card.active {
   border-color: var(--accent-primary);
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
 }
 
 .phase-card.active:hover {
@@ -546,7 +574,9 @@ button:focus-visible,
   font-weight: 600;
   font-size: 1rem;
   border-radius: 12px;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   opacity: 0;
   transform: translateY(20px);
 }
@@ -587,8 +617,15 @@ button:focus-visible,
 }
 
 @keyframes scroll-wheel {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.3; }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.3;
+  }
 }
 
 /* ===================================
@@ -609,7 +646,11 @@ button:focus-visible,
 
 .phase-header {
   padding: 6rem 2rem 4rem;
-  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 100%
+  );
   text-align: center;
 }
 
@@ -770,7 +811,11 @@ button:focus-visible,
 /* Phase Complete Section */
 .phase-complete {
   padding: 6rem 2rem;
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--bg-secondary) 0%,
+    var(--bg-primary) 100%
+  );
   text-align: center;
 }
 
@@ -875,7 +920,11 @@ button:focus-visible,
 
 .roadmap-item.active {
   border-color: var(--accent-primary);
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.1),
+    rgba(139, 92, 246, 0.05)
+  );
 }
 
 .roadmap-item.locked {
@@ -1017,7 +1066,9 @@ button:focus-visible,
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .def-card:hover {
@@ -1059,7 +1110,11 @@ button:focus-visible,
 
 .analogy-box {
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1),
+    rgba(6, 182, 212, 0.1)
+  );
   border-radius: 16px;
   border: 1px solid rgba(139, 92, 246, 0.2);
   margin: 1.5rem 0;
@@ -1162,7 +1217,11 @@ blockquote.insight {
 }
 
 blockquote.insight.accent {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
   border-left-color: var(--accent-secondary);
 }
 
@@ -1222,7 +1281,8 @@ code {
    Lists
    =================================== */
 
-ul, ol {
+ul,
+ol {
   margin: 1rem 0;
   padding-left: 1.5rem;
 }
@@ -1239,7 +1299,7 @@ li {
 }
 
 .question-list li::before {
-  content: '?';
+  content: "?";
   position: absolute;
   left: 0;
   color: var(--accent-primary);
@@ -1387,7 +1447,7 @@ li {
 }
 
 .answer-list li::before {
-  content: '→';
+  content: "→";
   position: absolute;
   left: 0;
   color: var(--accent-primary);
@@ -1598,7 +1658,9 @@ li {
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .big-o-card:hover {
@@ -1625,9 +1687,15 @@ li {
   margin-bottom: 0.5rem;
 }
 
-[data-complexity="o1"] .card-o { color: var(--accent-success); }
-[data-complexity="on"] .card-o { color: var(--accent-primary); }
-[data-complexity="on2"] .card-o { color: var(--accent-danger); }
+[data-complexity="o1"] .card-o {
+  color: var(--accent-success);
+}
+[data-complexity="on"] .card-o {
+  color: var(--accent-primary);
+}
+[data-complexity="on2"] .card-o {
+  color: var(--accent-danger);
+}
 
 .card-name {
   display: block;
@@ -1656,14 +1724,23 @@ li {
   transition: width 0.3s ease-out;
 }
 
-[data-complexity="o1"] .bar { background: var(--accent-success); width: 20%; }
+[data-complexity="o1"] .bar {
+  background: var(--accent-success);
+  width: 20%;
+}
 
 /* CSS hover animation for bars (more performant than JS) */
 .big-o-card:hover .bar {
   width: 100% !important;
 }
-[data-complexity="on"] .bar { background: var(--accent-primary); width: 50%; }
-[data-complexity="on2"] .bar { background: var(--accent-danger); width: 100%; }
+[data-complexity="on"] .bar {
+  background: var(--accent-primary);
+  width: 50%;
+}
+[data-complexity="on2"] .bar {
+  background: var(--accent-danger);
+  width: 100%;
+}
 
 .center-text {
   text-align: center;
@@ -1835,11 +1912,11 @@ li {
   .navbar {
     padding: 1rem;
   }
-  
+
   .nav-toggle {
     display: flex;
   }
-  
+
   .nav-links {
     position: fixed;
     top: 0;
@@ -1854,31 +1931,31 @@ li {
     transition: right var(--transition-medium);
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
   }
-  
+
   .nav-links.active {
     right: 0;
   }
-  
+
   .nav-link {
     display: block;
     padding: 1rem 0;
     font-size: 1.1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-  
+
   .nav-link::after {
     display: none;
   }
-  
+
   .nav-dropdown {
     width: 100%;
   }
-  
+
   .dropdown-trigger {
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .dropdown-menu {
     position: static;
     transform: none;
@@ -1890,11 +1967,11 @@ li {
     border: none;
     min-width: auto;
   }
-  
+
   .dropdown-item {
     padding: 0.75rem 0;
   }
-  
+
   /* Mobile overlay */
   .nav-overlay {
     display: none;
@@ -1903,139 +1980,139 @@ li {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
   }
-  
+
   .nav-overlay.active {
     display: block;
   }
-  
+
   .hero {
     padding: 4rem 1rem;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .course-phases {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .phase-card {
     width: 100%;
     max-width: 280px;
   }
-  
+
   .phase-header {
     padding: 4rem 1rem 2rem;
   }
-  
+
   .phase-title {
     font-size: 2rem;
   }
-  
+
   .phase-description {
     font-size: 1rem;
   }
-  
+
   .lessons-nav {
     flex-direction: column;
     padding: 1.5rem 1rem;
     gap: 1rem;
   }
-  
+
   .lesson-nav-item {
     width: 100%;
     padding: 1.25rem 1.5rem;
   }
-  
+
   .lesson {
     padding: 3rem 1rem;
   }
-  
+
   .lesson-number {
     font-size: 4rem;
   }
-  
+
   .lesson-title {
     font-size: 1.75rem;
   }
-  
+
   .content-block h4 {
     font-size: 1.25rem;
   }
-  
+
   .comparison-demo {
     grid-template-columns: 1fr;
   }
-  
+
   .equation {
     font-size: 1rem;
     padding: 1.5rem 1rem;
   }
-  
+
   .eq-part {
     padding: 0.4rem 0.75rem;
     font-size: 0.9rem;
   }
-  
+
   .big-o {
     font-size: 2rem;
   }
-  
+
   .big-o-reveal {
     padding: 1.5rem;
     flex-wrap: wrap;
   }
-  
+
   .big-o-cards {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .definition-cards {
     grid-template-columns: 1fr;
   }
-  
+
   .decides-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .mindset-comparison {
     grid-template-columns: 1fr;
   }
-  
+
   .roadmap-item {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
     padding: 1.5rem;
   }
-  
+
   .roadmap-number {
     min-width: auto;
   }
-  
+
   .phase-complete {
     padding: 4rem 1rem;
   }
-  
+
   .phase-complete h3 {
     font-size: 2rem;
   }
-  
+
   .phases-overview {
     padding: 4rem 1rem;
   }
-  
+
   .phases-content h2 {
     font-size: 2rem;
   }
-  
+
   .footer {
     padding: 2rem 1rem;
   }
@@ -2044,7 +2121,7 @@ li {
 /* Tablet */
 @media (min-width: 769px) {
   html {
-    font-size: 18px;
+    font-size: 16px; /* Keep base font size smaller for better control */
   }
 
   .navbar {
@@ -2068,7 +2145,7 @@ li {
   }
 
   .hero {
-    padding: 8rem 3rem;
+    padding: 6rem 3rem 4rem;
   }
 
   .hero-content {
@@ -2450,7 +2527,7 @@ li {
 /* Desktop */
 @media (min-width: 1024px) {
   html {
-    font-size: 18px;
+    font-size: 16px; /* Keep base font size consistent */
   }
 
   :root {
@@ -2478,7 +2555,7 @@ li {
   }
 
   .hero {
-    padding: 10rem 4rem;
+    padding: 7rem 4rem 5rem;
   }
 
   .hero-content {
@@ -2486,13 +2563,14 @@ li {
   }
 
   .hero-tag {
-    font-size: 1.1rem;
-    padding: 0.75rem 1.75rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
   }
 
   .hero-subtitle {
-    font-size: 1.6rem;
-    max-width: 800px;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin-bottom: 2.5rem;
   }
 
   .course-phases {
@@ -2966,7 +3044,7 @@ li {
   }
 
   .hero {
-    padding: 12rem 6rem;
+    padding: 8rem 6rem 6rem;
   }
 
   .hero-content {
@@ -3270,7 +3348,7 @@ li {
   }
 
   .hero {
-    padding: 14rem 8rem;
+    padding: 9rem 8rem 7rem;
   }
 
   .hero-content {
@@ -3283,8 +3361,8 @@ li {
   }
 
   .hero-subtitle {
-    font-size: 1.8rem;
-    max-width: 900px;
+    font-size: 1.3rem;
+    max-width: 800px;
   }
 
   .phase-card {
