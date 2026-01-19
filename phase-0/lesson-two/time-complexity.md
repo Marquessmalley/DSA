@@ -5,7 +5,40 @@
 
 ---
 
-## 1. What Problem Does Time Complexity Solve?
+## 1. What Is Time Complexity?
+
+**Time complexity is a way to describe how the runtime of an algorithm grows as the input size increases.**
+
+It's not about measuring actual seconds or milliseconds — it's about understanding the **relationship** between input size and the number of operations.
+
+### Understanding the Notation: O(n)
+
+When you see something like **O(n)**, here's what each part means:
+
+| Symbol | Meaning |
+| ------ | ------- |
+| **O** | "Order of" — a mathematical notation that describes growth rate |
+| **n** | The **input size** — how many items you're working with |
+
+So **O(n)** reads as "Order of n" and means: *the number of operations grows proportionally with the input size.*
+
+### Common Misconception: O(1) ≠ "One Operation"
+
+**O(1)** does **not** mean "exactly one operation."
+
+It means the number of operations stays **constant** — it doesn't change as input grows. Whether it's 1 operation, 5 operations, or 100 operations, if that number doesn't depend on `n`, it's O(1).
+
+```python
+def example(arr):
+    print(arr[0])      # 1 operation
+    print(arr[0] * 2)  # another operation
+    print(arr[0] + 10) # another operation
+    # Still O(1) — always 3 operations, regardless of array size
+```
+
+---
+
+## 2. What Problem Does Time Complexity Solve?
 
 Imagine you write a program and ask:
 
@@ -23,7 +56,7 @@ Time complexity helps answer:
 
 ---
 
-## 2. The Core Idea (In One Sentence)
+## 3. The Core Idea (In One Sentence)
 
 **Time complexity describes how the number of operations grows with input size.**
 
@@ -31,7 +64,7 @@ Input size is usually called `n`.
 
 ---
 
-## 3. Let's Start with the Simplest Example
+## 4. Let's Start with the Simplest Example
 
 ### Example 1: One Loop
 
@@ -59,7 +92,7 @@ Meaning:
 
 ---
 
-## 4. Why We Ignore Exact Numbers
+## 5. Why We Ignore Exact Numbers
 
 Look at this code:
 
@@ -85,7 +118,7 @@ Why?
 
 ---
 
-## 5. Constant Time: O(1)
+## 6. Constant Time: O(1)
 
 ### Example:
 
@@ -106,7 +139,7 @@ This always takes the same time.
 
 ---
 
-## 6. Two Loops = O(n²)
+## 7. Two Loops = O(n²)
 
 ### Example:
 
@@ -133,7 +166,7 @@ If:
 
 ---
 
-## 7. Important Clarification (Common Beginner Confusion)
+## 8. Important Clarification (Common Beginner Confusion)
 
 ### This is NOT O(n²):
 
@@ -157,7 +190,7 @@ This is:
 
 ---
 
-## 8. The Three Most Important Big-O Types (For Now)
+## 9. The Three Most Important Big-O Types (For Now)
 
 | Big-O | Meaning   | Example         |
 | ----- | --------- | --------------- |
@@ -169,7 +202,7 @@ You'll see these everywhere.
 
 ---
 
-## 9. How to "Read" Time Complexity (Skill You Must Build)
+## 10. How to "Read" Time Complexity (Skill You Must Build)
 
 Look at code and ask:
 
@@ -181,7 +214,7 @@ That's it.
 
 ---
 
-## 10. Tiny Exercises (Answer Mentally)
+## 11. Tiny Exercises (Answer Mentally)
 
 ### Exercise 1
 
@@ -219,7 +252,7 @@ def pairs(arr):
 
 ---
 
-## 11. One Thing to NOT Worry About Yet
+## 12. One Thing to NOT Worry About Yet
 
 ❌ Exact operation counting  
 ❌ Mathematical proofs  

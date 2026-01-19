@@ -65,6 +65,42 @@ body {
 }
 
 /* ===================================
+   Accessibility - Skip Link
+   =================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem 2rem;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  z-index: 10000;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+.cta-button:focus-visible,
+.reveal-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+/* ===================================
    Navigation
    =================================== */
 
@@ -87,6 +123,8 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .brand-icon {
@@ -99,6 +137,41 @@ body {
 .brand-text {
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+/* Mobile Menu Toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .nav-links {
@@ -126,11 +199,13 @@ body {
   transition: width var(--transition-fast);
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
   color: var(--text-primary);
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link:focus::after {
   width: 100%;
 }
 
@@ -1713,21 +1788,143 @@ li {
    Responsive
    =================================== */
 
+/* Mobile (default styles above) */
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
   }
   
+  .nav-toggle {
+    display: flex;
+  }
+  
   .nav-links {
-    gap: 1rem;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    padding: 5rem 2rem 2rem;
+    gap: 0;
+    transition: right var(--transition-medium);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .nav-links.active {
+    right: 0;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .nav-link::after {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    width: 100%;
+  }
+  
+  .dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+    padding: 0.5rem 0 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    min-width: auto;
+  }
+  
+  .dropdown-item {
+    padding: 0.75rem 0;
+  }
+  
+  /* Mobile overlay */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .nav-overlay.active {
+    display: block;
   }
   
   .hero {
     padding: 4rem 1rem;
   }
   
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .course-phases {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .phase-card {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .phase-header {
+    padding: 4rem 1rem 2rem;
+  }
+  
+  .phase-title {
+    font-size: 2rem;
+  }
+  
+  .phase-description {
+    font-size: 1rem;
+  }
+  
+  .lessons-nav {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+  
+  .lesson-nav-item {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+  }
+  
   .lesson {
     padding: 3rem 1rem;
+  }
+  
+  .lesson-number {
+    font-size: 4rem;
+  }
+  
+  .lesson-title {
+    font-size: 1.75rem;
+  }
+  
+  .content-block h4 {
+    font-size: 1.25rem;
   }
   
   .comparison-demo {
@@ -1736,9 +1933,1628 @@ li {
   
   .equation {
     font-size: 1rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .eq-part {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
   }
   
   .big-o {
     font-size: 2rem;
+  }
+  
+  .big-o-reveal {
+    padding: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .big-o-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .definition-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .decides-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mindset-comparison {
+    grid-template-columns: 1fr;
+  }
+  
+  .roadmap-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .roadmap-number {
+    min-width: auto;
+  }
+  
+  .phase-complete {
+    padding: 4rem 1rem;
+  }
+  
+  .phase-complete h3 {
+    font-size: 2rem;
+  }
+  
+  .phases-overview {
+    padding: 4rem 1rem;
+  }
+  
+  .phases-content h2 {
+    font-size: 2rem;
+  }
+  
+  .footer {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) {
+  html {
+    font-size: 18px;
+  }
+
+  .navbar {
+    padding: 1.25rem 3rem;
+  }
+
+  .nav-links {
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .brand-icon {
+    font-size: 1.5rem;
+  }
+
+  .brand-text {
+    font-size: 1.25rem;
+  }
+
+  .hero {
+    padding: 8rem 3rem;
+  }
+
+  .hero-content {
+    max-width: 900px;
+  }
+
+  .hero-tag {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.4rem;
+    max-width: 700px;
+  }
+
+  .phase-card {
+    padding: 2rem 2.5rem;
+  }
+
+  .phase-number {
+    font-size: 1.75rem;
+  }
+
+  .phase-name {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.1rem;
+  }
+
+  .phase-header {
+    padding: 8rem 3rem 5rem;
+  }
+
+  .phase-title {
+    font-size: 3.5rem;
+  }
+
+  .phase-description {
+    font-size: 1.4rem;
+  }
+
+  .topic-tag {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.25rem;
+  }
+
+  .lessons-nav {
+    padding: 3rem;
+    gap: 2rem;
+  }
+
+  .lesson-nav-item {
+    padding: 2rem 2.5rem;
+  }
+
+  .lesson-nav-number {
+    font-size: 1.75rem;
+  }
+
+  .lesson-nav-title {
+    font-size: 1.1rem;
+  }
+
+  .lesson {
+    padding: 6rem 3rem;
+  }
+
+  .lesson-number {
+    font-size: 6rem;
+  }
+
+  .lesson-title {
+    font-size: 3rem;
+  }
+
+  .lesson-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .lesson-intro {
+    font-size: 1.4rem;
+    padding: 2.5rem;
+  }
+
+  .content-block {
+    margin-bottom: 5rem;
+  }
+
+  .content-block h4 {
+    font-size: 1.75rem;
+    margin: 2rem 0 1.25rem;
+  }
+
+  .content-block p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .equation {
+    font-size: 1.75rem;
+    padding: 2.5rem;
+  }
+
+  .definition-cards {
+    gap: 2rem;
+  }
+
+  .def-card {
+    padding: 2.5rem;
+  }
+
+  .def-icon {
+    font-size: 3rem;
+  }
+
+  .def-card h5 {
+    font-size: 1.25rem;
+  }
+
+  .def-card p {
+    font-size: 1.05rem;
+  }
+
+  .analogy-box {
+    padding: 2.5rem;
+  }
+
+  .analogy-icon {
+    font-size: 3.5rem;
+  }
+
+  .analogy-box h5 {
+    font-size: 1.35rem;
+  }
+
+  .analogy-list li {
+    font-size: 1.1rem;
+  }
+
+  .comparison-demo {
+    gap: 2.5rem;
+  }
+
+  .demo-side {
+    padding: 2.5rem;
+  }
+
+  .demo-visual .book {
+    font-size: 2rem;
+  }
+
+  .demo-label {
+    font-size: 1rem;
+  }
+
+  .demo-speed {
+    font-size: 1.1rem;
+  }
+
+  blockquote.insight {
+    font-size: 1.25rem;
+    padding: 2rem 2.5rem;
+  }
+
+  .code-block {
+    padding: 2rem;
+  }
+
+  .code-block code {
+    font-size: 1.05rem;
+  }
+
+  .decides-card {
+    padding: 2rem;
+  }
+
+  .decides-card h5 {
+    font-size: 1.15rem;
+  }
+
+  .mindset {
+    padding: 2rem;
+  }
+
+  .mindset blockquote {
+    font-size: 1.1rem;
+  }
+
+  .key-takeaway {
+    font-size: 1.4rem;
+  }
+
+  .exercise-list {
+    padding: 2rem 2rem 2rem 3rem;
+  }
+
+  .exercise-list li {
+    font-size: 1.05rem;
+  }
+
+  .question-quote {
+    font-size: 1.4rem;
+    padding: 2rem;
+  }
+
+  .important-box {
+    padding: 2rem;
+  }
+
+  .important-box .icon {
+    font-size: 1.75rem;
+  }
+
+  .important-box p {
+    font-size: 1.05rem;
+  }
+
+  .core-idea {
+    padding: 2.5rem;
+  }
+
+  .core-idea p {
+    font-size: 1.4rem;
+  }
+
+  .step {
+    padding: 1.25rem 2rem;
+    font-size: 1.05rem;
+  }
+
+  .big-o-reveal {
+    padding: 2.5rem;
+  }
+
+  .big-o {
+    font-size: 3.5rem;
+  }
+
+  .big-o-reveal .reading {
+    font-size: 1.1rem;
+  }
+
+  .why-box {
+    padding: 2rem;
+  }
+
+  .why-box p {
+    font-size: 1.05rem;
+  }
+
+  .scary-item {
+    padding: 1.25rem 2rem;
+    font-size: 1.05rem;
+  }
+
+  .pattern-table th,
+  .pattern-table td {
+    padding: 1.25rem 2rem;
+    font-size: 1.05rem;
+  }
+
+  .big-o-cards {
+    gap: 2rem;
+  }
+
+  .big-o-card {
+    padding: 2.5rem;
+  }
+
+  .card-o {
+    font-size: 2.5rem;
+  }
+
+  .card-name {
+    font-size: 1.15rem;
+  }
+
+  .card-example {
+    font-size: 0.95rem;
+  }
+
+  .read-steps li {
+    padding: 1.25rem 1.25rem 1.25rem 4rem;
+    font-size: 1.05rem;
+  }
+
+  .exercise-card {
+    padding: 2.5rem;
+  }
+
+  .exercise-card .code-block {
+    font-size: 1rem;
+  }
+
+  .ex-question {
+    font-size: 1.1rem;
+  }
+
+  .reveal-btn {
+    font-size: 1rem;
+    padding: 0.6rem 1.25rem;
+  }
+
+  .dont-worry li {
+    font-size: 1.1rem;
+  }
+
+  .final-note {
+    font-size: 1.6rem;
+    padding: 2.5rem;
+  }
+
+  .phase-complete {
+    padding: 8rem 3rem;
+  }
+
+  .complete-icon {
+    font-size: 5rem;
+  }
+
+  .phase-complete h3 {
+    font-size: 3rem;
+  }
+
+  .phase-complete p {
+    font-size: 1.25rem;
+  }
+
+  .next-phase {
+    padding: 2.5rem;
+  }
+
+  .next-title {
+    font-size: 1.4rem;
+  }
+
+  .phases-overview {
+    padding: 8rem 3rem;
+  }
+
+  .phases-content h2 {
+    font-size: 3rem;
+  }
+
+  .phases-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .roadmap-item {
+    padding: 2rem 2.5rem;
+  }
+
+  .roadmap-number {
+    font-size: 2.5rem;
+    min-width: 4rem;
+  }
+
+  .roadmap-info h4 {
+    font-size: 1.25rem;
+  }
+
+  .roadmap-info p {
+    font-size: 1rem;
+  }
+
+  .footer {
+    padding: 4rem 3rem;
+  }
+
+  .footer-content p {
+    font-size: 1.05rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  html {
+    font-size: 20px;
+  }
+
+  :root {
+    --content-max: 1000px;
+  }
+
+  .navbar {
+    padding: 1.5rem 4rem;
+  }
+
+  .nav-links {
+    gap: 3rem;
+  }
+
+  .nav-link {
+    font-size: 1.05rem;
+  }
+
+  .brand-icon {
+    font-size: 1.6rem;
+  }
+
+  .brand-text {
+    font-size: 1.3rem;
+  }
+
+  .hero {
+    padding: 10rem 4rem;
+  }
+
+  .hero-content {
+    max-width: 1000px;
+  }
+
+  .hero-tag {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.6rem;
+    max-width: 800px;
+  }
+
+  .course-phases {
+    gap: 1.5rem;
+  }
+
+  .phase-card {
+    padding: 2.5rem 3rem;
+  }
+
+  .phase-number {
+    font-size: 2rem;
+  }
+
+  .phase-name {
+    font-size: 1.1rem;
+  }
+
+  .cta-button {
+    padding: 1.4rem 2.75rem;
+    font-size: 1.15rem;
+  }
+
+  .phase-header {
+    padding: 10rem 4rem 6rem;
+  }
+
+  .phase-title {
+    font-size: 4.25rem;
+  }
+
+  .phase-description {
+    font-size: 1.5rem;
+  }
+
+  .topic-tag {
+    font-size: 1.05rem;
+    padding: 0.7rem 1.4rem;
+  }
+
+  .lessons-nav {
+    padding: 4rem;
+  }
+
+  .lesson-nav-item {
+    padding: 2.25rem 3rem;
+  }
+
+  .lesson-nav-number {
+    font-size: 2rem;
+  }
+
+  .lesson-nav-title {
+    font-size: 1.2rem;
+  }
+
+  .lesson-nav-desc {
+    font-size: 1rem;
+  }
+
+  .lesson {
+    padding: 8rem 4rem;
+  }
+
+  .lesson-alt {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .lesson-header {
+    margin-bottom: 5rem;
+  }
+
+  .lesson-number {
+    font-size: 8rem;
+  }
+
+  .lesson-title {
+    font-size: 3.75rem;
+  }
+
+  .lesson-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .lesson-intro {
+    font-size: 1.5rem;
+    padding: 3rem;
+  }
+
+  .content-block {
+    margin-bottom: 6rem;
+  }
+
+  .content-block h4 {
+    font-size: 2.25rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .content-block h5 {
+    font-size: 1.4rem;
+  }
+
+  .content-block p {
+    font-size: 1.2rem;
+    line-height: 1.85;
+  }
+
+  .content-block li {
+    font-size: 1.15rem;
+  }
+
+  .equation {
+    font-size: 2rem;
+    padding: 3rem;
+  }
+
+  .definition-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .def-card {
+    padding: 3rem;
+  }
+
+  .def-icon {
+    font-size: 3.5rem;
+  }
+
+  .def-card h5 {
+    font-size: 1.4rem;
+  }
+
+  .def-card p {
+    font-size: 1.15rem;
+  }
+
+  .analogy-box {
+    padding: 3rem;
+  }
+
+  .analogy-icon {
+    font-size: 4rem;
+  }
+
+  .analogy-box h5 {
+    font-size: 1.5rem;
+  }
+
+  .analogy-list li {
+    font-size: 1.2rem;
+  }
+
+  .comparison-demo {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .demo-side {
+    padding: 3rem;
+  }
+
+  .demo-visual .book {
+    font-size: 2.25rem;
+  }
+
+  .demo-label {
+    font-size: 1.1rem;
+  }
+
+  .demo-speed {
+    font-size: 1.2rem;
+  }
+
+  blockquote.insight {
+    font-size: 1.35rem;
+    padding: 2.25rem 3rem;
+  }
+
+  .code-block {
+    padding: 2.25rem;
+  }
+
+  .code-block code {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .decides-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .decides-card {
+    padding: 2.5rem;
+  }
+
+  .decides-card h5 {
+    font-size: 1.25rem;
+  }
+
+  .decides-card li {
+    font-size: 1.1rem;
+  }
+
+  .mindset-comparison {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .mindset {
+    padding: 2.5rem;
+  }
+
+  .mindset .label {
+    font-size: 1.05rem;
+  }
+
+  .mindset blockquote {
+    font-size: 1.2rem;
+  }
+
+  .key-takeaway {
+    font-size: 1.5rem;
+  }
+
+  .exercise-list {
+    padding: 2.25rem 2.25rem 2.25rem 3.5rem;
+  }
+
+  .exercise-list li {
+    font-size: 1.15rem;
+  }
+
+  .question-quote {
+    font-size: 1.5rem;
+    padding: 2.5rem;
+  }
+
+  .important-box {
+    padding: 2.25rem;
+  }
+
+  .important-box .icon {
+    font-size: 2rem;
+  }
+
+  .important-box p {
+    font-size: 1.15rem;
+  }
+
+  .core-idea {
+    padding: 3rem;
+  }
+
+  .core-idea p {
+    font-size: 1.5rem;
+  }
+
+  .step {
+    padding: 1.5rem 2.25rem;
+    font-size: 1.15rem;
+  }
+
+  .big-o-reveal {
+    padding: 3rem;
+  }
+
+  .big-o {
+    font-size: 4.5rem;
+  }
+
+  .big-o-reveal .reading {
+    font-size: 1.2rem;
+  }
+
+  .big-o-inline {
+    font-size: 1.1em;
+  }
+
+  .why-box {
+    padding: 2.25rem;
+  }
+
+  .why-box p {
+    font-size: 1.15rem;
+  }
+
+  .scary-numbers {
+    gap: 1rem;
+  }
+
+  .scary-item {
+    padding: 1.5rem 2.25rem;
+    font-size: 1.15rem;
+  }
+
+  .pattern-table th,
+  .pattern-table td {
+    padding: 1.5rem 2.25rem;
+    font-size: 1.15rem;
+  }
+
+  .big-o-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .big-o-card {
+    padding: 3rem;
+  }
+
+  .card-o {
+    font-size: 3rem;
+  }
+
+  .card-name {
+    font-size: 1.25rem;
+  }
+
+  .card-example {
+    font-size: 1.05rem;
+  }
+
+  .read-steps li {
+    padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+    font-size: 1.15rem;
+  }
+
+  .exercise-card {
+    padding: 3rem;
+  }
+
+  .exercise-card .code-block code {
+    font-size: 1.05rem;
+  }
+
+  .ex-question {
+    font-size: 1.2rem;
+  }
+
+  .reveal-btn {
+    font-size: 1.05rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .answer {
+    font-size: 1.1rem;
+  }
+
+  .dont-worry li {
+    font-size: 1.2rem;
+  }
+
+  .final-note {
+    font-size: 1.75rem;
+    padding: 3rem;
+  }
+
+  .phase-complete {
+    padding: 10rem 4rem;
+  }
+
+  .complete-icon {
+    font-size: 5.5rem;
+  }
+
+  .phase-complete h3 {
+    font-size: 3.25rem;
+  }
+
+  .phase-complete p {
+    font-size: 1.35rem;
+  }
+
+  .next-phase {
+    padding: 3rem;
+  }
+
+  .next-label {
+    font-size: 0.95rem;
+  }
+
+  .next-title {
+    font-size: 1.5rem;
+  }
+
+  .next-topics {
+    font-size: 1.05rem;
+  }
+
+  .phases-overview {
+    padding: 10rem 4rem;
+  }
+
+  .phases-content h2 {
+    font-size: 3.25rem;
+  }
+
+  .phases-subtitle {
+    font-size: 1.35rem;
+  }
+
+  .roadmap {
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 1.5rem;
+  }
+
+  .roadmap-item {
+    padding: 2.25rem 3rem;
+  }
+
+  .roadmap-number {
+    font-size: 2.75rem;
+    min-width: 4.5rem;
+  }
+
+  .roadmap-info h4 {
+    font-size: 1.35rem;
+  }
+
+  .roadmap-info p {
+    font-size: 1.1rem;
+  }
+
+  .roadmap-status {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .footer {
+    padding: 5rem 4rem;
+  }
+
+  .footer-content p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  html {
+    font-size: 21px;
+  }
+
+  :root {
+    --content-max: 1100px;
+  }
+
+  .navbar {
+    padding: 1.75rem 6rem;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+
+  .brand-icon {
+    font-size: 1.75rem;
+  }
+
+  .brand-text {
+    font-size: 1.4rem;
+  }
+
+  .hero {
+    padding: 12rem 6rem;
+  }
+
+  .hero-content {
+    max-width: 1100px;
+  }
+
+  .hero-tag {
+    font-size: 1.15rem;
+    padding: 0.85rem 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.7rem;
+  }
+
+  .phase-card {
+    padding: 2.75rem 3.5rem;
+  }
+
+  .phase-number {
+    font-size: 2.25rem;
+  }
+
+  .phase-name {
+    font-size: 1.15rem;
+  }
+
+  .cta-button {
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+  }
+
+  .phase-header {
+    padding: 12rem 6rem 8rem;
+  }
+
+  .phase-title {
+    font-size: 4.75rem;
+  }
+
+  .phase-description {
+    font-size: 1.6rem;
+  }
+
+  .topic-tag {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .lessons-nav {
+    padding: 5rem 6rem;
+  }
+
+  .lesson-nav-item {
+    padding: 2.5rem 3.25rem;
+  }
+
+  .lesson-nav-number {
+    font-size: 2.25rem;
+  }
+
+  .lesson-nav-title {
+    font-size: 1.3rem;
+  }
+
+  .lesson {
+    padding: 10rem 6rem;
+  }
+
+  .lesson-alt {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  .lesson-number {
+    font-size: 9rem;
+  }
+
+  .lesson-title {
+    font-size: 4.25rem;
+  }
+
+  .lesson-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .lesson-intro {
+    font-size: 1.6rem;
+    padding: 3.5rem;
+  }
+
+  .content-block h4 {
+    font-size: 2.5rem;
+    margin: 3rem 0 1.75rem;
+  }
+
+  .content-block h5 {
+    font-size: 1.5rem;
+  }
+
+  .content-block p {
+    font-size: 1.25rem;
+    line-height: 1.9;
+  }
+
+  .content-block li {
+    font-size: 1.2rem;
+  }
+
+  .equation {
+    font-size: 2.25rem;
+    padding: 3.5rem;
+  }
+
+  .def-card {
+    padding: 3.5rem;
+  }
+
+  .def-icon {
+    font-size: 4rem;
+  }
+
+  .def-card h5 {
+    font-size: 1.5rem;
+  }
+
+  .def-card p {
+    font-size: 1.2rem;
+  }
+
+  .analogy-box {
+    padding: 3.5rem;
+  }
+
+  .analogy-icon {
+    font-size: 4.5rem;
+  }
+
+  .analogy-box h5 {
+    font-size: 1.6rem;
+  }
+
+  .analogy-list li {
+    font-size: 1.25rem;
+  }
+
+  blockquote.insight {
+    font-size: 1.45rem;
+    padding: 2.5rem 3.5rem;
+  }
+
+  .code-block {
+    padding: 2.5rem;
+  }
+
+  .code-block code {
+    font-size: 1.15rem;
+  }
+
+  .core-idea {
+    padding: 3.5rem;
+  }
+
+  .core-idea p {
+    font-size: 1.6rem;
+  }
+
+  .question-quote {
+    font-size: 1.6rem;
+    padding: 3rem;
+  }
+
+  .big-o {
+    font-size: 5rem;
+  }
+
+  .big-o-reveal .reading {
+    font-size: 1.25rem;
+  }
+
+  .pattern-table th,
+  .pattern-table td {
+    padding: 1.75rem 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .big-o-card {
+    padding: 3.5rem;
+  }
+
+  .card-o {
+    font-size: 3.25rem;
+  }
+
+  .card-name {
+    font-size: 1.35rem;
+  }
+
+  .exercise-card {
+    padding: 3.5rem;
+  }
+
+  .ex-question {
+    font-size: 1.25rem;
+  }
+
+  .final-note {
+    font-size: 1.9rem;
+    padding: 3.5rem;
+  }
+
+  .phase-complete {
+    padding: 12rem 6rem;
+  }
+
+  .complete-icon {
+    font-size: 6rem;
+  }
+
+  .phase-complete h3 {
+    font-size: 3.75rem;
+  }
+
+  .phase-complete p {
+    font-size: 1.45rem;
+  }
+
+  .next-phase {
+    padding: 3.5rem;
+  }
+
+  .next-title {
+    font-size: 1.6rem;
+  }
+
+  .phases-overview {
+    padding: 12rem 6rem;
+  }
+
+  .phases-content h2 {
+    font-size: 3.75rem;
+  }
+
+  .phases-subtitle {
+    font-size: 1.45rem;
+  }
+
+  .roadmap {
+    max-width: 1000px;
+  }
+
+  .roadmap-item {
+    padding: 2.5rem 3.25rem;
+  }
+
+  .roadmap-number {
+    font-size: 3rem;
+  }
+
+  .roadmap-info h4 {
+    font-size: 1.45rem;
+  }
+
+  .roadmap-info p {
+    font-size: 1.15rem;
+  }
+
+  .footer {
+    padding: 5rem 6rem;
+  }
+
+  .footer-content p {
+    font-size: 1.15rem;
+  }
+}
+
+/* Extra Large Desktop */
+@media (min-width: 1920px) {
+  html {
+    font-size: 23px;
+  }
+
+  :root {
+    --content-max: 1300px;
+  }
+
+  .navbar {
+    padding: 2rem 8rem;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+
+  .brand-icon {
+    font-size: 1.85rem;
+  }
+
+  .brand-text {
+    font-size: 1.5rem;
+  }
+
+  .hero {
+    padding: 14rem 8rem;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+  }
+
+  .hero-tag {
+    font-size: 1.2rem;
+    padding: 0.9rem 2.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.8rem;
+    max-width: 900px;
+  }
+
+  .phase-card {
+    padding: 3rem 4rem;
+  }
+
+  .phase-number {
+    font-size: 2.5rem;
+  }
+
+  .phase-name {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    padding: 1.6rem 3.25rem;
+    font-size: 1.25rem;
+  }
+
+  .phase-header {
+    padding: 14rem 8rem 10rem;
+  }
+
+  .phase-title {
+    font-size: 5.25rem;
+  }
+
+  .phase-description {
+    font-size: 1.75rem;
+  }
+
+  .topic-tag {
+    font-size: 1.15rem;
+    padding: 0.8rem 1.6rem;
+  }
+
+  .lessons-nav {
+    padding: 6rem 8rem;
+  }
+
+  .lesson-nav-item {
+    padding: 2.75rem 3.5rem;
+  }
+
+  .lesson-nav-number {
+    font-size: 2.5rem;
+  }
+
+  .lesson-nav-title {
+    font-size: 1.4rem;
+  }
+
+  .lesson {
+    padding: 12rem 8rem;
+  }
+
+  .lesson-alt {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .lesson-number {
+    font-size: 10rem;
+  }
+
+  .lesson-title {
+    font-size: 4.75rem;
+  }
+
+  .lesson-subtitle {
+    font-size: 1.6rem;
+  }
+
+  .lesson-intro {
+    font-size: 1.75rem;
+    padding: 4rem;
+  }
+
+  .content-block h4 {
+    font-size: 2.75rem;
+    margin: 3.5rem 0 2rem;
+  }
+
+  .content-block h5 {
+    font-size: 1.6rem;
+  }
+
+  .content-block p {
+    font-size: 1.3rem;
+    line-height: 1.95;
+  }
+
+  .content-block li {
+    font-size: 1.25rem;
+  }
+
+  .equation {
+    font-size: 2.5rem;
+    padding: 4rem;
+  }
+
+  .def-card {
+    padding: 4rem;
+  }
+
+  .def-icon {
+    font-size: 4.5rem;
+  }
+
+  .def-card h5 {
+    font-size: 1.6rem;
+  }
+
+  .def-card p {
+    font-size: 1.25rem;
+  }
+
+  .analogy-box {
+    padding: 4rem;
+  }
+
+  .analogy-icon {
+    font-size: 5rem;
+  }
+
+  .analogy-box h5 {
+    font-size: 1.75rem;
+  }
+
+  .analogy-list li {
+    font-size: 1.3rem;
+  }
+
+  blockquote.insight {
+    font-size: 1.55rem;
+    padding: 2.75rem 4rem;
+  }
+
+  .code-block {
+    padding: 2.75rem;
+  }
+
+  .code-block code {
+    font-size: 1.2rem;
+  }
+
+  .core-idea {
+    padding: 4rem;
+  }
+
+  .core-idea p {
+    font-size: 1.75rem;
+  }
+
+  .question-quote {
+    font-size: 1.75rem;
+    padding: 3.5rem;
+  }
+
+  .important-box {
+    padding: 2.75rem;
+  }
+
+  .important-box .icon {
+    font-size: 2.25rem;
+  }
+
+  .important-box p {
+    font-size: 1.25rem;
+  }
+
+  .step {
+    padding: 1.75rem 2.75rem;
+    font-size: 1.25rem;
+  }
+
+  .big-o-reveal {
+    padding: 3.5rem;
+  }
+
+  .big-o {
+    font-size: 5.5rem;
+  }
+
+  .big-o-reveal .reading {
+    font-size: 1.35rem;
+  }
+
+  .pattern-table th,
+  .pattern-table td {
+    padding: 2rem 2.75rem;
+    font-size: 1.25rem;
+  }
+
+  .big-o-card {
+    padding: 4rem;
+  }
+
+  .card-o {
+    font-size: 3.5rem;
+  }
+
+  .card-name {
+    font-size: 1.45rem;
+  }
+
+  .card-example {
+    font-size: 1.15rem;
+  }
+
+  .read-steps li {
+    padding: 1.75rem 1.75rem 1.75rem 5rem;
+    font-size: 1.25rem;
+  }
+
+  .exercise-card {
+    padding: 4rem;
+  }
+
+  .ex-question {
+    font-size: 1.35rem;
+  }
+
+  .reveal-btn {
+    font-size: 1.1rem;
+    padding: 0.85rem 1.75rem;
+  }
+
+  .answer {
+    font-size: 1.2rem;
+    padding: 1.25rem;
+  }
+
+  .dont-worry li {
+    font-size: 1.3rem;
+  }
+
+  .final-note {
+    font-size: 2.1rem;
+    padding: 4rem;
+  }
+
+  .phase-complete {
+    padding: 14rem 8rem;
+  }
+
+  .complete-icon {
+    font-size: 7rem;
+  }
+
+  .phase-complete h3 {
+    font-size: 4.25rem;
+  }
+
+  .phase-complete p {
+    font-size: 1.55rem;
+  }
+
+  .next-phase {
+    padding: 4rem;
+  }
+
+  .next-label {
+    font-size: 1rem;
+  }
+
+  .next-title {
+    font-size: 1.75rem;
+  }
+
+  .next-topics {
+    font-size: 1.15rem;
+  }
+
+  .phases-overview {
+    padding: 14rem 8rem;
+  }
+
+  .phases-content h2 {
+    font-size: 4.25rem;
+  }
+
+  .phases-subtitle {
+    font-size: 1.55rem;
+  }
+
+  .roadmap {
+    max-width: 1100px;
+  }
+
+  .roadmap-item {
+    padding: 2.75rem 3.5rem;
+  }
+
+  .roadmap-number {
+    font-size: 3.25rem;
+    min-width: 5rem;
+  }
+
+  .roadmap-info h4 {
+    font-size: 1.55rem;
+  }
+
+  .roadmap-info p {
+    font-size: 1.2rem;
+  }
+
+  .roadmap-status {
+    font-size: 1rem;
+    padding: 0.6rem 1.15rem;
+  }
+
+  .footer {
+    padding: 6rem 8rem;
+  }
+
+  .footer-content p {
+    font-size: 1.2rem;
   }
 }

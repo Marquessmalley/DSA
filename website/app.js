@@ -12,7 +12,67 @@ document.addEventListener("DOMContentLoaded", () => {
   initBigOCards();
   initPhaseAnimations();
   initRoadmapAnimations();
+  initMobileNavigation();
 });
+
+// ===================================
+// Mobile Navigation Toggle
+// ===================================
+
+function initMobileNavigation() {
+  const navToggle = document.getElementById("navToggle");
+  const navLinks = document.getElementById("navLinks");
+  const navOverlay = document.getElementById("navOverlay");
+
+  if (!navToggle || !navLinks) return;
+
+  function toggleMenu() {
+    const isOpen = navToggle.classList.contains("active");
+    
+    navToggle.classList.toggle("active");
+    navLinks.classList.toggle("active");
+    if (navOverlay) navOverlay.classList.toggle("active");
+    
+    // Update ARIA attributes
+    navToggle.setAttribute("aria-expanded", !isOpen);
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = !isOpen ? "hidden" : "";
+  }
+
+  function closeMenu() {
+    navToggle.classList.remove("active");
+    navLinks.classList.remove("active");
+    if (navOverlay) navOverlay.classList.remove("active");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  navToggle.addEventListener("click", toggleMenu);
+  
+  if (navOverlay) {
+    navOverlay.addEventListener("click", closeMenu);
+  }
+
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close menu on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && navToggle.classList.contains("active")) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on window resize (if switching to desktop)
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && navToggle.classList.contains("active")) {
+      closeMenu();
+    }
+  });
+}
 
 // ===================================
 // Hero Section Animations
@@ -326,10 +386,19 @@ function initBigOCards() {
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
+    const href = this.getAttribute("href");
+    
+    // Skip if it's just "#" (home link)
+    if (href === "#") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    
+    const target = document.querySelector(href);
 
     if (target) {
+      e.preventDefault();
       const offsetTop = target.offsetTop - 80; // Account for navbar
 
       anime({

@@ -19,8 +19,8 @@
 
 | Term               | Meaning                 |
 | ------------------ | ----------------------- |
-| **Data Structure** | How data is _stored_    |
-| **Algorithm**      | How data is _processed_ |
+| **Data Structure** | A specific format for organizing, storing, and managing data in a computer system |
+| **Algorithm**      | A set of step-by-step instructions to solve a specific problem |
 
 That's it.
 

@@ -14,13 +14,24 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#phase-0" class="skip-link">Skip to main content</a>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+    
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-brand">
-        <span class="brand-icon">&lt;/&gt;</span>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="#" class="nav-brand">
+        <span class="brand-icon" aria-hidden="true">&lt;/&gt;</span>
         <span class="brand-text">DSA Course</span>
-      </div>
-      <div class="nav-links">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks" role="menubar">
         <div class="nav-dropdown">
           <a href="#phases" class="nav-link dropdown-trigger">
             Phases
@@ -182,12 +193,12 @@
               <div class="def-card" data-delay="0">
                 <div class="def-icon">📦</div>
                 <h5>Data Structure</h5>
-                <p>How data is <em>stored</em></p>
+                <p>A specific format for organizing, storing, and managing data in a computer system</p>
               </div>
               <div class="def-card" data-delay="100">
                 <div class="def-icon">⚙️</div>
                 <h5>Algorithm</h5>
-                <p>How data is <em>processed</em></p>
+                <p>A set of step-by-step instructions to solve a specific problem</p>
               </div>
             </div>
             <p class="simple-text">That's it.</p>
@@ -338,7 +349,50 @@
           </blockquote>
 
           <div class="content-block fade-in">
-            <h4>1. What Problem Does Time Complexity Solve?</h4>
+            <h4>1. What Is Time Complexity?</h4>
+            <div class="core-idea">
+              <p>
+                Time complexity is a way to describe how the <strong>runtime of an algorithm grows</strong> as the <strong>input size increases</strong>.
+              </p>
+            </div>
+            <p>It's not about measuring actual seconds — it's about understanding the <strong>relationship</strong> between input size and the number of operations.</p>
+            
+            <h5>Understanding the Notation: O(n)</h5>
+            <p>When you see something like <strong class="big-o-inline">O(n)</strong>, here's what each part means:</p>
+            <table class="pattern-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>O</strong></td>
+                  <td>"Order of" — a mathematical notation that describes growth rate</td>
+                </tr>
+                <tr>
+                  <td><strong>n</strong></td>
+                  <td>The <strong>input size</strong> — how many items you're working with</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>So <strong class="big-o-inline">O(n)</strong> reads as "Order of n" and means: <em>the number of operations grows proportionally with the input size.</em></p>
+
+            <h5>Common Misconception: O(1) ≠ "One Operation"</h5>
+            <p><strong class="big-o-inline">O(1)</strong> does <strong>not</strong> mean "exactly one operation."</p>
+            <p>It means the number of operations stays <strong>constant</strong> — it doesn't change as input grows. Whether it's 1 operation, 5 operations, or 100 operations, if that number doesn't depend on <code>n</code>, it's O(1).</p>
+            <pre
+              class="code-block"
+            ><code><span class="keyword">def</span> <span class="function">example</span>(arr):
+    <span class="function">print</span>(arr[<span class="number">0</span>])      <span class="comment"># 1 operation</span>
+    <span class="function">print</span>(arr[<span class="number">0</span>] * <span class="number">2</span>)  <span class="comment"># another operation</span>
+    <span class="function">print</span>(arr[<span class="number">0</span>] + <span class="number">10</span>) <span class="comment"># another operation</span>
+    <span class="comment"># Still O(1) — always 3 operations, regardless of array size</span></code></pre>
+          </div>
+
+          <div class="content-block fade-in">
+            <h4>2. What Problem Does Time Complexity Solve?</h4>
             <p>Imagine you write a program and ask:</p>
             <blockquote class="question-quote">
               "Will this still work if my input becomes very large?"
@@ -358,7 +412,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>2. The Core Idea (In One Sentence)</h4>
+            <h4>3. The Core Idea (In One Sentence)</h4>
             <div class="core-idea">
               <p>
                 Time complexity describes how the
@@ -370,7 +424,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>3. Let's Start with the Simplest Example</h4>
+            <h4>4. Let's Start with the Simplest Example</h4>
             <h5>Example: One Loop</h5>
             <pre
               class="code-block"
@@ -406,7 +460,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>4. Why We Ignore Exact Numbers</h4>
+            <h4>5. Why We Ignore Exact Numbers</h4>
             <pre
               class="code-block"
             ><code><span class="keyword">for</span> num <span class="keyword">in</span> numbers:
@@ -421,7 +475,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>5. Constant Time: O(1)</h4>
+            <h4>6. Constant Time: O(1)</h4>
             <pre
               class="code-block"
             ><code><span class="keyword">numbers</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]
@@ -441,7 +495,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>6. Two Loops = O(n²)</h4>
+            <h4>7. Two Loops = O(n²)</h4>
             <pre
               class="code-block"
             ><code><span class="keyword">numbers</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]
@@ -475,7 +529,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>7. Important Clarification</h4>
+            <h4>8. Important Clarification</h4>
             <p class="subtitle">Common Beginner Confusion</p>
             <h5>This is NOT O(n²):</h5>
             <pre
@@ -510,7 +564,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>8. The Three Most Important Big-O Types</h4>
+            <h4>9. The Three Most Important Big-O Types</h4>
             <div class="big-o-cards">
               <div class="big-o-card" data-complexity="o1">
                 <span class="card-o">O(1)</span>
@@ -541,7 +595,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>9. How to "Read" Time Complexity</h4>
+            <h4>10. How to "Read" Time Complexity</h4>
             <p class="subtitle">A skill you must build</p>
             <p>Look at code and ask:</p>
             <ol class="read-steps">
@@ -553,7 +607,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>10. Tiny Exercises</h4>
+            <h4>11. Tiny Exercises</h4>
             <p>Answer mentally:</p>
 
             <div class="exercise-card">
@@ -616,7 +670,7 @@
           </div>
 
           <div class="content-block fade-in">
-            <h4>11. One Thing to NOT Worry About Yet</h4>
+            <h4>12. One Thing to NOT Worry About Yet</h4>
             <ul class="dont-worry">
               <li><span class="x">❌</span> Exact operation counting</li>
               <li><span class="x">❌</span> Mathematical proofs</li>
