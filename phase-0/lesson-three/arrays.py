@@ -18,7 +18,7 @@ for num in numbers:
 
 
 # Updating an element - Constant time O(1)
-    # numbers[0] = 100
+    numbers[0] = 100
 
 
 # Searching for an element - Linear time O(n)

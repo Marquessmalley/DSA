@@ -1730,7 +1730,8 @@ li {
 
 .answer.show {
   opacity: 1;
-  max-height: 100px;
+  max-height: 300px;
+  padding: 1rem;
 }
 
 /* ===================================
@@ -2800,6 +2801,11 @@ li {
 
   .answer {
     font-size: 1.1rem;
+    max-height: 400px;
+  }
+
+  .answer.show {
+    padding: 1.25rem;
   }
 
   .dont-worry li {
@@ -3468,7 +3474,11 @@ li {
 
   .answer {
     font-size: 1.2rem;
-    padding: 1.25rem;
+    max-height: 500px;
+  }
+
+  .answer.show {
+    padding: 1.5rem;
   }
 
   .dont-worry li {
