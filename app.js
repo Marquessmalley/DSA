@@ -1,18 +1,24 @@
 // ===================================
 // DSA Course — Phase 0 Animations
-// Using anime.js
+// Using anime.js (Performance Optimized)
 // ===================================
+
+// Check for reduced motion preference
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize all animations
   initHeroAnimations();
   initScrollAnimations();
-  initFloatingShapes();
+  if (!prefersReducedMotion) {
+    initFloatingShapes(); // Only run if user allows motion
+  }
   initBookDemo();
   initBigOCards();
   initPhaseAnimations();
   initRoadmapAnimations();
   initMobileNavigation();
+  initOptimizedScrollEffects();
 });
 
 // ===================================
@@ -140,32 +146,30 @@ function initHeroAnimations() {
 }
 
 // ===================================
-// Floating Background Shapes
+// Floating Background Shapes (Optimized)
 // ===================================
 
 function initFloatingShapes() {
-  // Animate each shape with random floating motion
-  document.querySelectorAll(".shape").forEach((shape, index) => {
-    const randomDuration = 15000 + Math.random() * 10000;
-    const randomDelay = index * 500;
-
+  const shapes = document.querySelectorAll(".shape");
+  
+  // Use CSS animations instead for better performance
+  // Only animate the first 3 shapes to reduce load
+  shapes.forEach((shape, index) => {
+    if (index > 2) {
+      // Skip animation for extra shapes
+      return;
+    }
+    
+    // Longer durations = less CPU usage
+    const duration = 20000 + index * 5000;
+    
     anime({
       targets: shape,
-      translateX: [
-        { value: anime.random(-30, 30), duration: randomDuration },
-        { value: anime.random(-30, 30), duration: randomDuration },
-      ],
-      translateY: [
-        { value: anime.random(-30, 30), duration: randomDuration },
-        { value: anime.random(-30, 30), duration: randomDuration },
-      ],
-      scale: [
-        { value: 1, duration: randomDuration / 2 },
-        { value: 1.1, duration: randomDuration / 2 },
-      ],
-      easing: "easeInOutQuad",
+      translateX: [0, anime.random(-20, 20), 0],
+      translateY: [0, anime.random(-20, 20), 0],
+      duration: duration,
+      easing: "easeInOutSine", // Simpler easing
       loop: true,
-      delay: randomDelay,
     });
   });
 }
@@ -253,10 +257,10 @@ function initScrollAnimations() {
         if (entry.isIntersecting) {
           anime({
             targets: entry.target.querySelector(".big-o"),
-            scale: [0, 1],
+            scale: [0.5, 1],
             opacity: [0, 1],
-            duration: 800,
-            easing: "easeOutElastic(1, 0.5)",
+            duration: 600,
+            easing: "easeOutCubic", // Simpler easing, better performance
           });
           bigOObserver.unobserve(entry.target);
         }
@@ -287,12 +291,12 @@ function initBookDemo() {
             // Animate slow/random pile
             anime({
               targets: slowBooks,
-              rotate: () => anime.random(-45, 45),
-              translateX: () => anime.random(-10, 10),
-              translateY: () => anime.random(-5, 5),
-              duration: 600,
-              delay: anime.stagger(50),
-              easing: "easeOutElastic(1, 0.5)",
+              rotate: () => anime.random(-30, 30),
+              translateX: () => anime.random(-8, 8),
+              translateY: () => anime.random(-4, 4),
+              duration: 500,
+              delay: anime.stagger(40),
+              easing: "easeOutCubic", // Simpler easing
             });
 
             // Animate fast/sorted pile
@@ -301,9 +305,9 @@ function initBookDemo() {
               rotate: 0,
               translateX: 0,
               translateY: 0,
-              duration: 800,
-              delay: anime.stagger(50, { start: 300 }),
-              easing: "easeOutExpo",
+              duration: 600,
+              delay: anime.stagger(40, { start: 200 }),
+              easing: "easeOutCubic",
             });
 
             observer.unobserve(entry.target);
@@ -318,40 +322,15 @@ function initBookDemo() {
 }
 
 // ===================================
-// Big-O Cards Hover Animation
+// Big-O Cards Hover Animation (Optimized)
 // ===================================
 
 function initBigOCards() {
   const cards = document.querySelectorAll(".big-o-card");
 
-  cards.forEach((card) => {
-    const bar = card.querySelector(".bar");
-
-    card.addEventListener("mouseenter", () => {
-      // Animate bar on hover
-      anime({
-        targets: bar,
-        width: "100%",
-        duration: 400,
-        easing: "easeOutQuad",
-      });
-    });
-
-    card.addEventListener("mouseleave", () => {
-      // Reset bar width
-      const complexity = card.dataset.complexity;
-      let targetWidth = "20%";
-      if (complexity === "on") targetWidth = "50%";
-      if (complexity === "on2") targetWidth = "100%";
-
-      anime({
-        targets: bar,
-        width: targetWidth,
-        duration: 400,
-        easing: "easeOutQuad",
-      });
-    });
-  });
+  // Use CSS for hover effects instead of JS (much more performant)
+  // The hover animation is now handled via CSS transitions
+  // See styles.css .bar transition
 
   // Animate cards on scroll
   const cardsContainer = document.querySelector(".big-o-cards");
@@ -364,9 +343,8 @@ function initBigOCards() {
               targets: cards,
               opacity: [0, 1],
               translateY: [30, 0],
-              scale: [0.9, 1],
               duration: 600,
-              delay: anime.stagger(150),
+              delay: anime.stagger(100),
               easing: "easeOutCubic",
             });
             observer.unobserve(entry.target);
@@ -415,23 +393,10 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // ===================================
-// Navbar Background on Scroll
+// Navbar Background on Scroll (Optimized)
 // ===================================
 
-let lastScroll = 0;
-const navbar = document.querySelector(".navbar");
-
-window.addEventListener("scroll", () => {
-  const currentScroll = window.pageYOffset;
-
-  if (currentScroll > 100) {
-    navbar.style.background = "rgba(10, 14, 23, 0.95)";
-  } else {
-    navbar.style.background = "rgba(10, 14, 23, 0.8)";
-  }
-
-  lastScroll = currentScroll;
-});
+// Removed - now handled in initOptimizedScrollEffects()
 
 // ===================================
 // Code Block Typing Effect (Optional)
@@ -636,21 +601,53 @@ function initRoadmapAnimations() {
 }
 
 // ===================================
-// Parallax Effect for Hero
+// Optimized Scroll Effects (Throttled with RAF)
 // ===================================
 
-window.addEventListener("scroll", () => {
-  const scrolled = window.pageYOffset;
+function initOptimizedScrollEffects() {
+  const navbar = document.querySelector(".navbar");
   const heroContent = document.querySelector(".hero-content");
   const shapes = document.querySelectorAll(".shape");
+  
+  let ticking = false;
+  let lastScrollY = 0;
 
-  if (heroContent && scrolled < window.innerHeight) {
-    heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-    heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
+  function updateScrollEffects() {
+    const scrolled = lastScrollY;
+    
+    // Navbar background
+    if (navbar) {
+      if (scrolled > 100) {
+        navbar.style.background = "rgba(10, 14, 23, 0.95)";
+      } else {
+        navbar.style.background = "rgba(10, 14, 23, 0.8)";
+      }
+    }
+    
+    // Hero parallax (only if not reduced motion and in view)
+    if (!prefersReducedMotion && heroContent && scrolled < window.innerHeight) {
+      heroContent.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0)`;
+      heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
+    }
+    
+    // Shape parallax (simplified - only first 2 shapes)
+    if (!prefersReducedMotion && scrolled < window.innerHeight) {
+      shapes.forEach((shape, index) => {
+        if (index > 1) return; // Only animate first 2 shapes on scroll
+        const speed = 0.05 + index * 0.03;
+        shape.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+      });
+    }
+    
+    ticking = false;
   }
 
-  shapes.forEach((shape, index) => {
-    const speed = 0.1 + index * 0.05;
-    shape.style.transform = `translateY(${scrolled * speed}px)`;
-  });
-});
+  window.addEventListener("scroll", () => {
+    lastScrollY = window.pageYOffset;
+    
+    if (!ticking) {
+      requestAnimationFrame(updateScrollEffects);
+      ticking = true;
+    }
+  }, { passive: true });
+}

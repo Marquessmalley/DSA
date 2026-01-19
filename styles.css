@@ -65,6 +65,42 @@ body {
 }
 
 /* ===================================
+   Performance Optimizations
+   =================================== */
+
+/* GPU acceleration for animated elements */
+.shape,
+.hero-content,
+.fade-in,
+.phase-card,
+.big-o-card,
+.book,
+.navbar {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .shape {
+    display: none;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===================================
    Accessibility - Skip Link
    =================================== */
 
@@ -1617,10 +1653,15 @@ li {
 
 .card-visual .bar {
   height: 100%;
-  transition: width 0.5s ease;
+  transition: width 0.3s ease-out;
 }
 
 [data-complexity="o1"] .bar { background: var(--accent-success); width: 20%; }
+
+/* CSS hover animation for bars (more performant than JS) */
+.big-o-card:hover .bar {
+  width: 100% !important;
+}
 [data-complexity="on"] .bar { background: var(--accent-primary); width: 50%; }
 [data-complexity="on2"] .bar { background: var(--accent-danger); width: 100%; }
 
