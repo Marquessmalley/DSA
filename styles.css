@@ -34,8 +34,8 @@
   --section-padding: 6rem 2rem;
   --content-max: 900px;
 
-  --drawer-width: clamp(240px, 22vw, 320px);
-  --drawer-width-collapsed: 76px;
+  --drawer-width: clamp(200px, 18vw, 280px);
+  --drawer-width-collapsed: 0px;
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -57,15 +57,16 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 body {
   font-family: var(--font-display);
   background: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.7;
+  line-height: 1.6;
   overflow-x: hidden;
+  font-size: 0.9rem;
 }
 
 ::selection {
@@ -362,7 +363,7 @@ button:focus-visible,
 
 .drawer-title {
   font-weight: 600;
-  font-size: clamp(1rem, 1vw, 1.15rem);
+  font-size: clamp(0.85rem, 0.8vw, 1rem);
 }
 
 .drawer-toggle {
@@ -431,7 +432,7 @@ footer {
   border: none;
   color: var(--text-primary);
   font-weight: 600;
-  font-size: clamp(0.95rem, 0.9vw, 1.05rem);
+  font-size: clamp(0.8rem, 0.75vw, 0.95rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -462,7 +463,7 @@ footer {
 .drawer-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: clamp(0.9rem, 0.85vw, 1rem);
+  font-size: clamp(0.75rem, 0.7vw, 0.9rem);
   padding: 0.2rem 0.5rem 0.2rem 0.75rem;
   border-radius: 8px;
   transition:
@@ -484,6 +485,8 @@ footer {
 
 body.drawer-collapsed .course-drawer {
   width: var(--drawer-width-collapsed);
+  transform: translateX(-100%);
+  visibility: hidden;
 }
 
 body.drawer-collapsed .drawer-content,
@@ -505,7 +508,7 @@ body.drawer-collapsed .drawer-toggle-button {
 body.drawer-collapsed .hero,
 body.drawer-collapsed .main-content,
 body.drawer-collapsed footer {
-  margin-left: var(--drawer-width-collapsed);
+  margin-left: 0;
 }
 
 .drawer-section-label {
@@ -634,7 +637,7 @@ body.drawer-collapsed footer {
 }
 
 .hero-title {
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(1.5rem, 5vw, 3rem);
   font-weight: 700;
   line-height: 1.2;
   margin: 0.5rem 0 1.5rem;
@@ -888,13 +891,13 @@ body.drawer-collapsed footer {
 }
 
 .phase-title {
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .phase-description {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
 }
@@ -992,7 +995,7 @@ body.drawer-collapsed footer {
 .lesson-number {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 5rem;
+  font-size: 3.5rem;
   font-weight: 700;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
@@ -1003,20 +1006,20 @@ body.drawer-collapsed footer {
 }
 
 .lesson-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-top: -1rem;
 }
 
 .lesson-subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-top: 0.5rem;
 }
 
 .lesson-intro {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: var(--text-secondary);
   border-left: none;
   padding: 2rem;
@@ -1042,13 +1045,13 @@ body.drawer-collapsed footer {
 }
 
 .complete-icon {
-  font-size: 4rem;
+  font-size: 3rem;
   display: block;
   margin-bottom: 1.5rem;
 }
 
 .phase-complete h3 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
@@ -1058,7 +1061,7 @@ body.drawer-collapsed footer {
 
 .phase-complete p {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 2rem;
 }
 
@@ -1080,7 +1083,7 @@ body.drawer-collapsed footer {
 
 .next-title {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
@@ -1108,7 +1111,7 @@ body.drawer-collapsed footer {
 }
 
 .phases-content h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
@@ -2127,7 +2130,7 @@ li {
 /* Mobile (default styles above) */
 @media (max-width: 768px) {
   :root {
-    --drawer-width: min(88vw, 320px);
+    --drawer-width: min(85vw, 280px);
   }
 
   .navbar {
@@ -2220,6 +2223,7 @@ li {
 
   body.drawer-collapsed .course-drawer {
     transform: translateX(-100%);
+    visibility: hidden;
   }
 
   .drawer-backdrop.active {
@@ -2253,11 +2257,11 @@ li {
   }
 
   .phase-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .phase-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .lessons-nav {
@@ -2276,15 +2280,15 @@ li {
   }
 
   .lesson-number {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .lesson-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .content-block h4 {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 
   .comparison-demo {
@@ -2302,7 +2306,7 @@ li {
   }
 
   .big-o {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .big-o-reveal {
