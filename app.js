@@ -4,7 +4,9 @@
 // ===================================
 
 // Check for reduced motion preference
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize all animations
@@ -13,71 +15,104 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!prefersReducedMotion) {
     initFloatingShapes(); // Only run if user allows motion
   }
+
   initBookDemo();
   initBigOCards();
   initPhaseAnimations();
   initRoadmapAnimations();
-  initMobileNavigation();
+  initDrawerNavigation();
   initOptimizedScrollEffects();
 });
 
 // ===================================
-// Mobile Navigation Toggle
+// Drawer Navigation (Mobile)
 // ===================================
 
-function initMobileNavigation() {
-  const navToggle = document.getElementById("navToggle");
-  const navLinks = document.getElementById("navLinks");
-  const navOverlay = document.getElementById("navOverlay");
+function initDrawerNavigation() {
+  const drawer = document.getElementById("courseDrawer");
+  const drawerToggle = document.getElementById("drawerToggle");
+  const drawerToggleButton = document.getElementById("drawerToggleButton");
+  if (!drawer) return;
 
-  if (!navToggle || !navLinks) return;
+  const drawerLinks = drawer.querySelectorAll("a.drawer-link");
+  const drawerSections = drawer.querySelectorAll("[data-collapsible]");
+  const lessonSections = document.querySelectorAll("[data-lesson-section]");
 
-  function toggleMenu() {
-    const isOpen = navToggle.classList.contains("active");
-    
-    navToggle.classList.toggle("active");
-    navLinks.classList.toggle("active");
-    if (navOverlay) navOverlay.classList.toggle("active");
-    
-    // Update ARIA attributes
-    navToggle.setAttribute("aria-expanded", !isOpen);
-    
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = !isOpen ? "hidden" : "";
-  }
+  drawerSections.forEach((section) => {
+    const toggle = section.querySelector(".drawer-section-toggle");
+    const links = section.querySelector(".drawer-links");
+    if (!toggle || !links) return;
 
-  function closeMenu() {
-    navToggle.classList.remove("active");
-    navLinks.classList.remove("active");
-    if (navOverlay) navOverlay.classList.remove("active");
-    navToggle.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
-  }
+    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+    links.hidden = !isExpanded;
 
-  navToggle.addEventListener("click", toggleMenu);
-  
-  if (navOverlay) {
-    navOverlay.addEventListener("click", closeMenu);
-  }
-
-  // Close menu when a link is clicked
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    toggle.addEventListener("click", () => {
+      const nextState = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(nextState));
+      links.hidden = !nextState;
+    });
   });
 
-  // Close menu on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && navToggle.classList.contains("active")) {
-      closeMenu();
+  const setDrawerCollapsed = (collapsed) => {
+    document.body.classList.toggle("drawer-collapsed", collapsed);
+    if (drawerToggle) {
+      drawerToggle.setAttribute("aria-expanded", String(!collapsed));
+    }
+    if (drawerToggleButton) {
+      drawerToggleButton.setAttribute("aria-expanded", String(!collapsed));
+      drawerToggleButton.style.display = collapsed ? "inline-flex" : "none";
+    }
+  };
+
+  if (drawerToggle) {
+    drawerToggle.addEventListener("click", () => {
+      setDrawerCollapsed(!document.body.classList.contains("drawer-collapsed"));
+    });
+  }
+
+  if (drawerToggleButton) {
+    drawerToggleButton.addEventListener("click", () => {
+      setDrawerCollapsed(false);
+    });
+  }
+
+  const setActiveLink = (hash) => {
+    if (!hash) return;
+    drawerLinks.forEach((link) => {
+      const linkHash = link.getAttribute("href")?.split("#")[1];
+      const isActive = linkHash && `#${linkHash}` === hash;
+      link.classList.toggle("active", Boolean(isActive));
+    });
+  };
+
+  if (window.location.hash) {
+    setActiveLink(window.location.hash);
+  } else if (lessonSections.length > 0) {
+    setActiveLink(`#${lessonSections[0].id}`);
+  }
+
+  if (lessonSections.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveLink(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0.2 },
+    );
+
+    lessonSections.forEach((section) => observer.observe(section));
+  }
+
+  window.addEventListener("hashchange", () => {
+    if (window.location.hash) {
+      setActiveLink(window.location.hash);
     }
   });
 
-  // Close menu on window resize (if switching to desktop)
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768 && navToggle.classList.contains("active")) {
-      closeMenu();
-    }
-  });
+  setDrawerCollapsed(document.body.classList.contains("drawer-collapsed"));
 }
 
 // ===================================
@@ -105,7 +140,7 @@ function initHeroAnimations() {
         duration: 1000,
         delay: anime.stagger(150),
       },
-      "-=400"
+      "-=400",
     )
     .add(
       {
@@ -114,7 +149,7 @@ function initHeroAnimations() {
         translateY: [20, 0],
         duration: 800,
       },
-      "-=600"
+      "-=600",
     )
     .add(
       {
@@ -124,7 +159,7 @@ function initHeroAnimations() {
         duration: 600,
         delay: anime.stagger(100),
       },
-      "-=400"
+      "-=400",
     )
     .add(
       {
@@ -133,7 +168,7 @@ function initHeroAnimations() {
         translateY: [20, 0],
         duration: 600,
       },
-      "-=300"
+      "-=300",
     )
     .add(
       {
@@ -141,7 +176,7 @@ function initHeroAnimations() {
         opacity: [0, 0.7],
         duration: 1000,
       },
-      "-=200"
+      "-=200",
     );
 }
 
@@ -151,7 +186,7 @@ function initHeroAnimations() {
 
 function initFloatingShapes() {
   const shapes = document.querySelectorAll(".shape");
-  
+
   // Use CSS animations instead for better performance
   // Only animate the first 3 shapes to reduce load
   shapes.forEach((shape, index) => {
@@ -159,10 +194,10 @@ function initFloatingShapes() {
       // Skip animation for extra shapes
       return;
     }
-    
+
     // Longer durations = less CPU usage
     const duration = 20000 + index * 5000;
-    
+
     anime({
       targets: shape,
       translateX: [0, anime.random(-20, 20), 0],
@@ -200,7 +235,7 @@ function initScrollAnimations() {
 
           // Animate child elements with stagger
           const children = entry.target.querySelectorAll(
-            ".def-card, .step, .topic-item"
+            ".def-card, .step, .topic-item",
           );
           if (children.length > 0) {
             anime({
@@ -221,7 +256,7 @@ function initScrollAnimations() {
     {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
-    }
+    },
   );
 
   // Observe all fade-in elements
@@ -244,7 +279,7 @@ function initScrollAnimations() {
         }
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.5 },
   );
 
   lessonNumbers.forEach((el) => numberObserver.observe(el));
@@ -266,7 +301,7 @@ function initScrollAnimations() {
         }
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.5 },
   );
 
   bigOReveals.forEach((el) => bigOObserver.observe(el));
@@ -314,7 +349,7 @@ function initBookDemo() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     observer.observe(demo);
@@ -351,7 +386,7 @@ function initBigOCards() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(cardsContainer);
@@ -365,14 +400,14 @@ function initBigOCards() {
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     const href = this.getAttribute("href");
-    
+
     // Skip if it's just "#" (home link)
     if (href === "#") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    
+
     const target = document.querySelector(href);
 
     if (target) {
@@ -425,7 +460,7 @@ function initCodeTyping() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     observer.observe(block);
@@ -459,7 +494,7 @@ function initPhaseAnimations() {
                   translateY: [30, 0],
                   duration: 800,
                 },
-                "-=400"
+                "-=400",
               )
               .add(
                 {
@@ -468,7 +503,7 @@ function initPhaseAnimations() {
                   translateY: [20, 0],
                   duration: 600,
                 },
-                "-=500"
+                "-=500",
               )
               .add(
                 {
@@ -478,14 +513,14 @@ function initPhaseAnimations() {
                   duration: 400,
                   delay: anime.stagger(50),
                 },
-                "-=300"
+                "-=300",
               );
 
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(phaseHeader);
@@ -510,7 +545,7 @@ function initPhaseAnimations() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     observer.observe(lessonsNav);
@@ -538,7 +573,7 @@ function initPhaseAnimations() {
                   translateY: [20, 0],
                   duration: 600,
                 },
-                "-=400"
+                "-=400",
               )
               .add(
                 {
@@ -547,7 +582,7 @@ function initPhaseAnimations() {
                   translateY: [20, 0],
                   duration: 600,
                 },
-                "-=400"
+                "-=400",
               )
               .add(
                 {
@@ -556,14 +591,14 @@ function initPhaseAnimations() {
                   translateY: [20, 0],
                   duration: 600,
                 },
-                "-=300"
+                "-=300",
               );
 
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(phaseComplete);
@@ -594,7 +629,7 @@ function initRoadmapAnimations() {
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.2 },
   );
 
   observer.observe(roadmap);
@@ -608,13 +643,13 @@ function initOptimizedScrollEffects() {
   const navbar = document.querySelector(".navbar");
   const heroContent = document.querySelector(".hero-content");
   const shapes = document.querySelectorAll(".shape");
-  
+
   let ticking = false;
   let lastScrollY = 0;
 
   function updateScrollEffects() {
     const scrolled = lastScrollY;
-    
+
     // Navbar background
     if (navbar) {
       if (scrolled > 100) {
@@ -623,13 +658,13 @@ function initOptimizedScrollEffects() {
         navbar.style.background = "rgba(10, 14, 23, 0.8)";
       }
     }
-    
+
     // Hero parallax (only if not reduced motion and in view)
     if (!prefersReducedMotion && heroContent && scrolled < window.innerHeight) {
       heroContent.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0)`;
       heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
     }
-    
+
     // Shape parallax (simplified - only first 2 shapes)
     if (!prefersReducedMotion && scrolled < window.innerHeight) {
       shapes.forEach((shape, index) => {
@@ -638,16 +673,20 @@ function initOptimizedScrollEffects() {
         shape.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
       });
     }
-    
+
     ticking = false;
   }
 
-  window.addEventListener("scroll", () => {
-    lastScrollY = window.pageYOffset;
-    
-    if (!ticking) {
-      requestAnimationFrame(updateScrollEffects);
-      ticking = true;
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      lastScrollY = window.pageYOffset;
+
+      if (!ticking) {
+        requestAnimationFrame(updateScrollEffects);
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
 }

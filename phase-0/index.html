@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 0 • Foundations | DSA Course</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="lesson-page phase-page">
+    <aside
+      class="course-drawer"
+      id="courseDrawer"
+      aria-label="Course navigation"
+    >
+      <div class="drawer-header">
+        <span class="drawer-title">&lt;/&gt; DSA</span>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="true">
+            Phase 0: Foundations
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="#lesson-1" class="drawer-link">Lesson 1: What is DSA?</a>
+            <a href="#lesson-2" class="drawer-link"
+              >Lesson 2: Time Complexity</a
+            >
+            <a href="#lesson-3" class="drawer-link">Lesson 3: Arrays</a>
+            <a href="#lesson-4" class="drawer-link">Lesson 4: Linear Search</a>
+          </div>
+        </div>
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="false">
+            Phase 1: Core Structures
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../phase-1/index.html" class="drawer-link">
+              Phase 1: Sorted Arrays & Binary Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-locked">
+          <div class="drawer-section-label">Phase 2: Algorithms</div>
+          <div class="drawer-section-status">Coming Soon</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="phase-header">
+        <div class="phase-header-content">
+          <span class="phase-badge">Phase 0</span>
+          <h2 class="phase-title">Absolute Foundations</h2>
+          <p class="phase-description">
+            Before "Data Structures" and "Algorithms", we need thinking tools.
+          </p>
+          <div class="phase-topics">
+            <span class="topic-tag">What is DSA</span>
+            <span class="topic-tag">Big-O Notation</span>
+            <span class="topic-tag">Arrays</span>
+            <span class="topic-tag">Linear Search</span>
+          </div>
+        </div>
+      </section>
+
+      <article id="lesson-1" data-lesson-section class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">01</span>
+          <h3 class="lesson-title">What is DSA, Really?</h3>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>First, forget the buzzwords</h4>
+          <div class="equation">
+            <span class="eq-part">DSA</span>
+            <span class="eq-symbol">=</span>
+            <span class="eq-part highlight">Data Structures</span>
+            <span class="eq-symbol">+</span>
+            <span class="eq-part highlight">Algorithms</span>
+          </div>
+          <div class="definition-cards">
+            <div class="def-card" data-delay="0">
+              <div class="def-icon">📦</div>
+              <h5>Data Structure</h5>
+              <p>
+                A specific format for organizing, storing, and managing data in
+                a computer system
+              </p>
+            </div>
+            <div class="def-card" data-delay="100">
+              <div class="def-icon">⚙️</div>
+              <h5>Algorithm</h5>
+              <p>
+                A set of step-by-step instructions to solve a specific problem
+              </p>
+            </div>
+          </div>
+          <p class="simple-text">That's it.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>Real-world Analogy</h4>
+          <div class="analogy-box">
+            <div class="analogy-icon">📚</div>
+            <h5>Imagine a library...</h5>
+            <ul class="analogy-list">
+              <li>
+                <strong>Shelves arranged alphabetically</strong> → Data
+                Structure
+              </li>
+              <li><strong>How you find a book</strong> → Algorithm</li>
+            </ul>
+          </div>
+          <div class="comparison-demo">
+            <div class="demo-side slow">
+              <div class="demo-visual">
+                <div class="book" style="--i: 0">📕</div>
+                <div class="book" style="--i: 1">📗</div>
+                <div class="book" style="--i: 2">📘</div>
+                <div class="book" style="--i: 3">📙</div>
+                <div class="book" style="--i: 4">📓</div>
+              </div>
+              <span class="demo-label">Random pile</span>
+              <span class="demo-speed">🐢 Slow</span>
+            </div>
+            <div class="demo-side fast">
+              <div class="demo-visual sorted">
+                <div class="book" style="--i: 0">📕</div>
+                <div class="book" style="--i: 1">📗</div>
+                <div class="book" style="--i: 2">📘</div>
+                <div class="book" style="--i: 3">📙</div>
+                <div class="book" style="--i: 4">📓</div>
+              </div>
+              <span class="demo-label">Alphabetically sorted</span>
+              <span class="demo-speed">⚡ Fast</span>
+            </div>
+          </div>
+          <blockquote class="insight">
+            👉 Same data, different structure → different performance.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>In Programming Terms</h4>
+          <p>Let's say you have user IDs:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">users</span> = [<span class="number">101</span>, <span class="number">205</span>, <span class="number">309</span>, <span class="number">412</span>]</code></pre>
+          <p>Questions you might ask:</p>
+          <ul class="question-list">
+            <li>Is user 309 present?</li>
+            <li>Add a new user</li>
+            <li>Remove a user</li>
+          </ul>
+          <div class="decides-grid">
+            <div class="decides-card">
+              <h5>The data structure decides:</h5>
+              <ul>
+                <li>How <strong>fast</strong> these operations are</li>
+                <li>How much <strong>memory</strong> they use</li>
+              </ul>
+            </div>
+            <div class="decides-card">
+              <h5>The algorithm decides:</h5>
+              <ul>
+                <li>Step-by-step <strong>how</strong> to do it</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>Why DSA Matters (Even If You Already Code)</h4>
+          <p>You can already write this:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">for</span> user <span class="keyword">in</span> users:
+    <span class="keyword">if</span> user == <span class="number">309</span>:
+        <span class="function">print</span>(<span class="string">"Found"</span>)</code></pre>
+          <p>But DSA teaches you:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">→</span> Is this the <em>best</em> way?
+            </li>
+            <li>
+              <span class="bullet">→</span> What happens if <code>users</code> =
+              10 million?
+            </li>
+            <li><span class="bullet">→</span> Can this be <em>faster</em>?</li>
+          </ul>
+          <blockquote class="insight accent">
+            👉 DSA = performance + scalability thinking
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>Important Mindset Shift ⚠️</h4>
+          <div class="mindset-comparison">
+            <div class="mindset wrong">
+              <span class="label">❌ Don't ask:</span>
+              <blockquote>"What's the correct solution?"</blockquote>
+            </div>
+            <div class="mindset right">
+              <span class="label">✅ Instead ask:</span>
+              <blockquote>"How expensive is this solution?"</blockquote>
+            </div>
+          </div>
+          <p class="key-takeaway">
+            DSA is about <strong>trade-offs</strong>, not perfection.
+          </p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>🧠 Tiny Exercise (Don't Skip)</h4>
+          <p>Answer in your head (no code needed):</p>
+          <ol class="exercise-list">
+            <li>
+              If a list has <code>n</code> items, how many times does a
+              <code>for</code> loop run?
+            </li>
+            <li>If the list doubles in size, what happens to runtime?</li>
+            <li>Is this behavior predictable?</li>
+          </ol>
+          <p class="next-hint">We'll put formal names on these ideas next. →</p>
+        </div>
+      </article>
+
+      <article id="lesson-2" data-lesson-section class="lesson lesson-alt">
+        <div class="lesson-header">
+          <span class="lesson-number">02</span>
+          <h3 class="lesson-title">Time Complexity (Big-O)</h3>
+          <p class="lesson-subtitle">Zero-Math Version</p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          This is one of the most important lessons in all of DSA.<br />
+          If this clicks, everything else becomes easier.
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is Time Complexity?</h4>
+          <div class="core-idea">
+            <p>
+              Time complexity is a way to describe how the
+              <strong>runtime of an algorithm grows</strong> as the
+              <strong>input size increases</strong>.
+            </p>
+          </div>
+          <p>
+            It's not about measuring actual seconds — it's about understanding
+            the <strong>relationship</strong> between input size and the number
+            of operations.
+          </p>
+
+          <h5>Understanding the Notation: O(n)</h5>
+          <p>
+            When you see something like
+            <strong class="big-o-inline">O(n)</strong>, here's what each part
+            means:
+          </p>
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>O</strong></td>
+                <td>
+                  "Order of" — a mathematical notation that describes growth
+                  rate
+                </td>
+              </tr>
+              <tr>
+                <td><strong>n</strong></td>
+                <td>
+                  The <strong>input size</strong> — how many items you're
+                  working with
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            So <strong class="big-o-inline">O(n)</strong> reads as "Order of n"
+            and means:
+            <em
+              >the number of operations grows proportionally with the input
+              size.</em
+            >
+          </p>
+
+          <h5>Common Misconception: O(1) ≠ "One Operation"</h5>
+          <p>
+            <strong class="big-o-inline">O(1)</strong> does
+            <strong>not</strong> mean "exactly one operation."
+          </p>
+          <p>
+            It means the number of operations stays <strong>constant</strong> —
+            it doesn't change as input grows. Whether it's 1 operation, 5
+            operations, or 100 operations, if that number doesn't depend on
+            <code>n</code>, it's O(1).
+          </p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">example</span>(arr):
+    <span class="function">print</span>(arr[<span class="number">0</span>])      <span class="comment"># 1 operation</span>
+    <span class="function">print</span>(arr[<span class="number">0</span>] * <span class="number">2</span>)  <span class="comment"># another operation</span>
+    <span class="function">print</span>(arr[<span class="number">0</span>] + <span class="number">10</span>) <span class="comment"># another operation</span>
+    <span class="comment"># Still O(1) — always 3 operations, regardless of array size</span></code></pre>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. What Problem Does Time Complexity Solve?</h4>
+          <p>Imagine you write a program and ask:</p>
+          <blockquote class="question-quote">
+            "Will this still work if my input becomes very large?"
+          </blockquote>
+          <p>Time complexity helps answer:</p>
+          <ul class="answer-list">
+            <li>Will it be <strong>fast enough</strong>?</li>
+            <li>How does runtime <strong>grow</strong> as input grows?</li>
+          </ul>
+          <div class="important-box">
+            <span class="icon">⚠️</span>
+            <div>
+              <p>We are <strong>not</strong> measuring seconds</p>
+              <p>We are measuring <strong>growth</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. The Core Idea (In One Sentence)</h4>
+          <div class="core-idea">
+            <p>
+              Time complexity describes how the
+              <strong>number of operations</strong> grows with
+              <strong>input size</strong>.
+            </p>
+          </div>
+          <p class="n-note">Input size is usually called <code>n</code>.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>4. Let's Start with the Simplest Example</h4>
+          <h5>Example: One Loop</h5>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>]
+
+<span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="function">print</span>(num)</code></pre>
+          <p>Let's analyze:</p>
+          <div class="analysis-steps">
+            <div class="step">
+              If list size = <span class="num">5</span> → loop runs
+              <span class="num">5</span> times
+            </div>
+            <div class="step">
+              If list size = <span class="num">100</span> → loop runs
+              <span class="num">100</span> times
+            </div>
+            <div class="step">
+              If list size = <span class="num">n</span> → loop runs
+              <span class="num">n</span> times
+            </div>
+          </div>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o">O(n)</span>
+            <span class="reading">"order of n"</span>
+          </div>
+          <p>Meaning:</p>
+          <ul>
+            <li>Runtime grows <strong>linearly</strong></li>
+            <li>Double the input → double the work</li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. Why We Ignore Exact Numbers</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="function">print</span>(num)      <span class="comment"># 1 operation</span>
+    <span class="function">print</span>(num * <span class="number">2</span>)  <span class="comment"># another operation</span></code></pre>
+          <p>Runs: 2 operations per element = 2n total</p>
+          <p>We still say: <strong class="big-o-inline">O(n)</strong></p>
+          <div class="why-box">
+            <p>Constants (like 2, 5, 100) don't matter for growth</p>
+            <p><strong>Growth trend</strong> matters</p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>6. Constant Time: O(1)</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]
+
+<span class="function">print</span>(numbers[<span class="number">0</span>])</code></pre>
+          <p>No matter:</p>
+          <ul>
+            <li>List size = 3</li>
+            <li>List size = 1 million</li>
+          </ul>
+          <p>This always takes the <strong>same time</strong>.</p>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o o1">O(1)</span>
+            <span class="reading">constant time</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="lesson-3" data-lesson-section class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">03</span>
+          <h3 class="lesson-title">Arrays (Python Lists)</h3>
+          <p class="lesson-subtitle">Your First Data Structure</p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          This is where DSA stops being abstract and starts feeling real.
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is an Array?</h4>
+          <p>
+            An array is a collection of elements stored in
+            <strong>contiguous memory locations</strong>.
+          </p>
+          <p>
+            In Python, we use lists, but conceptually they behave like arrays.
+          </p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>]</code></pre>
+          <div class="decides-grid">
+            <div class="decides-card">
+              <h5>Key Characteristics</h5>
+              <ul>
+                <li><strong>Ordered</strong></li>
+                <li><strong>Indexed</strong> (starts at 0)</li>
+                <li>Stores elements of the same conceptual type</li>
+                <li>Fast access by index</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. Why Arrays Exist</h4>
+          <p>Arrays solve a simple problem:</p>
+          <blockquote class="question-quote">
+            "How do I store many values and access them efficiently?"
+          </blockquote>
+          <p>Without arrays, you'd need separate variables:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">a</span> = <span class="number">10</span>
+<span class="keyword">b</span> = <span class="number">20</span>
+<span class="keyword">c</span> = <span class="number">30</span>
+<span class="keyword">d</span> = <span class="number">40</span></code></pre>
+          <p>Arrays give you:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> Structure</li>
+            <li><span class="bullet">→</span> Predictability</li>
+            <li><span class="bullet">→</span> Performance</li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. Indexing: The Superpower of Arrays (O(1))</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>]
+
+<span class="function">print</span>(numbers[<span class="number">0</span>])  <span class="comment"># 10</span>
+<span class="function">print</span>(numbers[<span class="number">2</span>])  <span class="comment"># 30</span></code></pre>
+          <p>No matter how big the array is:</p>
+          <ul>
+            <li>
+              Accessing <code>numbers[i]</code> takes the
+              <strong>same time</strong>
+            </li>
+          </ul>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o o1">O(1)</span>
+            <span class="reading">index access</span>
+          </div>
+          <div class="analogy-box">
+            <div class="analogy-icon">📬</div>
+            <h5>Mental Model</h5>
+            <p>
+              Imagine a row of mailboxes with numbers on them.<br />
+              You don't open every mailbox — you go
+              <strong>directly</strong> to the one you want.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article id="lesson-4" data-lesson-section class="lesson lesson-alt">
+        <div class="lesson-header">
+          <span class="lesson-number">04</span>
+          <h3 class="lesson-title">Linear Search</h3>
+          <p class="lesson-subtitle">Your First Algorithm</p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          This lesson teaches you how algorithms think, not just how code runs.
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is an Algorithm?</h4>
+          <p>An algorithm is:</p>
+          <div class="core-idea">
+            <p>A <strong>step-by-step process</strong> to solve a problem.</p>
+          </div>
+          <p>For this lesson, the problem is simple:</p>
+          <blockquote class="question-quote">
+            "Given a list and a value, does the value exist?"
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. What Is Linear Search?</h4>
+          <p>
+            Linear search is the
+            <strong>simplest searching algorithm</strong>. It sequentially
+            checks each element in a collection until it finds the target value
+            or reaches the end of the collection.
+          </p>
+          <p>
+            It's called "linear" because it progresses through the data in a
+            <strong>straight line</strong>, one element at a time.
+          </p>
+
+          <div class="decides-grid">
+            <div class="decides-card">
+              <h5>Key Characteristics</h5>
+              <ul>
+                <li>Works on <strong>any</strong> list (sorted or unsorted)</li>
+                <li>Requires <strong>no preprocessing</strong> of the data</li>
+                <li>Simple to understand and implement</li>
+                <li>Guaranteed to find the element if it exists</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. The Problem Setup</h4>
+          <p>You're given:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> A list (array)</li>
+            <li><span class="bullet">→</span> A target value</li>
+          </ul>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">4</span>, <span class="number">9</span>, <span class="number">15</span>, <span class="number">23</span>, <span class="number">42</span>]
+<span class="keyword">target</span> = <span class="number">15</span></code></pre>
+          <p>Your task:</p>
+          <blockquote class="insight">
+            👉 Check whether <code>target</code> is in <code>numbers</code>
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. The Most Obvious Approach (And That's Okay)</h4>
+          <p>You already know how to do this:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="keyword">if</span> num == target:
+        <span class="function">print</span>(<span class="string">"Found"</span>)</code></pre>
+          <p>This approach <strong>is</strong> an algorithm.</p>
+          <p>We call it <strong>Linear Search</strong>.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. Linear Search — Formal Version</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">linear_search</span>(arr, target):
+    <span class="keyword">for</span> item <span class="keyword">in</span> arr:
+        <span class="keyword">if</span> item == target:
+            <span class="keyword">return</span> <span class="number">True</span>
+    <span class="keyword">return</span> <span class="number">False</span></code></pre>
+          <p>This function:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">→</span> Returns <code>True</code> if found
+            </li>
+            <li>
+              <span class="bullet">→</span> Returns <code>False</code> otherwise
+            </li>
+          </ul>
+
+          <h5 style="margin-top: 1.5rem">Try It Yourself</h5>
+          <p>
+            Watch linear search in action. Click Play or Step through each
+            comparison:
+          </p>
+          <div id="linear-search-viz"></div>
+        </div>
+      </article>
+    </main>
+
+    <script src="../app.js"></script>
+    <script src="../visualizations.js"></script>
+  </body>
+</html>

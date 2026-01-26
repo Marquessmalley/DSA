@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 0 • Lesson 2 | Time Complexity (Big-O)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="lesson-page">
+    <aside
+      class="course-drawer"
+      id="courseDrawer"
+      aria-label="Course navigation"
+    >
+      <div class="drawer-header">
+        <span class="drawer-title">&lt;/&gt; DSA</span>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="true">
+            Phase 0: Foundations
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../index.html#lesson-1" class="drawer-link">
+              Lesson 1: What is DSA?
+            </a>
+            <a href="../index.html#lesson-2" class="drawer-link">
+              Lesson 2: Time Complexity
+            </a>
+            <a href="../index.html#lesson-3" class="drawer-link">
+              Lesson 3: Arrays
+            </a>
+            <a href="../index.html#lesson-4" class="drawer-link">
+              Lesson 4: Linear Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="false">
+            Phase 1: Core Structures
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../phase-1/index.html" class="drawer-link">
+              Phase 1: Sorted Arrays & Binary Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-locked">
+          <div class="drawer-section-label">Phase 2: Algorithms</div>
+          <div class="drawer-section-status">Coming Soon</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="lesson-page-header">
+        <span class="phase-badge">Phase 0</span>
+        <h1 class="lesson-page-title">Time Complexity (Big-O)</h1>
+        <p class="lesson-page-subtitle">Zero-math version</p>
+      </section>
+
+      <article class="lesson lesson-alt">
+        <div class="lesson-header">
+          <span class="lesson-number">02</span>
+          <h3 class="lesson-title">Time Complexity (Big-O)</h3>
+          <p class="lesson-subtitle">Zero-Math Version</p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          This is one of the most important lessons in all of DSA.<br />
+          If this clicks, everything else becomes easier.
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is Time Complexity?</h4>
+          <div class="core-idea">
+            <p>
+              Time complexity is a way to describe how the
+              <strong>runtime of an algorithm grows</strong> as the
+              <strong>input size increases</strong>.
+            </p>
+          </div>
+          <p>
+            It's not about measuring actual seconds — it's about understanding
+            the <strong>relationship</strong> between input size and the number
+            of operations.
+          </p>
+
+          <h5>Understanding the Notation: O(n)</h5>
+          <p>
+            When you see something like
+            <strong class="big-o-inline">O(n)</strong>, here's what each part
+            means:
+          </p>
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>O</strong></td>
+                <td>
+                  "Order of" — a mathematical notation that describes growth
+                  rate
+                </td>
+              </tr>
+              <tr>
+                <td><strong>n</strong></td>
+                <td>
+                  The <strong>input size</strong> — how many items you're
+                  working with
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            So <strong class="big-o-inline">O(n)</strong> reads as "Order of n"
+            and means:
+            <em
+              >the number of operations grows proportionally with the input
+              size.</em
+            >
+          </p>
+
+          <h5>Common Misconception: O(1) ≠ "One Operation"</h5>
+          <p>
+            <strong class="big-o-inline">O(1)</strong> does
+            <strong>not</strong> mean "exactly one operation."
+          </p>
+          <p>
+            It means the number of operations stays <strong>constant</strong> —
+            it doesn't change as input grows. Whether it's 1 operation, 5
+            operations, or 100 operations, if that number doesn't depend on
+            <code>n</code>, it's O(1).
+          </p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">example</span>(arr):
+    <span class="function">print</span>(arr[<span class="number">0</span>])      <span class="comment"># 1 operation</span>
+    <span class="function">print</span>(arr[<span class="number">0</span>] * <span class="number">2</span>)  <span class="comment"># another operation</span>
+    <span class="function">print</span>(arr[<span class="number">0</span>] + <span class="number">10</span>) <span class="comment"># another operation</span>
+    <span class="comment"># Still O(1) — always 3 operations, regardless of array size</span></code></pre>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. What Problem Does Time Complexity Solve?</h4>
+          <p>Imagine you write a program and ask:</p>
+          <blockquote class="question-quote">
+            "Will this still work if my input becomes very large?"
+          </blockquote>
+          <p>Time complexity helps answer:</p>
+          <ul class="answer-list">
+            <li>Will it be <strong>fast enough</strong>?</li>
+            <li>How does runtime <strong>grow</strong> as input grows?</li>
+          </ul>
+          <div class="important-box">
+            <span class="icon">⚠️</span>
+            <div>
+              <p>We are <strong>not</strong> measuring seconds</p>
+              <p>We are measuring <strong>growth</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. The Core Idea (In One Sentence)</h4>
+          <div class="core-idea">
+            <p>
+              Time complexity describes how the
+              <strong>number of operations</strong> grows with
+              <strong>input size</strong>.
+            </p>
+          </div>
+          <p class="n-note">Input size is usually called <code>n</code>.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>4. Let's Start with the Simplest Example</h4>
+          <h5>Example: One Loop</h5>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>]
+
+<span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="function">print</span>(num)</code></pre>
+          <p>Let's analyze:</p>
+          <div class="analysis-steps">
+            <div class="step">
+              If list size = <span class="num">5</span> → loop runs
+              <span class="num">5</span> times
+            </div>
+            <div class="step">
+              If list size = <span class="num">100</span> → loop runs
+              <span class="num">100</span> times
+            </div>
+            <div class="step">
+              If list size = <span class="num">n</span> → loop runs
+              <span class="num">n</span> times
+            </div>
+          </div>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o">O(n)</span>
+            <span class="reading">"order of n"</span>
+          </div>
+          <p>Meaning:</p>
+          <ul>
+            <li>Runtime grows <strong>linearly</strong></li>
+            <li>Double the input → double the work</li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. Why We Ignore Exact Numbers</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="function">print</span>(num)      <span class="comment"># 1 operation</span>
+    <span class="function">print</span>(num * <span class="number">2</span>)  <span class="comment"># another operation</span></code></pre>
+          <p>Runs: 2 operations per element = 2n total</p>
+          <p>We still say: <strong class="big-o-inline">O(n)</strong></p>
+          <div class="why-box">
+            <p>Constants (like 2, 5, 100) don't matter for growth</p>
+            <p><strong>Growth trend</strong> matters</p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>6. Constant Time: O(1)</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]
+
+<span class="function">print</span>(numbers[<span class="number">0</span>])</code></pre>
+          <p>No matter:</p>
+          <ul>
+            <li>List size = 3</li>
+            <li>List size = 1 million</li>
+          </ul>
+          <p>This always takes the <strong>same time</strong>.</p>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o o1">O(1)</span>
+            <span class="reading">constant time</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>7. Two Loops = O(n²)</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]
+
+<span class="keyword">for</span> i <span class="keyword">in</span> numbers:
+    <span class="keyword">for</span> j <span class="keyword">in</span> numbers:
+        <span class="function">print</span>(i, j)</code></pre>
+          <div class="analysis-steps">
+            <div class="step">
+              Outer loop runs <span class="num">n</span> times
+            </div>
+            <div class="step">
+              Inner loop runs <span class="num">n</span> times for each outer
+              loop
+            </div>
+            <div class="step">
+              Total operations ≈ <span class="num">n × n = n²</span>
+            </div>
+          </div>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o on2">O(n²)</span>
+            <span class="reading">quadratic time</span>
+          </div>
+          <div class="scary-numbers">
+            <div class="scary-item">n = 10 → <span>100</span> operations</div>
+            <div class="scary-item">
+              n = 1,000 → <span>1,000,000</span> operations 😬
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>8. Important Clarification</h4>
+          <p class="subtitle">Common Beginner Confusion</p>
+          <h5>This is NOT O(n²):</h5>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="function">print</span>(num)
+
+<span class="keyword">for</span> num <span class="keyword">in</span> numbers:
+    <span class="function">print</span>(num)</code></pre>
+          <p>
+            This is: n + n = 2n → Still
+            <strong class="big-o-inline">O(n)</strong>
+          </p>
+          <table class="pattern-table">
+            <thead>
+              <tr>
+                <th>Pattern</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nested loops</td>
+                <td><strong>Multiply</strong></td>
+              </tr>
+              <tr>
+                <td>Separate loops</td>
+                <td><strong>Add</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>9. The Three Most Important Big-O Types</h4>
+          <div class="big-o-cards">
+            <div class="big-o-card" data-complexity="o1">
+              <span class="card-o">O(1)</span>
+              <span class="card-name">Constant</span>
+              <span class="card-example">Access by index</span>
+              <div class="card-visual">
+                <div class="bar" style="height: 20%"></div>
+              </div>
+            </div>
+            <div class="big-o-card" data-complexity="on">
+              <span class="card-o">O(n)</span>
+              <span class="card-name">Linear</span>
+              <span class="card-example">Single loop</span>
+              <div class="card-visual">
+                <div class="bar" style="height: 50%"></div>
+              </div>
+            </div>
+            <div class="big-o-card" data-complexity="on2">
+              <span class="card-o">O(n²)</span>
+              <span class="card-name">Quadratic</span>
+              <span class="card-example">Nested loops</span>
+              <div class="card-visual">
+                <div class="bar" style="height: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <p class="center-text">You'll see these everywhere.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>10. How to "Read" Time Complexity</h4>
+          <p class="subtitle">A skill you must build</p>
+          <p>Look at code and ask:</p>
+          <ol class="read-steps">
+            <li>How many loops?</li>
+            <li>Are they nested?</li>
+            <li>What grows with input size?</li>
+          </ol>
+          <p class="simple-text">That's it.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>11. Tiny Exercises</h4>
+          <p>Answer mentally:</p>
+
+          <div class="exercise-card">
+            <span class="ex-number">1</span>
+            <pre
+              class="code-block small"
+            ><code><span class="keyword">def</span> <span class="function">print_first</span>(arr):
+    <span class="function">print</span>(arr[<span class="number">0</span>])</code></pre>
+            <p class="ex-question">👉 Time complexity?</p>
+            <button
+              class="reveal-btn"
+              onclick="this.nextElementSibling.classList.toggle('show')"
+            >
+              Reveal Answer
+            </button>
+            <span class="answer"
+              >O(1) — Constant time, just one operation regardless of array
+              size</span
+            >
+          </div>
+
+          <div class="exercise-card">
+            <span class="ex-number">2</span>
+            <pre
+              class="code-block small"
+            ><code><span class="keyword">def</span> <span class="function">print_all</span>(arr):
+    <span class="keyword">for</span> x <span class="keyword">in</span> arr:
+        <span class="function">print</span>(x)</code></pre>
+            <p class="ex-question">👉 Time complexity?</p>
+            <button
+              class="reveal-btn"
+              onclick="this.nextElementSibling.classList.toggle('show')"
+            >
+              Reveal Answer
+            </button>
+            <span class="answer"
+              >O(n) — Linear time, loops through each element once</span
+            >
+          </div>
+
+          <div class="exercise-card">
+            <span class="ex-number">3</span>
+            <pre
+              class="code-block small"
+            ><code><span class="keyword">def</span> <span class="function">pairs</span>(arr):
+    <span class="keyword">for</span> i <span class="keyword">in</span> arr:
+        <span class="keyword">for</span> j <span class="keyword">in</span> arr:
+            <span class="function">print</span>(i, j)</code></pre>
+            <p class="ex-question">👉 Time complexity?</p>
+            <button
+              class="reveal-btn"
+              onclick="this.nextElementSibling.classList.toggle('show')"
+            >
+              Reveal Answer
+            </button>
+            <span class="answer"
+              >O(n²) — Quadratic time, nested loops multiply</span
+            >
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>12. One Thing to NOT Worry About Yet</h4>
+          <ul class="dont-worry">
+            <li><span class="x">❌</span> Exact operation counting</li>
+            <li><span class="x">❌</span> Mathematical proofs</li>
+            <li>
+              <span class="x">❌</span> Space complexity (we'll do it later)
+            </li>
+          </ul>
+          <p class="final-note">
+            <strong>Right now, intuition > precision.</strong>
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <script src="../../app.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

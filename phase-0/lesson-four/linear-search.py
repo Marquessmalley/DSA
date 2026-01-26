@@ -21,3 +21,12 @@ def linear_search(numbers_list, target):
         if num == target:
             return True
     return False
+
+
+
+def containsZero(numbers_list):
+    for num in numbers_list:
+        if(num == 0):
+            return True
+    else: return False
+

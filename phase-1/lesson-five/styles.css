@@ -1,0 +1,24 @@
+body.lesson-page {
+  padding-top: 6rem;
+}
+
+.lesson-page-header {
+  text-align: center;
+  padding: 6rem 2rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.lesson-page-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin: 1rem 0 0.5rem;
+}
+
+.lesson-page-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.lesson-page .lesson {
+  padding-top: 2rem;
+}

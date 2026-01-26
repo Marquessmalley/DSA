@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 0 • Lesson 1 | What is DSA, Really?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="lesson-page">
+    <aside
+      class="course-drawer"
+      id="courseDrawer"
+      aria-label="Course navigation"
+    >
+      <div class="drawer-header">
+        <span class="drawer-title">&lt;/&gt; DSA</span>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="true">
+            Phase 0: Foundations
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../index.html#lesson-1" class="drawer-link">
+              Lesson 1: What is DSA?
+            </a>
+            <a href="../index.html#lesson-2" class="drawer-link">
+              Lesson 2: Time Complexity
+            </a>
+            <a href="../index.html#lesson-3" class="drawer-link">
+              Lesson 3: Arrays
+            </a>
+            <a href="../index.html#lesson-4" class="drawer-link">
+              Lesson 4: Linear Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="false">
+            Phase 1: Core Structures
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../phase-1/index.html" class="drawer-link">
+              Phase 1: Sorted Arrays & Binary Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-locked">
+          <div class="drawer-section-label">Phase 2: Algorithms</div>
+          <div class="drawer-section-status">Coming Soon</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="lesson-page-header">
+        <span class="phase-badge">Phase 0</span>
+        <h1 class="lesson-page-title">What is DSA, Really?</h1>
+        <p class="lesson-page-subtitle">Understanding the fundamentals</p>
+      </section>
+
+      <article class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">01</span>
+          <h3 class="lesson-title">What is DSA, Really?</h3>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>First, forget the buzzwords</h4>
+          <div class="equation">
+            <span class="eq-part">DSA</span>
+            <span class="eq-symbol">=</span>
+            <span class="eq-part highlight">Data Structures</span>
+            <span class="eq-symbol">+</span>
+            <span class="eq-part highlight">Algorithms</span>
+          </div>
+          <div class="definition-cards">
+            <div class="def-card" data-delay="0">
+              <div class="def-icon">📦</div>
+              <h5>Data Structure</h5>
+              <p>
+                A specific format for organizing, storing, and managing data in
+                a computer system
+              </p>
+            </div>
+            <div class="def-card" data-delay="100">
+              <div class="def-icon">⚙️</div>
+              <h5>Algorithm</h5>
+              <p>
+                A set of step-by-step instructions to solve a specific problem
+              </p>
+            </div>
+          </div>
+          <p class="simple-text">That's it.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>Real-world Analogy</h4>
+          <div class="analogy-box">
+            <div class="analogy-icon">📚</div>
+            <h5>Imagine a library...</h5>
+            <ul class="analogy-list">
+              <li>
+                <strong>Shelves arranged alphabetically</strong> → Data
+                Structure
+              </li>
+              <li><strong>How you find a book</strong> → Algorithm</li>
+            </ul>
+          </div>
+          <div class="comparison-demo">
+            <div class="demo-side slow">
+              <div class="demo-visual">
+                <div class="book" style="--i: 0">📕</div>
+                <div class="book" style="--i: 1">📗</div>
+                <div class="book" style="--i: 2">📘</div>
+                <div class="book" style="--i: 3">📙</div>
+                <div class="book" style="--i: 4">📓</div>
+              </div>
+              <span class="demo-label">Random pile</span>
+              <span class="demo-speed">🐢 Slow</span>
+            </div>
+            <div class="demo-side fast">
+              <div class="demo-visual sorted">
+                <div class="book" style="--i: 0">📕</div>
+                <div class="book" style="--i: 1">📗</div>
+                <div class="book" style="--i: 2">📘</div>
+                <div class="book" style="--i: 3">📙</div>
+                <div class="book" style="--i: 4">📓</div>
+              </div>
+              <span class="demo-label">Alphabetically sorted</span>
+              <span class="demo-speed">⚡ Fast</span>
+            </div>
+          </div>
+          <blockquote class="insight">
+            👉 Same data, different structure → different performance.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>In Programming Terms</h4>
+          <p>Let's say you have user IDs:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">users</span> = [<span class="number">101</span>, <span class="number">205</span>, <span class="number">309</span>, <span class="number">412</span>]</code></pre>
+          <p>Questions you might ask:</p>
+          <ul class="question-list">
+            <li>Is user 309 present?</li>
+            <li>Add a new user</li>
+            <li>Remove a user</li>
+          </ul>
+          <div class="decides-grid">
+            <div class="decides-card">
+              <h5>The data structure decides:</h5>
+              <ul>
+                <li>How <strong>fast</strong> these operations are</li>
+                <li>How much <strong>memory</strong> they use</li>
+              </ul>
+            </div>
+            <div class="decides-card">
+              <h5>The algorithm decides:</h5>
+              <ul>
+                <li>Step-by-step <strong>how</strong> to do it</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>Why DSA Matters (Even If You Already Code)</h4>
+          <p>You can already write this:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">for</span> user <span class="keyword">in</span> users:
+    <span class="keyword">if</span> user == <span class="number">309</span>:
+        <span class="function">print</span>(<span class="string">"Found"</span>)</code></pre>
+          <p>But DSA teaches you:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">→</span> Is this the <em>best</em> way?
+            </li>
+            <li>
+              <span class="bullet">→</span> What happens if <code>users</code> =
+              10 million?
+            </li>
+            <li><span class="bullet">→</span> Can this be <em>faster</em>?</li>
+          </ul>
+          <blockquote class="insight accent">
+            👉 DSA = performance + scalability thinking
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>Important Mindset Shift ⚠️</h4>
+          <div class="mindset-comparison">
+            <div class="mindset wrong">
+              <span class="label">❌ Don't ask:</span>
+              <blockquote>"What's the correct solution?"</blockquote>
+            </div>
+            <div class="mindset right">
+              <span class="label">✅ Instead ask:</span>
+              <blockquote>"How expensive is this solution?"</blockquote>
+            </div>
+          </div>
+          <p class="key-takeaway">
+            DSA is about <strong>trade-offs</strong>, not perfection.
+          </p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>🧠 Tiny Exercise (Don't Skip)</h4>
+          <p>Answer in your head (no code needed):</p>
+          <ol class="exercise-list">
+            <li>
+              If a list has <code>n</code> items, how many times does a
+              <code>for</code> loop run?
+            </li>
+            <li>If the list doubles in size, what happens to runtime?</li>
+            <li>Is this behavior predictable?</li>
+          </ol>
+          <p class="next-hint">We'll put formal names on these ideas next. →</p>
+        </div>
+      </article>
+    </main>
+
+    <script src="../../app.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

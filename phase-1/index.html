@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phase 1 • Core Structures | DSA Course</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="lesson-page phase-page">
+    <aside
+      class="course-drawer"
+      id="courseDrawer"
+      aria-label="Course navigation"
+    >
+      <div class="drawer-header">
+        <span class="drawer-title">&lt;/&gt; DSA</span>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="false">
+            Phase 0: Foundations
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../phase-0/index.html#lesson-1" class="drawer-link">
+              Lesson 1: What is DSA?
+            </a>
+            <a href="../phase-0/index.html#lesson-2" class="drawer-link">
+              Lesson 2: Time Complexity
+            </a>
+            <a href="../phase-0/index.html#lesson-3" class="drawer-link">
+              Lesson 3: Arrays
+            </a>
+            <a href="../phase-0/index.html#lesson-4" class="drawer-link">
+              Lesson 4: Linear Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section" data-collapsible>
+          <button class="drawer-section-toggle" aria-expanded="true">
+            Phase 1: Core Structures
+            <span class="drawer-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../phase-1/index.html" class="drawer-link">
+              Phase 1: Sorted Arrays & Binary Search
+            </a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-locked">
+          <div class="drawer-section-label">Phase 2: Algorithms</div>
+          <div class="drawer-section-status">Coming Soon</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="phase-header">
+        <div class="phase-header-content">
+          <span class="phase-badge">Phase 1</span>
+          <h2 class="phase-title">Sorted Arrays & Binary Search</h2>
+          <p class="phase-description">
+            Discover how organizing data unlocks dramatically faster algorithms.
+          </p>
+          <div class="phase-topics">
+            <span class="topic-tag">Sorted Arrays</span>
+            <span class="topic-tag">Binary Search</span>
+            <span class="topic-tag">O(log n) Time</span>
+            <span class="topic-tag">Trade-offs</span>
+          </div>
+        </div>
+      </section>
+
+      <article id="lesson-5" data-lesson-section class="lesson lesson-alt">
+        <div class="lesson-header">
+          <span class="lesson-number">05</span>
+          <h3 class="lesson-title">Sorted Arrays &amp; Binary Search</h3>
+          <p class="lesson-subtitle">
+            To go faster, we must give something up.
+          </p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          So far, we've been searching like this: "Check every element until we
+          find it." That works — but it's slow at scale. Binary search asks a
+          different question: "What if the data were organized?"
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is Binary Search?</h4>
+          <p>
+            Binary search is a <strong>searching algorithm</strong> that works
+            on sorted arrays.
+          </p>
+          <div class="core-idea">
+            <p>
+              It repeatedly divides the search space in half until the target is
+              found (or proven not to exist).
+            </p>
+          </div>
+          <p>The key insight:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">→</span> Each comparison
+              <strong>eliminates half the remaining elements</strong>
+            </li>
+            <li>
+              <span class="bullet">→</span> This leads to O(log n) time
+              complexity
+            </li>
+            <li>
+              <span class="bullet">→</span> Vastly faster than linear search for
+              large datasets
+            </li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. The Cost of Speed (Important Trade-off)</h4>
+          <p>Binary search only works if the array is sorted.</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">3</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">18</span>, <span class="number">25</span>, <span class="number">31</span>]</code></pre>
+          <p>That's the price we pay:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> We must keep data sorted</li>
+            <li><span class="bullet">→</span> Insertions become harder</li>
+            <li>
+              <span class="bullet">→</span> But searches become much faster
+            </li>
+          </ul>
+          <div class="core-idea">
+            <p>👉 This is a classic DSA trade-off.</p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. Intuition Before Code</h4>
+          <p>Imagine guessing a number between 1 and 100.</p>
+          <p>You don't start at 1. You guess 50.</p>
+          <p>Then:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> If too high → go left</li>
+            <li><span class="bullet">→</span> If too low → go right</li>
+          </ul>
+          <p>Each guess eliminates half the possibilities.</p>
+          <blockquote class="insight">That's binary search.</blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>4. How Binary Search Works (Step by Step)</h4>
+          <p>Given:</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">numbers</span> = [<span class="number">3</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">18</span>, <span class="number">25</span>, <span class="number">31</span>]
+<span class="keyword">target</span> = <span class="number">18</span></code></pre>
+          <p>Steps:</p>
+          <ol style="margin-left: 1.5rem">
+            <li>Look at the middle element → 18</li>
+            <li>Is it the target?</li>
+            <li>Yes → done</li>
+          </ol>
+          <p>Worst case:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> You cut the array in half</li>
+            <li><span class="bullet">→</span> Then in half again</li>
+            <li><span class="bullet">→</span> Then again…</li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. Binary Search Code (Iterative)</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">binary_search</span>(arr, target):
+    left = <span class="number">0</span>
+    right = <span class="function">len</span>(arr) - <span class="number">1</span>
+
+    <span class="keyword">while</span> left &lt;= right:
+        mid = (left + right) // <span class="number">2</span>
+
+        <span class="keyword">if</span> arr[mid] == target:
+            <span class="keyword">return</span> <span class="number">True</span>
+        <span class="keyword">elif</span> arr[mid] &lt; target:
+            left = mid + <span class="number">1</span>
+        <span class="keyword">else</span>:
+            right = mid - <span class="number">1</span>
+
+    <span class="keyword">return</span> <span class="number">False</span></code></pre>
+          <p>Don't worry about memorizing this. Focus on the idea.</p>
+
+          <h5 style="margin-top: 1.5rem">Try It Yourself</h5>
+          <p>
+            Watch binary search in action. Click Play or Step through each
+            comparison:
+          </p>
+          <div id="binary-search-viz"></div>
+        </div>
+      </article>
+    </main>
+
+    <script src="../app.js"></script>
+    <script src="../visualizations.js"></script>
+  </body>
+</html>
