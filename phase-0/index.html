@@ -22,6 +22,15 @@
     >
       <div class="drawer-header">
         <span class="drawer-title">&lt;/&gt; DSA</span>
+        <button
+          class="drawer-toggle"
+          id="drawerToggle"
+          aria-label="Collapse navigation"
+          aria-expanded="true"
+          type="button"
+        >
+          Hide
+        </button>
       </div>
       <div class="drawer-content">
         <div class="drawer-section" data-collapsible>
@@ -30,6 +39,9 @@
             <span class="drawer-chevron" aria-hidden="true">▾</span>
           </button>
           <div class="drawer-links">
+            <a href="#phase-0-intro" class="drawer-link"
+              >Phase 0: Absolute Foundations</a
+            >
             <a href="#lesson-1" class="drawer-link">Lesson 1: What is DSA?</a>
             <a href="#lesson-2" class="drawer-link"
               >Lesson 2: Time Complexity</a
@@ -44,9 +56,9 @@
             <span class="drawer-chevron" aria-hidden="true">▾</span>
           </button>
           <div class="drawer-links">
-            <a href="../phase-1/index.html" class="drawer-link">
-              Phase 1: Sorted Arrays & Binary Search
-            </a>
+            <a href="../phase-1/index.html#phase-1-intro" class="drawer-link"
+              >Phase 1: Sorted Arrays & Binary Search</a
+            >
           </div>
         </div>
         <div class="drawer-section drawer-section-locked">
@@ -56,8 +68,18 @@
       </div>
     </aside>
 
+    <button
+      class="drawer-toggle-button"
+      id="drawerToggleButton"
+      aria-label="Open navigation"
+      aria-expanded="true"
+      type="button"
+    >
+      &lt;/&gt; DSA
+    </button>
+
     <main class="main-content">
-      <section class="phase-header">
+      <section id="phase-0-intro" data-lesson-section class="phase-header">
         <div class="phase-header-content">
           <span class="phase-badge">Phase 0</span>
           <h2 class="phase-title">Absolute Foundations</h2>

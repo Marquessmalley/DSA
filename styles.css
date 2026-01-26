@@ -34,6 +34,9 @@
   --section-padding: 6rem 2rem;
   --content-max: 900px;
 
+  --drawer-width: clamp(240px, 22vw, 320px);
+  --drawer-width-collapsed: 76px;
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-medium: 0.4s ease;
@@ -331,7 +334,7 @@ button:focus-visible,
   position: fixed;
   top: 0;
   left: 0;
-  width: min(340px, 28vw);
+  width: var(--drawer-width);
   height: 100vh;
   background: var(--bg-secondary);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -339,7 +342,7 @@ button:focus-visible,
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.75rem 2.5rem;
+  padding: clamp(1.25rem, 2vw, 2rem) clamp(1rem, 1.5vw, 1.75rem) 2.5rem;
   overflow-y: auto;
   transition:
     width var(--transition-medium),
@@ -359,23 +362,29 @@ button:focus-visible,
 
 .drawer-title {
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1vw, 1.15rem);
 }
 
 .drawer-toggle {
-  border: none;
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.6);
   color: var(--text-secondary);
-  font-size: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
   cursor: pointer;
   transition:
     color var(--transition-fast),
-    transform var(--transition-fast);
+    border-color var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .drawer-toggle:hover,
 .drawer-toggle:focus {
   color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(15, 23, 42, 0.85);
 }
 
 .drawer-toggle-button {
@@ -387,8 +396,8 @@ button:focus-visible,
   color: var(--text-primary);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 999px;
-  padding: 0.55rem 1rem;
-  font-size: 0.95rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   display: none;
 }
@@ -407,7 +416,7 @@ button:focus-visible,
 .hero,
 .main-content,
 footer {
-  margin-left: min(340px, 28vw);
+  margin-left: var(--drawer-width);
 }
 
 .drawer-section-locked {
@@ -422,7 +431,7 @@ footer {
   border: none;
   color: var(--text-primary);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 0.9vw, 1.05rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -453,7 +462,7 @@ footer {
 .drawer-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 0.85vw, 1rem);
   padding: 0.2rem 0.5rem 0.2rem 0.75rem;
   border-radius: 8px;
   transition:
@@ -474,7 +483,7 @@ footer {
 }
 
 body.drawer-collapsed .course-drawer {
-  width: 76px;
+  width: var(--drawer-width-collapsed);
 }
 
 body.drawer-collapsed .drawer-content,
@@ -496,7 +505,7 @@ body.drawer-collapsed .drawer-toggle-button {
 body.drawer-collapsed .hero,
 body.drawer-collapsed .main-content,
 body.drawer-collapsed footer {
-  margin-left: 76px;
+  margin-left: var(--drawer-width-collapsed);
 }
 
 .drawer-section-label {
@@ -2117,9 +2126,8 @@ li {
 
 /* Mobile (default styles above) */
 @media (max-width: 768px) {
-  .hero {
-    padding: 7rem 1rem 3rem;
-    min-height: calc(100vh - 70px);
+  :root {
+    --drawer-width: min(88vw, 320px);
   }
 
   .navbar {
@@ -2199,8 +2207,19 @@ li {
   }
 
   .course-drawer {
-    width: min(88vw, 360px);
+    width: var(--drawer-width);
     padding-top: 2rem;
+    box-shadow: 24px 0 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .hero,
+  .main-content,
+  footer {
+    margin-left: 0;
+  }
+
+  body.drawer-collapsed .course-drawer {
+    transform: translateX(-100%);
   }
 
   .drawer-backdrop.active {

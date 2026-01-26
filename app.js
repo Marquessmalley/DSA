@@ -57,6 +57,7 @@ function initDrawerNavigation() {
     document.body.classList.toggle("drawer-collapsed", collapsed);
     if (drawerToggle) {
       drawerToggle.setAttribute("aria-expanded", String(!collapsed));
+      drawerToggle.textContent = collapsed ? "Show" : "Hide";
     }
     if (drawerToggleButton) {
       drawerToggleButton.setAttribute("aria-expanded", String(!collapsed));
@@ -85,10 +86,20 @@ function initDrawerNavigation() {
     });
   };
 
+  const firstSectionId = lessonSections[0]?.id;
+  const phaseIntro =
+    document.getElementById("phase-0-intro") ||
+    document.getElementById("phase-1-intro");
+  const defaultHash = phaseIntro
+    ? `#${phaseIntro.id}`
+    : firstSectionId
+      ? `#${firstSectionId}`
+      : "";
+
   if (window.location.hash) {
     setActiveLink(window.location.hash);
-  } else if (lessonSections.length > 0) {
-    setActiveLink(`#${lessonSections[0].id}`);
+  } else if (defaultHash) {
+    setActiveLink(defaultHash);
   }
 
   if (lessonSections.length > 0) {
