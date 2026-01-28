@@ -203,6 +203,56 @@ Can binary search work on:
 
 Why or why not?
 
+---
+
+## 🧩 Practice Set 1: Arrays & Searching
+
+### Problem 2: Binary Search (Beginner)
+
+**📌 Problem Statement**
+
+You are given a sorted array of integers `nums` and an integer `target`.
+
+Return the index of `target` if it exists. Otherwise, return `-1`.
+
+**🧠 What This Tests**
+
+- Binary search logic
+- Understanding sorted data
+- O(log n) thinking
+
+**✍️ Function Signature**
+```python
+def binary_search(nums, target):
+    pass
+```
+
+**🧪 Example**
+```python
+nums = [1, 3, 5, 7, 9, 11]
+target = 7
+
+# Output: 3
+```
+
+**🧭 Constraints**
+
+- `1 ≤ len(nums) ≤ 10⁵`
+- `nums` is sorted in ascending order
+- No duplicate elements
+
+**💡 Hints**
+
+- Track left and right
+- Eliminate half each step
+
+**⏱ Expected Complexity**
+
+- Time: O(log n)
+- Space: O(1)
+
+---
+
 ## 11. Key Takeaway (Lock This In)
 
 Binary search trades flexibility for speed.

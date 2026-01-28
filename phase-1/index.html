@@ -66,6 +66,9 @@
               >Phase 1: Sorted Arrays & Binary Search</a
             >
             <a href="#lesson-5" class="drawer-link">Lesson 5: Binary Search</a>
+            <a href="#lesson-6" class="drawer-link"
+              >Lesson 6: Array Insertions & Deletions</a
+            >
           </div>
         </div>
         <div class="drawer-section drawer-section-locked">
@@ -226,6 +229,286 @@
             comparison:
           </p>
           <div id="binary-search-viz"></div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>🧩 Practice Set 1: Arrays & Searching</h4>
+          <div class="practice-problem">
+            <h5>Problem 2: Binary Search (Beginner)</h5>
+            <div class="problem-section">
+              <p class="problem-label">📌 Problem Statement</p>
+              <p>
+                You are given a sorted array of integers <code>nums</code> and an
+                integer <code>target</code>.
+              </p>
+              <p>
+                Return the index of <code>target</code> if it exists. Otherwise,
+                return <code>-1</code>.
+              </p>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">🧠 What This Tests</p>
+              <ul>
+                <li>Binary search logic</li>
+                <li>Understanding sorted data</li>
+                <li>O(log n) thinking</li>
+              </ul>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">✍️ Function Signature</p>
+              <pre
+                class="code-block"
+              ><code><span class="keyword">def</span> <span class="function">binary_search</span>(nums, target):
+    <span class="keyword">pass</span></code></pre>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">🧪 Example</p>
+              <pre
+                class="code-block"
+              ><code>nums = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>]
+target = <span class="number">7</span>
+
+<span class="comment"># Output: 3</span></code></pre>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">🧭 Constraints</p>
+              <ul>
+                <li><code>1 ≤ len(nums) ≤ 10⁵</code></li>
+                <li><code>nums</code> is sorted in ascending order</li>
+                <li>No duplicate elements</li>
+              </ul>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">💡 Hints</p>
+              <ul>
+                <li>Track left and right</li>
+                <li>Eliminate half each step</li>
+              </ul>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">⏱ Expected Complexity</p>
+              <ul>
+                <li>Time: O(log n)</li>
+                <li>Space: O(1)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article id="lesson-6" data-lesson-section class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">06</span>
+          <h3 class="lesson-title">Array Insertions & Deletions</h3>
+          <p class="lesson-subtitle">
+            The Hidden Cost of Maintaining Sorted Arrays
+          </p>
+        </div>
+
+        <div class="lesson-intro fade-in">
+          <p>
+            Binary search is fast — but sorted arrays are expensive to maintain.
+          </p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>1. The Core Trade-off</h4>
+          <p>From Lesson 5, we learned:</p>
+          <div class="highlight-box">
+            <p>
+              <strong>Sorted arrays + binary search → O(log n) search</strong>
+            </p>
+          </div>
+          <p>
+            But arrays are stored contiguously. That combination creates a
+            problem.
+          </p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. Why Arrays Are Fast (Reminder)</h4>
+          <p>Arrays are fast because:</p>
+          <ul>
+            <li>Elements live next to each other in memory</li>
+            <li>Index access is O(1)</li>
+            <li>Jumping to <code>arr[i]</code> is instant</li>
+          </ul>
+          <p>But that same property causes trouble.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. Inserting into a Sorted Array</h4>
+          <p>Suppose we have a sorted array:</p>
+          <div class="code-block">
+            <pre><code>numbers = [3, 7, 12, 18, 25]</code></pre>
+          </div>
+          <p>We want to insert 10.</p>
+
+          <h5>Step 1: Find the correct position</h5>
+          <p>Binary search can do this in: <strong>O(log n)</strong></p>
+          <p>So far so good.</p>
+
+          <h5>Step 2: Make space (This Is the Problem)</h5>
+          <p>To insert 10, the array must become:</p>
+          <div class="code-block">
+            <pre><code>[3, 7, 10, 12, 18, 25]</code></pre>
+          </div>
+          <p>What must happen internally:</p>
+          <ul>
+            <li>12, 18, and 25 shift one position right</li>
+            <li>Multiple assignments occur</li>
+            <li>If the array has n elements: Up to n elements may shift</li>
+          </ul>
+          <div class="big-o-reveal">
+            <span class="big-o">O(n)</span>
+            <span class="label">Insertion</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>4. Deleting from a Sorted Array</h4>
+          <p>Now remove 7:</p>
+          <div class="code-block">
+            <pre><code>numbers = [3, 7, 12, 18, 25]</code></pre>
+          </div>
+          <p>After deletion:</p>
+          <div class="code-block">
+            <pre><code>[3, 12, 18, 25]</code></pre>
+          </div>
+          <p>What happens:</p>
+          <ul>
+            <li>Elements after 7 shift left</li>
+            <li>Again, many assignments</li>
+          </ul>
+          <div class="big-o-reveal">
+            <span class="big-o">O(n)</span>
+            <span class="label">Deletion</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. Why Binary Search Can't Fix This</h4>
+          <p>Binary search helps you:</p>
+          <ul>
+            <li>Find where to insert or delete</li>
+          </ul>
+          <p>But it cannot:</p>
+          <ul>
+            <li>Move memory faster</li>
+            <li>Avoid shifting elements</li>
+          </ul>
+          <div class="highlight-box">
+            <p><strong>Searching is fast. Shifting is slow.</strong></p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>6. The Real Cost of "Sorted Arrays"</h4>
+          <p>Let's summarize operations:</p>
+          <div class="comparison-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Operation</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Search</td>
+                  <td>O(log n)</td>
+                </tr>
+                <tr>
+                  <td>Insert</td>
+                  <td>O(n)</td>
+                </tr>
+                <tr>
+                  <td>Delete</td>
+                  <td>O(n)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>So sorted arrays are:</p>
+          <ul>
+            <li>Excellent for read-heavy systems</li>
+            <li>Bad for write-heavy systems</li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>7. Real-World Analogy</h4>
+          <p>Think of a row of numbered lockers:</p>
+          <p>Looking up locker #500 → instant</p>
+          <p>Adding a locker in the middle → everyone shifts</p>
+          <p>That's a sorted array.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>8. When Sorted Arrays Make Sense</h4>
+          <p>Use them when:</p>
+          <ul>
+            <li>Searches are frequent</li>
+            <li>Inserts/deletes are rare</li>
+            <li>Data is mostly static</li>
+          </ul>
+          <p>Examples:</p>
+          <ul>
+            <li>Dictionaries</li>
+            <li>Static configuration data</li>
+            <li>Read-only datasets</li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>9. When Sorted Arrays Are a Bad Fit</h4>
+          <p>Avoid them when:</p>
+          <ul>
+            <li>Data changes constantly</li>
+            <li>Insertions/deletions are frequent</li>
+            <li>Order must be maintained dynamically</li>
+          </ul>
+          <p>This leads us to new data structures.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>10. Key Takeaway (Lock This In)</h4>
+          <div class="highlight-box">
+            <p>
+              <strong
+                >Binary search is fast, but keeping data sorted is
+                expensive.</strong
+              >
+            </p>
+          </div>
+          <p>DSA is always about trade-offs.</p>
+        </div>
+
+        <div class="where-we-are fade-in">
+          <h4>🧭 Where We Are Now</h4>
+          <p>You now understand:</p>
+          <ul>
+            <li>Why binary search is powerful</li>
+            <li>Why it's not free</li>
+            <li>Why arrays aren't always enough</li>
+          </ul>
+          <p>This sets the stage for dynamic data structures.</p>
+        </div>
+
+        <div class="what-next fade-in">
+          <h4>🔜 What Comes Next</h4>
+          <p>
+            👉
+            <strong>Phase 2 – Lesson 8: Linked Lists — Why They Exist</strong>
+          </p>
+          <p>But before that, we'll bridge the gap with:</p>
+          <p>
+            <strong>Lesson 7: Space Complexity (Gentle Introduction)</strong>
+          </p>
+          <div class="cta-button">
+            <a href="lesson-seven/index.html">Start Lesson 7</a>
+          </div>
+          <p>You're building the exact intuition strong DSA learners have.</p>
         </div>
       </article>
     </main>

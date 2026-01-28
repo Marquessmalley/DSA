@@ -1,0 +1,261 @@
+/* Lesson 6 specific styles */
+body {
+  padding: 0;
+}
+
+.lesson-page-header {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-content {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.lesson-breadcrumb {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.lesson-breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.lesson-breadcrumb a:hover {
+  color: var(--accent-primary);
+}
+
+.separator {
+  margin: 0 0.5rem;
+}
+
+.current {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.lesson-content {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.content-block {
+  margin-bottom: 3rem;
+}
+
+.content-block h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.content-block h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 2rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.content-block p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.content-block ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.content-block li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.code-block {
+  background: var(--bg-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.code-block code {
+  color: var(--text-primary);
+}
+
+.highlight-box {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.highlight-box p {
+  margin: 0;
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.big-o-reveal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.big-o {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.label {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.comparison-table {
+  margin: 2rem 0;
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.comparison-table th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.comparison-table td {
+  color: var(--text-secondary);
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.where-we-are,
+.what-next {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 3rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.where-we-are h3,
+.what-next h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.cta-button {
+  margin: 1.5rem 0;
+}
+
+.cta-button a {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: var(--gradient-primary);
+  color: var(--bg-primary);
+  text-decoration: none;
+  border-radius: 100px;
+  font-weight: 600;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cta-button a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .lesson-page-header {
+    padding: 4rem 1rem 2rem;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .lesson-content {
+    padding: 1rem;
+  }
+  
+  .content-block h3 {
+    font-size: 1.5rem;
+  }
+  
+  .content-block h4 {
+    font-size: 1.1rem;
+  }
+  
+  .big-o {
+    font-size: 1.5rem;
+  }
+  
+  .where-we-are,
+  .what-next {
+    padding: 1.5rem;
+  }
+  
+  .where-we-are h3,
+  .what-next h3 {
+    font-size: 1.3rem;
+  }
+}

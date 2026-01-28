@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6: Array Insertions & Deletions - DSA Course</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+</head>
+<body>
+  <!-- Course Drawer -->
+  <aside class="course-drawer" aria-label="Course navigation">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <span class="drawer-title">&lt;/&gt; DSA</span>
+        <button class="drawer-toggle" aria-label="Hide drawer">Hide</button>
+      </div>
+      
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-toggle" aria-expanded="true">
+            <span>Phase 0: Absolute Foundations</span>
+            <span class="drawer-chevron">▼</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../../phase-0/index.html#phase-0-intro" class="drawer-link">Phase Intro</a>
+            <a href="../../phase-0/index.html#lesson-1" class="drawer-link">Lesson 1: What is DSA, Really?</a>
+            <a href="../../phase-0/index.html#lesson-2" class="drawer-link">Lesson 2: Time Complexity</a>
+            <a href="../../phase-0/index.html#lesson-3" class="drawer-link">Lesson 3: Arrays</a>
+            <a href="../../phase-0/index.html#lesson-4" class="drawer-link">Lesson 4: Linear Search</a>
+          </div>
+        </div>
+        
+        <div class="drawer-section">
+          <button class="drawer-section-toggle" aria-expanded="true">
+            <span>Phase 1: Sorted Arrays & Binary Search</span>
+            <span class="drawer-chevron">▼</span>
+          </button>
+          <div class="drawer-links">
+            <a href="../index.html#phase-1-intro" class="drawer-link">Phase Intro</a>
+            <a href="../index.html#lesson-5" class="drawer-link">Lesson 5: Binary Search</a>
+            <a href="#lesson-6" class="drawer-link active">Lesson 6: Array Insertions & Deletions</a>
+          </div>
+        </div>
+        
+        <div class="drawer-section">
+          <button class="drawer-section-toggle" aria-expanded="false">
+            <span>Phase 2: Dynamic Data Structures (Coming Soon)</span>
+            <span class="drawer-chevron">▶</span>
+          </button>
+          <div class="drawer-links" hidden>
+            <a href="#" class="drawer-link">Lesson 7: Space Complexity</a>
+            <a href="#" class="drawer-link">Lesson 8: Linked Lists</a>
+            <a href="#" class="drawer-link">Lesson 9: Stacks & Queues</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Drawer Toggle Button (visible when drawer is collapsed) -->
+  <button class="drawer-toggle-button" aria-label="Show drawer">
+    &lt;/&gt; DSA
+  </button>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="lesson-page-header">
+      <div class="header-content">
+        <div class="lesson-breadcrumb">
+          <a href="../index.html">Phase 1</a>
+          <span class="separator">›</span>
+          <span class="current">Lesson 6</span>
+        </div>
+        <h1 class="page-title">Array Insertions & Deletions</h1>
+        <p class="page-subtitle">The Hidden Cost of Maintaining Sorted Arrays</p>
+      </div>
+    </section>
+
+    <article class="lesson-content">
+      <section id="lesson-6" class="lesson">
+        <div class="lesson-header">
+          <div class="lesson-number">6</div>
+          <h2 class="lesson-title">Array Insertions & Deletions</h2>
+          <p class="lesson-subtitle">The Hidden Cost of Maintaining Sorted Arrays</p>
+        </div>
+
+        <div class="lesson-intro">
+          <p>Binary search is fast — but sorted arrays are expensive to maintain.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>1. The Core Trade-off</h3>
+          <p>From Lesson 5, we learned:</p>
+          <div class="highlight-box">
+            <p><strong>Sorted arrays + binary search → O(log n) search</strong></p>
+          </div>
+          <p>But arrays are stored contiguously. That combination creates a problem.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>2. Why Arrays Are Fast (Reminder)</h3>
+          <p>Arrays are fast because:</p>
+          <ul>
+            <li>Elements live next to each other in memory</li>
+            <li>Index access is O(1)</li>
+            <li>Jumping to <code>arr[i]</code> is instant</li>
+          </ul>
+          <p>But that same property causes trouble.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>3. Inserting into a Sorted Array</h3>
+          <p>Suppose we have a sorted array:</p>
+          <div class="code-block">
+            <pre><code>numbers = [3, 7, 12, 18, 25]</code></pre>
+          </div>
+          <p>We want to insert 10.</p>
+          
+          <h4>Step 1: Find the correct position</h4>
+          <p>Binary search can do this in: <strong>O(log n)</strong></p>
+          <p>So far so good.</p>
+          
+          <h4>Step 2: Make space (This Is the Problem)</h4>
+          <p>To insert 10, the array must become:</p>
+          <div class="code-block">
+            <pre><code>[3, 7, 10, 12, 18, 25]</code></pre>
+          </div>
+          <p>What must happen internally:</p>
+          <ul>
+            <li>12, 18, and 25 shift one position right</li>
+            <li>Multiple assignments occur</li>
+            <li>If the array has n elements: Up to n elements may shift</li>
+          </ul>
+          <div class="big-o-reveal">
+            <span class="big-o">O(n)</span>
+            <span class="label">Insertion</span>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>4. Deleting from a Sorted Array</h3>
+          <p>Now remove 7:</p>
+          <div class="code-block">
+            <pre><code>numbers = [3, 7, 12, 18, 25]</code></pre>
+          </div>
+          <p>After deletion:</p>
+          <div class="code-block">
+            <pre><code>[3, 12, 18, 25]</code></pre>
+          </div>
+          <p>What happens:</p>
+          <ul>
+            <li>Elements after 7 shift left</li>
+            <li>Again, many assignments</li>
+          </ul>
+          <div class="big-o-reveal">
+            <span class="big-o">O(n)</span>
+            <span class="label">Deletion</span>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>5. Why Binary Search Can't Fix This</h3>
+          <p>Binary search helps you:</p>
+          <ul>
+            <li>Find where to insert or delete</li>
+          </ul>
+          <p>But it cannot:</p>
+          <ul>
+            <li>Move memory faster</li>
+            <li>Avoid shifting elements</li>
+          </ul>
+          <div class="highlight-box">
+            <p><strong>Searching is fast. Shifting is slow.</strong></p>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h3>6. The Real Cost of "Sorted Arrays"</h3>
+          <p>Let's summarize operations:</p>
+          <div class="comparison-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Operation</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Search</td>
+                  <td>O(log n)</td>
+                </tr>
+                <tr>
+                  <td>Insert</td>
+                  <td>O(n)</td>
+                </tr>
+                <tr>
+                  <td>Delete</td>
+                  <td>O(n)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>So sorted arrays are:</p>
+          <ul>
+            <li>Excellent for read-heavy systems</li>
+            <li>Bad for write-heavy systems</li>
+          </ul>
+        </div>
+
+        <div class="content-block">
+          <h3>7. Real-World Analogy</h3>
+          <p>Think of a row of numbered lockers:</p>
+          <p>Looking up locker #500 → instant</p>
+          <p>Adding a locker in the middle → everyone shifts</p>
+          <p>That's a sorted array.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>8. When Sorted Arrays Make Sense</h3>
+          <p>Use them when:</p>
+          <ul>
+            <li>Searches are frequent</li>
+            <li>Inserts/deletes are rare</li>
+            <li>Data is mostly static</li>
+          </ul>
+          <p>Examples:</p>
+          <ul>
+            <li>Dictionaries</li>
+            <li>Static configuration data</li>
+            <li>Read-only datasets</li>
+          </ul>
+        </div>
+
+        <div class="content-block">
+          <h3>9. When Sorted Arrays Are a Bad Fit</h3>
+          <p>Avoid them when:</p>
+          <ul>
+            <li>Data changes constantly</li>
+            <li>Insertions/deletions are frequent</li>
+            <li>Order must be maintained dynamically</li>
+          </ul>
+          <p>This leads us to new data structures.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>10. Key Takeaway (Lock This In)</h3>
+          <div class="highlight-box">
+            <p><strong>Binary search is fast, but keeping data sorted is expensive.</strong></p>
+          </div>
+          <p>DSA is always about trade-offs.</p>
+        </div>
+
+        <div class="where-we-are">
+          <h3>🧭 Where We Are Now</h3>
+          <p>You now understand:</p>
+          <ul>
+            <li>Why binary search is powerful</li>
+            <li>Why it's not free</li>
+            <li>Why arrays aren't always enough</li>
+          </ul>
+          <p>This sets the stage for dynamic data structures.</p>
+        </div>
+
+        <div class="what-next">
+          <h3>🔜 What Comes Next</h3>
+          <p>👉 <strong>Phase 2 – Lesson 8: Linked Lists — Why They Exist</strong></p>
+          <p>But before that, we'll bridge the gap with:</p>
+          <p><strong>Lesson 7: Space Complexity (Gentle Introduction)</strong></p>
+          <div class="cta-button">
+            <a href="../lesson-seven/index.html">Start Lesson 7</a>
+          </div>
+          <p>You're building the exact intuition strong DSA learners have.</p>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <script src="../../app.js"></script>
+</body>
+</html>

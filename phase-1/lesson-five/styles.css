@@ -22,3 +22,67 @@ body.lesson-page {
 .lesson-page .lesson {
   padding-top: 2rem;
 }
+
+/* Practice Problem Styles */
+.practice-problem {
+  background: var(--bg-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.practice-problem h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+.problem-section {
+  margin-bottom: 1.5rem;
+}
+
+.problem-section:last-child {
+  margin-bottom: 0;
+}
+
+.problem-label {
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  display: block;
+  font-size: 0.95rem;
+}
+
+.problem-section p {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.problem-section ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.problem-section ul li {
+  color: var(--text-secondary);
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.problem-section ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+.problem-section .code-block {
+  margin-top: 0.75rem;
+}

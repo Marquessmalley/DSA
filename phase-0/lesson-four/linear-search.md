@@ -259,6 +259,52 @@ def first_even(arr):
 
 ---
 
+## 🧩 Practice Set 1: Arrays & Searching
+
+### Problem 1: Linear Search (Beginner)
+
+**📌 Problem Statement**
+
+Given an array of integers `nums` and an integer `target`, return `true` if `target` exists in the array, otherwise return `false`.
+
+**🧠 What This Tests**
+
+- Array traversal
+- Linear search logic
+- Understanding of O(n)
+
+**✍️ Function Signature**
+```python
+def contains(nums, target):
+    pass
+```
+
+**🧪 Example**
+```python
+nums = [4, 2, 7, 1, 9]
+target = 7
+
+# Output: True
+```
+
+**🧭 Constraints (LeetCode Style)**
+
+- `1 ≤ len(nums) ≤ 10⁵`
+- `nums` is unsorted
+- Do not use built-in `in`
+
+**💡 Hints (Use Only If Needed)**
+
+- Start from the beginning
+- Stop early if you find the target
+
+**⏱ Expected Complexity**
+
+- Time: O(n)
+- Space: O(1)
+
+---
+
 ## 12. Key Takeaway (Lock This In)
 
 > **Linear search trades simplicity for speed.**
