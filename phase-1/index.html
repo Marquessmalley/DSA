@@ -69,6 +69,9 @@
             <a href="#lesson-6" class="drawer-link"
               >Lesson 6: Array Insertions & Deletions</a
             >
+            <a href="#lesson-7" class="drawer-link"
+              >Lesson 7: Space Complexity</a
+            >
           </div>
         </div>
         <div class="drawer-section drawer-section-locked">
@@ -498,17 +501,305 @@ target = <span class="number">7</span>
         <div class="what-next fade-in">
           <h4>🔜 What Comes Next</h4>
           <p>
+            Before we move to new data structures, let's understand
+            <strong>space complexity</strong> — the other half of algorithm
+            analysis.
+          </p>
+          <div class="cta-button">
+            <a href="#lesson-7">Start Lesson 7 →</a>
+          </div>
+        </div>
+      </article>
+
+      <article id="lesson-7" data-lesson-section class="lesson lesson-alt">
+        <div class="lesson-header">
+          <span class="lesson-number">07</span>
+          <h3 class="lesson-title">Space Complexity</h3>
+          <p class="lesson-subtitle">
+            Beginner-Friendly — No Math Required
+          </p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          If time complexity is "how long does it take?" — space complexity is
+          "how much extra memory does it use?" We'll keep this intuitive.
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is Space Complexity?</h4>
+          <p>
+            Space complexity measures how
+            <strong>memory usage grows</strong> as input size grows.
+          </p>
+          <div class="core-idea">
+            <p>We care about <strong>extra space</strong>, not the input itself.</p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. What Counts as "Extra Space"?</h4>
+          <div class="space-checklist">
+            <div class="space-yes">
+              <h5>Counts</h5>
+              <ul>
+                <li>Variables</li>
+                <li>New arrays / lists</li>
+                <li>Hash maps / sets</li>
+                <li>Recursive call stack</li>
+              </ul>
+            </div>
+            <div class="space-no">
+              <h5>Doesn't Count</h5>
+              <ul>
+                <li>The input array itself</li>
+                <li>Constants (fixed number of variables)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. Constant Space — O(1)</h4>
+          <p>Example: Your Binary Search from Lesson 5</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">binary_search</span>(nums, target):
+    left = <span class="number">0</span>
+    right = <span class="function">len</span>(nums) - <span class="number">1</span>
+
+    <span class="keyword">while</span> left &lt;= right:
+        mid = (left + right) // <span class="number">2</span>
+        <span class="keyword">if</span> nums[mid] == target:
+            <span class="keyword">return</span> mid
+        <span class="keyword">elif</span> nums[mid] &lt; target:
+            left = mid + <span class="number">1</span>
+        <span class="keyword">else</span>:
+            right = mid - <span class="number">1</span>
+
+    <span class="keyword">return</span> <span class="number">-1</span></code></pre>
+          <p>Extra memory used: <code>left</code>, <code>right</code>, <code>mid</code></p>
+          <p>That's three integers, no matter how big <code>nums</code> is.</p>
+          <div class="big-o-reveal">
+            <span class="big-o">O(1)</span>
+            <span class="label">Constant Space</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>4. Linear Space — O(n)</h4>
+          <p>Example: Creating a New Array</p>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">copy_array</span>(nums):
+    result = []
+    <span class="keyword">for</span> n <span class="keyword">in</span> nums:
+        result.append(n)
+    <span class="keyword">return</span> result</code></pre>
+          <p>
+            If <code>nums</code> has <strong>n</strong> elements,
+            <code>result</code> also has <strong>n</strong> elements.
+            Memory grows linearly.
+          </p>
+          <div class="big-o-reveal">
+            <span class="big-o">O(n)</span>
+            <span class="label">Linear Space</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. Space vs Time Tradeoff (Very Important)</h4>
+          <p>Consider two approaches to checking if a value exists:</p>
+
+          <h5 style="margin-top: 1.5rem">Linear Search</h5>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">contains</span>(nums, target):
+    <span class="keyword">for</span> n <span class="keyword">in</span> nums:
+        <span class="keyword">if</span> n == target:
+            <span class="keyword">return</span> <span class="number">True</span>
+    <span class="keyword">return</span> <span class="number">False</span></code></pre>
+          <div class="tradeoff-stats">
+            <span class="stat">Time: <strong>O(n)</strong></span>
+            <span class="stat">Space: <strong>O(1)</strong></span>
+          </div>
+
+          <h5 style="margin-top: 1.5rem">Using a Set for Faster Lookup</h5>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">contains_fast</span>(nums, target):
+    lookup = <span class="function">set</span>(nums)
+    <span class="keyword">return</span> target <span class="keyword">in</span> lookup</code></pre>
+          <div class="tradeoff-stats">
+            <span class="stat">Time: <strong>O(1)</strong> average lookup</span>
+            <span class="stat">Space: <strong>O(n)</strong> extra memory</span>
+          </div>
+
+          <div class="core-idea" style="margin-top: 1.5rem">
+            <p>
+              This is a classic DSA tradeoff: <strong>faster time → more
+              memory</strong>. <strong>Less memory → slower time</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>6. Recursion Uses Space (Hidden!)</h4>
+          <pre
+            class="code-block"
+          ><code><span class="keyword">def</span> <span class="function">print_all</span>(nums, i=<span class="number">0</span>):
+    <span class="keyword">if</span> i == <span class="function">len</span>(nums):
+        <span class="keyword">return</span>
+    <span class="function">print</span>(nums[i])
+    print_all(nums, i + <span class="number">1</span>)</code></pre>
+          <p>
+            Each recursive call sits on the <strong>call stack</strong> and
+            takes memory. If there are <strong>n</strong> elements:
+          </p>
+          <div class="big-o-reveal">
+            <span class="big-o">O(n)</span>
+            <span class="label">Stack Space</span>
+          </div>
+          <blockquote class="insight">
+            Even though you didn't create an array!
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>7. How LeetCode Expects You to Think</h4>
+          <p>When asked: "What's the space complexity?"</p>
+          <p>Ask yourself:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">→</span> Did I create new data structures?
+            </li>
+            <li>
+              <span class="bullet">→</span> Does memory grow with input?
+            </li>
+            <li>
+              <span class="bullet">→</span> Is recursion involved?
+            </li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>8. Common Beginner Confusions</h4>
+          <div class="confusion-list">
+            <div class="confusion-item">
+              <p class="confusion-wrong">"I used a loop so space is O(n)"</p>
+              <p class="confusion-right">Loops don't cost memory — variables do</p>
+            </div>
+            <div class="confusion-item">
+              <p class="confusion-wrong">"The input array counts"</p>
+              <p class="confusion-right">Input is free</p>
+            </div>
+            <div class="confusion-item">
+              <p class="confusion-wrong">"Python hides memory so I can't analyze it"</p>
+              <p class="confusion-right">Big-O ignores language details</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>9. Practice Problem: Contains Duplicate</h4>
+          <div class="practice-problem">
+            <h5>Problem 3: Contains Duplicate</h5>
+            <div class="problem-section">
+              <p class="problem-label">Problem Statement</p>
+              <p>
+                Given an array <code>nums</code>, return <code>True</code> if
+                any value appears at least twice.
+              </p>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Brute Force (Don't Code Yet)</p>
+              <ul>
+                <li>Nested loops</li>
+                <li>Time: O(n²)</li>
+                <li>Space: O(1)</li>
+              </ul>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Optimized Idea</p>
+              <ul>
+                <li>Use a set</li>
+                <li>Time: O(n)</li>
+                <li>Space: O(n)</li>
+              </ul>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Function Signature</p>
+              <pre
+                class="code-block"
+              ><code><span class="keyword">def</span> <span class="function">contains_duplicate</span>(nums):
+    <span class="keyword">pass</span></code></pre>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Example</p>
+              <pre
+                class="code-block"
+              ><code>nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>]
+<span class="comment"># Output: True</span>
+
+nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]
+<span class="comment"># Output: False</span></code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>10. Mental Model (Lock This In)</h4>
+          <div class="comparison-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Ask Yourself</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Time</td>
+                  <td>How many steps as n grows?</td>
+                </tr>
+                <tr>
+                  <td>Space</td>
+                  <td>How much extra memory as n grows?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box">
+            <p>
+              <strong>Space complexity is the price you pay for speed.</strong>
+            </p>
+            <p>
+              Good solutions balance both — great solutions justify the
+              tradeoff.
+            </p>
+          </div>
+        </div>
+
+        <div class="where-we-are fade-in">
+          <h4>Where We Are Now</h4>
+          <p>You now understand:</p>
+          <ul>
+            <li>What space complexity measures</li>
+            <li>O(1) vs O(n) space</li>
+            <li>The space-time tradeoff</li>
+            <li>How recursion secretly uses memory</li>
+          </ul>
+          <p>This completes the foundations for algorithm analysis.</p>
+        </div>
+
+        <div class="what-next fade-in">
+          <h4>What Comes Next</h4>
+          <p>
             👉
             <strong>Phase 2 – Lesson 8: Linked Lists — Why They Exist</strong>
           </p>
-          <p>But before that, we'll bridge the gap with:</p>
           <p>
-            <strong>Lesson 7: Space Complexity (Gentle Introduction)</strong>
+            You're building the exact intuition strong DSA learners have.
           </p>
-          <div class="cta-button">
-            <a href="lesson-seven/index.html">Start Lesson 7</a>
-          </div>
-          <p>You're building the exact intuition strong DSA learners have.</p>
         </div>
       </article>
     </main>
