@@ -8,7 +8,7 @@ We'll keep this intuitive.
 
 ## 1. What Is Space Complexity?
 
-Space complexity measures how **memory usage grows** as input size grows.
+Space complexity measures the memory an algorithm adds.
 
 **Important clarification right away:**
 
