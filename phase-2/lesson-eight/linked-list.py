@@ -8,10 +8,15 @@ class Node:
         self.value = value
         self.next = None
 
+    def __str__(self):
+        return str(self.value)
+
 # Creating Nodes
 a = Node(1)
 b = Node(2)
 c = Node(3)
+
+
 
 # Linking Nodes 
 a.next = b

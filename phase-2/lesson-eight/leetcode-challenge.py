@@ -10,6 +10,7 @@
 # - Time: O(n)
 # - Space: O(1)
 
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -20,10 +21,11 @@ class Node:
 def search_linked_list(head, target):
     current = head
     while current:
-        if(current.value == target):
+        if current.value == target:
             return True
         current = current.next
     return False
+
 
 # Example Usage
 # Build list: 5 -> 12 -> 8 -> 3 -> None
@@ -37,4 +39,4 @@ c.next = d
 
 # Test cases
 print(search_linked_list(a, 8))  # Expected: True
-print(search_linked_list(a, 99)) # Expected: False
+print(search_linked_list(a, 99))  # Expected: False
