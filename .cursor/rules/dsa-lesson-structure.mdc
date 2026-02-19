@@ -1,0 +1,38 @@
+---
+description: DSA course lesson and phase file structure conventions
+globs: phase-*/**/*.md, phase-*/**/*.py, phase-*/index.html
+alwaysApply: false
+---
+
+# DSA Lesson Structure Conventions
+
+## Folder naming
+
+- Phase folders: `phase-{n}/` (e.g. `phase-0`, `phase-1`)
+- Lesson folders: `phase-{n}/lesson-{spelled-number}/` (e.g. `lesson-ten`, not `lesson-10`)
+- Lesson markdown: `{topic-slug}.md` in kebab-case (e.g. `stacks-lifo.md`)
+- LeetCode challenge: `leetcode-challenge.py` in each lesson folder
+
+## Markdown structure
+
+- Title: `# Phase {N} – Lesson {X}: {Title}`
+- Blockquote hook after title
+- Numbered sections: `## 1. Title`, `## 2. Title`
+- Fenced Python code blocks (no HTML in markdown files)
+- End with a "Key Takeaway" section
+
+## Phase index.html structure
+
+- Drawer nav: every phase lists all phases with lesson links
+- Lessons use `<article id="lesson-{X}" data-lesson-section class="lesson">` (alternate `lesson-alt`)
+- Lesson headers: `lesson-number` (zero-padded, e.g. `08`), `lesson-title`, `lesson-subtitle`
+- Content sections: `<div class="content-block fade-in">`
+- Each lesson ends with `where-we-are` and `what-next` sections
+- Code uses span classes: `keyword`, `function`, `number`, `string`, `comment`
+
+## LeetCode challenge file
+
+- Docstring with: Problem title, statement, function signature, example, key insight, expected complexity
+- Helper classes (e.g. Node) if needed
+- Function implementation
+- Test calls at the bottom

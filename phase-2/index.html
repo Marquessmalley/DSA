@@ -91,6 +91,9 @@
             <a href="#lesson-9" class="drawer-link"
               >Lesson 9: Searching in Linked Lists</a
             >
+            <a href="#lesson-10" class="drawer-link"
+              >Lesson 10: Stacks</a
+            >
           </div>
         </div>
       </div>
@@ -729,6 +732,265 @@ find_index(head, <span class="number">99</span>)   <span class="comment"># Outpu
           <p>
             <strong>Lesson 10: Stacks — LIFO Thinking.</strong> This is where
             linked lists become useful again.
+          </p>
+        </div>
+      </article>
+    </main>
+
+      <article id="lesson-10" data-lesson-section class="lesson lesson-alt">
+        <div class="lesson-header">
+          <span class="lesson-number">10</span>
+          <h3 class="lesson-title">Stacks — LIFO Thinking</h3>
+          <p class="lesson-subtitle">Last In, First Out</p>
+        </div>
+
+        <blockquote class="lesson-intro fade-in">
+          Stack = Last In, First Out. The most recently added item is the first to leave.
+        </blockquote>
+
+        <div class="content-block fade-in">
+          <h4>1. What Is a Stack?</h4>
+          <p>A stack is a data structure where you can only access the <strong>top</strong> element.</p>
+          <div class="analogy-box">
+            <div class="analogy-icon">🍽</div>
+            <h5>Think of...</h5>
+            <ul class="analogy-list">
+              <li><strong>Stack of plates</strong> — you take from the top</li>
+              <li><strong>Undo button</strong> — reverses the most recent action</li>
+              <li><strong>Browser back button</strong> — goes to the last page visited</li>
+              <li><strong>Call stack</strong> — the most recent function returns first</li>
+            </ul>
+          </div>
+          <div class="comparison-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Operation</th>
+                  <th>What It Does</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>push(x)</code></td>
+                  <td>Add to top</td>
+                  <td>O(1)</td>
+                </tr>
+                <tr>
+                  <td><code>pop()</code></td>
+                  <td>Remove from top</td>
+                  <td>O(1)</td>
+                </tr>
+                <tr>
+                  <td><code>peek()</code></td>
+                  <td>Look at top</td>
+                  <td>O(1)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="core-idea">
+            <p>No random access. No searching in the middle. <strong>Top only.</strong></p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>2. Visual Model</h4>
+          <p>Start empty:</p>
+          <pre class="code-block"><code>[]</code></pre>
+          <p>Push 10:</p>
+          <pre class="code-block"><code>[<span class="number">10</span>]</code></pre>
+          <p>Push 20:</p>
+          <pre class="code-block"><code>[<span class="number">10</span>, <span class="number">20</span>]</code></pre>
+          <p>Push 30:</p>
+          <pre class="code-block"><code>[<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]   <span class="comment">← top</span></code></pre>
+          <p>Pop:</p>
+          <pre class="code-block"><code>[<span class="number">10</span>, <span class="number">20</span>]</code></pre>
+          <p>30 comes out first. <strong>That's LIFO.</strong></p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>3. Implementing a Stack in Python</h4>
+          <p>Using a list (most common):</p>
+          <pre class="code-block"><code><span class="keyword">stack</span> = []
+
+stack.append(<span class="number">10</span>)  <span class="comment"># push</span>
+stack.append(<span class="number">20</span>)  <span class="comment"># push</span>
+stack.pop()       <span class="comment"># pop → 20</span></code></pre>
+          <p>Time Complexity:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> push → <strong>O(1)</strong></li>
+            <li><span class="bullet">→</span> pop → <strong>O(1)</strong></li>
+            <li><span class="bullet">→</span> peek → <strong>O(1)</strong></li>
+          </ul>
+          <div class="big-o-reveal">
+            <span class="big-o o1">O(1)</span>
+            <span class="label">All core operations</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>4. Why Stacks Matter in DSA</h4>
+          <p>Stacks are used in:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> Expression evaluation</li>
+            <li><span class="bullet">→</span> Parentheses validation</li>
+            <li><span class="bullet">→</span> Depth-first search (DFS)</li>
+            <li><span class="bullet">→</span> Undo systems</li>
+            <li><span class="bullet">→</span> Recursion (call stack)</li>
+          </ul>
+          <blockquote class="insight">
+            They are everywhere.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>5. The Most Famous Stack Problem: Valid Parentheses</h4>
+          <p>Given a string containing only <code>()[]{}</code>, determine if it is valid.</p>
+          <pre class="code-block"><code><span class="string">"()[]{}"</span> → <span class="number">True</span>
+<span class="string">"(]"</span>    → <span class="number">False</span></code></pre>
+          <p>Why is this a stack problem?</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">→</span> Opening bracket → <strong>push</strong> it</li>
+            <li><span class="bullet">→</span> Closing bracket → <strong>pop</strong> and compare</li>
+            <li><span class="bullet">→</span> You always match the <strong>most recent</strong> opener first</li>
+          </ul>
+          <div class="core-idea">
+            <p>That's LIFO.</p>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>6. Code: Valid Parentheses</h4>
+          <pre class="code-block"><code><span class="keyword">def</span> <span class="function">is_valid</span>(s):
+    stack = []
+    pairs = {<span class="string">')'</span>: <span class="string">'('</span>, <span class="string">'}'</span>: <span class="string">'{'</span>, <span class="string">']'</span>: <span class="string">'['</span>}
+
+    <span class="keyword">for</span> char <span class="keyword">in</span> s:
+        <span class="keyword">if</span> char <span class="keyword">in</span> pairs.values():
+            stack.append(char)
+        <span class="keyword">elif</span> char <span class="keyword">in</span> pairs:
+            <span class="keyword">if not</span> stack <span class="keyword">or</span> stack.pop() != pairs[char]:
+                <span class="keyword">return</span> <span class="number">False</span>
+
+    <span class="keyword">return</span> <span class="function">len</span>(stack) == <span class="number">0</span></code></pre>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>7. Time &amp; Space</h4>
+          <p>Let <code>n</code> = <code>len(s)</code></p>
+          <div class="tradeoff-stats">
+            <span class="stat">Time: <strong>O(n)</strong> — single pass</span>
+            <span class="stat">Space: <strong>O(n)</strong> — worst case all open brackets</span>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>8. Why This Works (Deep Intuition)</h4>
+          <p>When you see:</p>
+          <pre class="code-block"><code>([{}])</code></pre>
+          <p>The matching order is:</p>
+          <ol style="margin-left: 1.5rem">
+            <li><code>{}</code> first</li>
+            <li><code>[]</code> second</li>
+            <li><code>()</code> last</li>
+          </ol>
+          <p>Exactly reverse of insertion.</p>
+          <blockquote class="insight">
+            That's a stack.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>9. Important Mental Model</h4>
+          <div class="core-idea">
+            <p>Stacks enforce: <strong>"Finish what you started most recently."</strong></p>
+          </div>
+          <p>That idea appears everywhere in DSA.</p>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>10. Common Beginner Mistakes</h4>
+          <div class="confusion-list">
+            <div class="confusion-item">
+              <p class="confusion-wrong">Forgetting to check if the stack is empty before <code>pop()</code></p>
+              <p class="confusion-right">Always check: <code>if stack:</code> before popping</p>
+            </div>
+            <div class="confusion-item">
+              <p class="confusion-wrong">Forgetting to check the stack is empty at the end</p>
+              <p class="confusion-right">Leftover items = unmatched brackets = invalid</p>
+            </div>
+            <div class="confusion-item">
+              <p class="confusion-wrong">Using queue logic (FIFO) instead of stack logic (LIFO)</p>
+              <p class="confusion-right">Stacks: <code>append()</code> + <code>pop()</code>, not <code>pop(0)</code></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>11. LeetCode-Style Question (Lesson 10)</h4>
+          <div class="practice-problem">
+            <h5>Problem: Remove All Adjacent Duplicates</h5>
+            <div class="problem-section">
+              <p class="problem-label">Problem Statement</p>
+              <p>
+                Given a string <code>s</code>, remove all adjacent duplicate
+                characters repeatedly until no adjacent duplicates remain.
+              </p>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Function Signature</p>
+              <pre class="code-block"><code><span class="keyword">def</span> <span class="function">remove_duplicates</span>(s):
+    <span class="keyword">pass</span></code></pre>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Example</p>
+              <pre class="code-block"><code><span class="string">"abbaca"</span> → <span class="string">"ca"</span></code></pre>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Key Insight</p>
+              <ul>
+                <li>Use a stack</li>
+                <li>Compare with top before pushing</li>
+              </ul>
+            </div>
+            <div class="problem-section">
+              <p class="problem-label">Expected Complexity</p>
+              <ul>
+                <li>Time: O(n)</li>
+                <li>Space: O(n)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>12. Key Takeaway</h4>
+          <div class="highlight-box">
+            <p>
+              <strong>Stacks are about reversing order of operations.</strong>
+            </p>
+            <p>They are simple — but extremely powerful. If a problem involves matching, nesting, or undoing in reverse order, think stack.</p>
+          </div>
+        </div>
+
+        <div class="where-we-are fade-in">
+          <h4>Where We Are Now</h4>
+          <p>You now understand:</p>
+          <ul>
+            <li>What a stack is and how LIFO works</li>
+            <li>push, pop, peek — all O(1)</li>
+            <li>The valid parentheses pattern</li>
+            <li>When and why to use stacks</li>
+          </ul>
+        </div>
+
+        <div class="what-next fade-in">
+          <h4>What Comes Next</h4>
+          <p>
+            <strong>Lesson 11: Queues — FIFO Thinking.</strong> The other side
+            of the coin — what happens when you process things in the order
+            they arrived?
           </p>
         </div>
       </article>
