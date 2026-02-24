@@ -27,7 +27,7 @@ def remove_duplicates(s):
     stack = []
 
     for char in s:
-        if stack and stack[-1] == char:
+        if stack and stack[len(stack) - 1] == char:
             stack.pop()
         else:
             stack.append(char)
@@ -35,6 +35,6 @@ def remove_duplicates(s):
     return "".join(stack)
 
 
-print(remove_duplicates("abbaca"))   # Expected: "ca"
-print(remove_duplicates("azxxzy"))   # Expected: "ay"
-print(remove_duplicates("aababaab")) # Expected: "ba"
+print(remove_duplicates("abbaca"))  # Expected: "ca"
+print(remove_duplicates("azxxzy"))  # Expected: "ay"
+print(remove_duplicates("aababaab"))  # Expected: "ba"

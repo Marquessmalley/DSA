@@ -10,10 +10,11 @@ description: Add a new lesson to the DSA course. Use when the user wants to add,
 1. **Identify the lesson** — Get the phase number, lesson number, and title from `course-roadmap.md`.
 2. **Create the lesson folder** — `phase-{n}/lesson-{number-word}/` (e.g. `lesson-ten`).
 3. **Create the markdown file** — `{topic-slug}.md` (kebab-case, e.g. `stacks-lifo.md`).
-4. **Create the LeetCode challenge** — `leetcode-challenge.py` in the same folder.Do not write coded solution.
-5. **Update the phase index.html** — Add a drawer link AND an `<article>` section.
-6. **Update other phase index.html drawers** — Add the new lesson link to the drawer nav in every other phase's `index.html` so cross-phase navigation stays in sync.
-7. **Update the main index.html** — If the phase is new, add it to the landing page drawer and roadmap.
+4. **Create the lesson python file** — `{lesson}.py` (kebab-case, e.g. `stacks-lifo.py`).
+5. **Create the LeetCode challenge** — `leetcode-challenge.py` in the same folder.Do not write coded solution.
+6. **Update the phase index.html** — Add a drawer link AND an `<article>` section.
+7. **Update other phase index.html drawers** — Add the new lesson link to the drawer nav in every other phase's `index.html` so cross-phase navigation stays in sync.
+8. **Update the main index.html** — If the phase is new, add it to the landing page drawer and roadmap.
 
 ## Step 1: Lesson folder
 
@@ -60,9 +61,27 @@ Rules:
 - Include a blockquote hook after the title.
 - End with a "Key Takeaway" section.
 
-## Step 3: LeetCode challenge file
+## Step 3: Lesson Python file
 
-Follow the pattern in `phase-2/lesson-nine/leetcode-challenge.py`:
+The lesson python file contains the code examples from the lesson with comments. Follow the pattern in existing files like `phase-2/lesson-eight/linked-list.py` or `phase-0/lesson-four/linear-search.py`:
+
+```python
+# Phase {N} – Lesson {X}: {Title}
+
+# {Brief description of the concept}
+
+# {Code examples from the lesson with inline comments}
+```
+
+Rules:
+- File name matches the topic slug: `{topic-slug}.py` (e.g. `stacks-lifo.py`).
+- Include the key code examples taught in the lesson.
+- Use comments to explain what each section demonstrates.
+- No function signatures without implementations — this is a working file, not a challenge.
+
+## Step 4: LeetCode challenge file
+
+Follow the pattern in `phase-2/lesson-nine/leetcode-challenge.py`. **Do not write the coded solution** — leave the function body as `pass`.
 
 ```python
 """
@@ -98,7 +117,7 @@ def function_name(params):
 print(function_name(test_input))
 ```
 
-## Step 4: Phase index.html
+## Step 5: Phase index.html
 
 ### Drawer link
 
@@ -168,11 +187,11 @@ Zero-padded two digits: `01`, `02`, ... `09`, `10`, `11`.
 
 Use these classes inside `<code>`: `keyword`, `function`, `number`, `string`, `comment`.
 
-## Step 5: Cross-phase drawer sync
+## Step 6: Cross-phase drawer sync
 
 Every phase `index.html` has a full drawer with links to all phases. When adding a lesson, update the drawer in **every** phase's `index.html` (and the main `index.html` if applicable) so the new lesson appears in navigation everywhere.
 
-## Step 6: New phase setup
+## Step 7: New phase setup
 
 If the lesson belongs to a phase that doesn't exist yet:
 
@@ -189,7 +208,8 @@ Copy and track:
 - [ ] Lesson identified from course-roadmap.md
 - [ ] Folder created: phase-{n}/lesson-{word}/
 - [ ] Markdown file created: {topic-slug}.md
-- [ ] LeetCode challenge created: leetcode-challenge.py
+- [ ] Lesson python file created: {topic-slug}.py
+- [ ] LeetCode challenge created: leetcode-challenge.py (no coded solution)
 - [ ] Phase index.html updated (drawer link + article)
 - [ ] Other phase index.html drawers updated
 - [ ] Main index.html updated (if new phase)

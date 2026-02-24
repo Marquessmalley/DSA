@@ -11,7 +11,8 @@ alwaysApply: false
 - Phase folders: `phase-{n}/` (e.g. `phase-0`, `phase-1`)
 - Lesson folders: `phase-{n}/lesson-{spelled-number}/` (e.g. `lesson-ten`, not `lesson-10`)
 - Lesson markdown: `{topic-slug}.md` in kebab-case (e.g. `stacks-lifo.md`)
-- LeetCode challenge: `leetcode-challenge.py` in each lesson folder
+- Lesson python file: `{topic-slug}.py` matching the markdown slug (e.g. `stacks-lifo.py`)
+- LeetCode challenge: `leetcode-challenge.py` in each lesson folder (no coded solution, leave as `pass`)
 
 ## Markdown structure
 
@@ -30,9 +31,15 @@ alwaysApply: false
 - Each lesson ends with `where-we-are` and `what-next` sections
 - Code uses span classes: `keyword`, `function`, `number`, `string`, `comment`
 
+## Lesson python file
+
+- Contains key code examples from the lesson with inline comments
+- Working code, not a challenge — all implementations complete
+- Reference: `phase-2/lesson-eight/linked-list.py`, `phase-0/lesson-four/linear-search.py`
+
 ## LeetCode challenge file
 
 - Docstring with: Problem title, statement, function signature, example, key insight, expected complexity
 - Helper classes (e.g. Node) if needed
-- Function implementation
+- Function body left as `pass` — do not write the coded solution
 - Test calls at the bottom
