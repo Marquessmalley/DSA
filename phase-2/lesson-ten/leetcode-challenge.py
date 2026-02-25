@@ -25,9 +25,8 @@ Expected Complexity:
 
 def remove_duplicates(s):
     stack = []
-
     for char in s:
-        if stack and stack[len(stack) - 1] == char:
+        if stack and stack[-1] == char:
             stack.pop()
         else:
             stack.append(char)
