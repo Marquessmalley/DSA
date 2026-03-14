@@ -251,6 +251,188 @@
         </div>
 
         <div class="content-block fade-in">
+          <h4>6. Time Complexity (Why This Is Powerful)</h4>
+          <p>
+            The power of binary search comes from how much work it removes at
+            each step.
+          </p>
+
+          <h5>The Core Rule</h5>
+          <p>
+            Each step of binary search cuts the remaining search space in half.
+          </p>
+          <p>
+            This is very different from linear search, which removes only one
+            element at a time.
+          </p>
+
+          <h5>What "Cutting in Half" Looks Like</h5>
+          <p>If an array has <code>n</code> elements:</p>
+          <div class="comparison-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Remaining elements</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>n / 2</td></tr>
+                <tr><td>2</td><td>n / 4</td></tr>
+                <tr><td>3</td><td>n / 8</td></tr>
+                <tr><td>4</td><td>n / 16</td></tr>
+                <tr><td>…</td><td>…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            You are not checking elements one by one. You are eliminating large
+            portions immediately.
+          </p>
+
+          <h5>Concrete Example</h5>
+          <p>If the array has 16 elements:</p>
+          <pre class="code-block"><code>16 → 8 → 4 → 2 → 1</code></pre>
+          <p>Binary search finishes in <strong>4 steps</strong>.</p>
+          <p>If the array has 1,024 elements:</p>
+          <pre class="code-block"><code>1,024 → 512 → 256 → ... → 1</code></pre>
+          <p>Binary search finishes in <strong>10 steps</strong>.</p>
+
+          <h5>What This Means for Performance</h5>
+          <p>Doubling the input size:</p>
+          <ul class="teaches-list">
+            <li><span class="bullet">❌</span> Does NOT double the work</li>
+            <li><span class="bullet">✅</span> Adds only one extra step</li>
+          </ul>
+
+          <h5>The Name for This Growth Pattern</h5>
+          <p>This kind of growth is called logarithmic time, written as:</p>
+          <div class="big-o-reveal">
+            <span class="arrow">👉</span>
+            <span class="big-o">O(log n)</span>
+            <span class="reading">logarithmic time</span>
+          </div>
+          <blockquote class="insight accent">
+            If an algorithm repeatedly cuts the problem in half, it's
+            <strong>O(log n)</strong>.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>7. Compare Growth (This Is the "Wow" Moment)</h4>
+          <div class="comparison-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Elements</th>
+                  <th>Linear Search O(n)</th>
+                  <th>Binary Search O(log n)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10</td>
+                  <td>10 checks</td>
+                  <td>~4 checks</td>
+                </tr>
+                <tr>
+                  <td>1,000</td>
+                  <td>1,000 checks</td>
+                  <td>~10 checks</td>
+                </tr>
+                <tr>
+                  <td>1,000,000</td>
+                  <td>1,000,000 checks</td>
+                  <td>~20 checks</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <blockquote class="insight">
+            This is why binary search is famous.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>8. Why Logarithmic Time Is So Fast</h4>
+          <p>Because:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">→</span> The problem size shrinks
+              aggressively
+            </li>
+            <li><span class="bullet">→</span> Growth is extremely slow</li>
+            <li>
+              <span class="bullet">→</span> Doubling input size adds one extra
+              step, not double work
+            </li>
+          </ul>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>9. Important Limitations (Don't Ignore These)</h4>
+          <p>Binary search:</p>
+          <ul class="teaches-list">
+            <li>
+              <span class="bullet">❌</span> Does NOT work on unsorted data
+            </li>
+            <li>
+              <span class="bullet">❌</span> Makes insertions expensive
+            </li>
+            <li>
+              <span class="bullet">❌</span> Requires random access (arrays)
+            </li>
+          </ul>
+          <blockquote class="insight accent">
+            Speed comes with constraints.
+          </blockquote>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>10. Tiny Exercises (Think First)</h4>
+
+          <div class="exercise-card">
+            <span class="ex-number">1</span>
+            <p>If an array has <strong>1,024 elements</strong>:</p>
+            <p class="ex-question">
+              👉 How many steps does binary search take (worst case)?
+            </p>
+            <button
+              class="reveal-btn"
+              onclick="this.nextElementSibling.classList.toggle('show')"
+            >
+              Reveal Answer
+            </button>
+            <span class="answer"
+              >10 steps. 1024 → 512 → 256 → 128 → 64 → 32 → 16 → 8 → 4 → 2 →
+              1. That's log₂(1024) = 10.</span
+            >
+          </div>
+
+          <div class="exercise-card">
+            <span class="ex-number">2</span>
+            <p>Can binary search work on:</p>
+            <ul>
+              <li>A linked list?</li>
+              <li>An unsorted list?</li>
+            </ul>
+            <p class="ex-question">👉 Why or why not?</p>
+            <button
+              class="reveal-btn"
+              onclick="this.nextElementSibling.classList.toggle('show')"
+            >
+              Reveal Answer
+            </button>
+            <span class="answer"
+              >No to both. Linked lists don't support O(1) index access, so you
+              can't jump to the middle efficiently. Unsorted lists have no
+              guaranteed structure — you can't eliminate half the search space
+              without knowing the data is ordered.</span
+            >
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
           <h4>🧩 Practice Set 1: Arrays & Searching</h4>
           <div class="practice-problem">
             <h5>Problem 2: Binary Search (Beginner)</h5>
@@ -311,6 +493,51 @@ target = <span class="number">7</span>
                 <li>Space: O(1)</li>
               </ul>
             </div>
+          </div>
+        </div>
+
+        <div class="content-block fade-in">
+          <h4>11. Key Takeaway (Lock This In)</h4>
+          <p>Binary search trades flexibility for speed.</p>
+          <div class="decides-grid">
+            <div class="decides-card">
+              <h5>Linear Search</h5>
+              <ul>
+                <li>Works everywhere</li>
+                <li>Scales poorly</li>
+              </ul>
+            </div>
+            <div class="decides-card">
+              <h5>Binary Search</h5>
+              <ul>
+                <li>Requires sorted data</li>
+                <li>Scales incredibly well</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="where-we-are fade-in">
+          <h4>🧭 Where We Are Now</h4>
+          <p>You've now seen your first major algorithmic upgrade:</p>
+          <ul>
+            <li>Same data structure (array)</li>
+            <li>Drastically better algorithm</li>
+          </ul>
+          <p>This is core DSA thinking.</p>
+        </div>
+
+        <div class="what-next fade-in">
+          <h4>🔜 What Comes Next</h4>
+          <p>Next, we look at the hidden cost of sorted arrays:</p>
+          <div class="core-idea">
+            <p>
+              <strong>Phase 1 – Lesson 6: Array Insertions & Deletions</strong>
+            </p>
+          </div>
+          <p>We'll explore why speed is never free.</p>
+          <div class="cta-button">
+            <a href="#lesson-6">Start Lesson 6 →</a>
           </div>
         </div>
       </article>
